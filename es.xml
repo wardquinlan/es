@@ -31,6 +31,7 @@
 
       <series ref="SP500"/>
       <series ref="RC" color="LightCyan"/>
+      <series ref="T10Y3M.inv" color="Yellow"/>
     </chart>
   </panel>
 
