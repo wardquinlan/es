@@ -1,4 +1,15 @@
 <context>
+  <panel label="S&amp;P 500"
+         dxincr="1"
+         backgroundcolor="LightYellow"
+         frequency="months">
+
+    <chart label="S&amp;P 500">
+      <series ref="SP500"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+  </panel>
+
   <panel label="Consumer Sentiment"
          dxincr="1"
          backgroundcolor="LightYellow"

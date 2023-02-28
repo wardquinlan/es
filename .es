@@ -70,3 +70,5 @@ setTitle(RSAFS.pc1, getTitle(RSAFS) + ", YoY Percentage Change");
 setNotes(RSAFS.pc1, getNotes(RSAFS));
 setSource(RSAFS.pc1, "[DERIVED]");
 
+SP500 = load(500);
+
