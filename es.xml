@@ -2,6 +2,8 @@
   <include name="NFCI.xml"/>
   <include name="T10Y3M.xml"/>
   <include name="SP500.xml"/>
+  <include name="JU.xml"/>
+  <include name="UMCSENT.xml"/>
 
 <!--
   <panel label="Consumer Sentiment"
@@ -17,19 +19,6 @@
       <series ref="RC" color="LightCyan"/>
     </chart>
 
-    <chart label="University of Michigan Consumer Sentiment"
-           ngridlines="8"
-           span="33">
-
-      <series ref="UMCSENT"/>
-      <series ref="RC" color="LightCyan"/>
-    </chart>
-
-    <chart label="Adjusted Market Cap to GDP"
-           ngridlines="8"
-           span="33">
-    </chart>
-    
   </panel>
 -->
 

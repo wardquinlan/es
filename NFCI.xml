@@ -5,7 +5,7 @@
          frequency="months">
 
     <chart label="S&amp;P 500"
-           ngridlines="24"
+           ngridlines="16"
            span="60"
            scale="log">
 

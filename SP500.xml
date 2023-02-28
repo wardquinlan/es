@@ -6,7 +6,7 @@
 
     <chart label="S&amp;P 500"
            span="40"
-           ngridlines="20"
+           ngridlines="16"
            scale="log">
 
       <series ref="SP500"/>

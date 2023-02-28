@@ -1,5 +1,5 @@
 <context>
-  <panel label="T10Y3M"
+  <panel label="JU"
          dxincr="1"
          backgroundcolor="LightYellow"
          frequency="months">
@@ -11,7 +11,6 @@
 
       <series ref="SP500"/>
       <series ref="RC" color="LightCyan"/>
-      <series ref="T10Y3M.inv" color="Yellow"/>
     </chart>
 
     <chart label="Gross Domestic Product, YoY Percentage Change"
@@ -20,15 +19,13 @@
 
       <series ref="GDP.pc1"/>
       <series ref="RC" color="LightCyan"/>
-      <series ref="T10Y3M.inv" color="Yellow"/>
     </chart>
 
-    <chart label="10-Year Treasury Constant Maturity Minus 3-Month Treasury Constant Maturity"
+    <chart label="Job Openings / Unemployment"
            span="15"
            ngridlines="10">
 
-      <series ref="T10Y3M" color="Red"/>
-      <series ref="T10Y3M.inv" color="Yellow"/>
+      <series ref="JU" color="Red"/>
       <series ref="RC" color="LightCyan"/>
     </chart>
   </panel>
