@@ -39,11 +39,8 @@ setNotes(RC, "Source: https://www.nber.org/research/data/us-business-cycle-expan
 setSource(RC, "NBER");
 
 UMCSENT = load(31);
-NFCI = load(18);
-RSAFS = load(37);
 WILL5000 = load(5000);
 
-# Market valuation metric VM
 const K = 0.5;
 const NR = 3.25; # neutral rate
 DGS2 = load(24);
@@ -59,12 +56,7 @@ DESC = "Adjusted Market Cap to GDP with:\n\n" +
 setNotes(MKCAPGDP, DESC);
 F = NULL;
 
-RSAFS = load(37);
-RSAFS.pc1 = pchange(RSAFS, 12);
-setName(RSAFS.pc1, "RSAFS.pc1");
-setTitle(RSAFS.pc1, getTitle(RSAFS) + ", YoY Percentage Change");
-setNotes(RSAFS.pc1, getNotes(RSAFS));
-setSource(RSAFS.pc1, "[DERIVED]");
+include "RSAFS.es";
 
 SP500 = load(500);
 

@@ -4,6 +4,7 @@
   <include name="SP500.xml"/>
   <include name="JU.xml"/>
   <include name="UMCSENT.xml"/>
+  <include name="RSAFS.xml"/>
 
 <!--
   <panel label="Consumer Sentiment"
