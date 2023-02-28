@@ -1,7 +1,3 @@
-const TEMPLATE = "/home/ward/c/quote/template";
-const DATABASE = "/home/ward/c/quote/db";
-connect('localhost', 'es', 'es', 'EconomicSeries00');
-
 GDP = load(10);
 GDP.pc1 = pchange(GDP, 4);
 setName(GDP.pc1, "GDP.pc1");
