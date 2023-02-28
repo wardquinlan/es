@@ -1,0 +1,38 @@
+<context>
+  <panel label="S&amp;P 500"
+         dxincr="1"
+         backgroundcolor="LightYellow"
+         frequency="months">
+
+    <chart label="S&amp;P 500"
+           span="40"
+           ngridlines="20"
+           scale="log">
+
+      <series ref="SP500"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+
+    <chart label="P/E"
+           span="20"
+           ngridlines="8">
+
+      <series ref="SP500_PE" color="Red"/>
+    </chart>
+
+    <chart label="P/S"
+           span="20"
+           ngridlines="8">
+
+      <series ref="SP500_PS" color="Red"/>
+    </chart>
+
+    <chart label="Market Cap to GDP"
+           span="20"
+           ngridlines="8">
+
+      <series ref="MKCAPGDP" color="Red"/>
+    </chart>
+  </panel>
+</context>
+

@@ -48,16 +48,15 @@ const NR = 3.25; # neutral rate
 DGS2 = load(24);
 F = (E - E^K) * DGS2 / NR + E^K;
 LOGF = log(F);
-VM = 100 * LOGF * WILL5000 / GDP;
-setName(VM, "VM");
-setTitle(VM, "Market Valuation Metric");
-setSource(VM, "[DERIVED]");
-DESC = "Adjusts market valuation against interest rates\n\n" +
+MKCAPGDP = 100 * LOGF * WILL5000 / GDP;
+setName(MKCAPGDP, "MKCAPGDP");
+setTitle(MKCAPGDP, "Market Cap to GDP");
+setSource(MKCAPGDP, "[DERIVED]");
+DESC = "Adjusted Market Cap to GDP with:\n\n" +
   "K=" + K + "\n" +
   "NR=" + NR;
-setNotes(VM, DESC);
+setNotes(MKCAPGDP, DESC);
 F = NULL;
-LOGF = NULL;
 
 RSAFS = load(37);
 RSAFS.pc1 = pchange(RSAFS, 12);
@@ -80,4 +79,14 @@ setName(T10Y3M.inv, "T10Y3M.inv");
 setTitle(T10Y3M.inv, getTitle(T10Y3M));
 setNotes(T10Y3M.inv, getNotes(T10Y3M));
 setSource(T10Y3M.inv, "[DERIVED]");
+
+SP500_EPS_Q = load(512);
+SP500_EPS = sum(SP500_EPS_Q, 4);
+SP500_PE = LOGF * SP500 / SP500_EPS;
+
+SP500_SALES_Q = load(510);
+SP500_SALES = sum(SP500_SALES_Q, 4);
+SP500_PS = LOGF * SP500 / SP500_SALES;
+
+NFCI = load(18);
 

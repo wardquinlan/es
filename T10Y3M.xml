@@ -1,0 +1,36 @@
+<context>
+  <panel label="T10Y3M"
+         dxincr="1"
+         backgroundcolor="LightYellow"
+         frequency="months">
+
+    <chart label="S&amp;P 500"
+           ngridlines="24"
+           span="60"
+           scale="log">
+
+      <series ref="SP500"/>
+      <series ref="RC" color="LightCyan"/>
+      <series ref="T10Y3M.inv" color="Yellow"/>
+    </chart>
+
+    <chart label="Gross Domestic Product, YoY Percentage Change"
+           ngridlines="18"
+           span="25">
+
+      <series ref="GDP.pc1"/>
+      <series ref="RC" color="LightCyan"/>
+      <series ref="T10Y3M.inv" color="Yellow"/>
+    </chart>
+
+    <chart label="10-Year Treasury Constant Maturity Minus 3-Month Treasury Constant Maturity"
+           span="15"
+           ngridlines="10">
+
+      <series ref="T10Y3M" color="Red"/>
+      <series ref="T10Y3M.inv" color="Yellow"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+  </panel>
+</context>
+

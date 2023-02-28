@@ -1,40 +1,9 @@
 <context>
-  <panel label="Gross Domestic Product"
-         dxincr="1"
-         backgroundcolor="LightYellow"
-         frequency="months">
+  <include name="NFCI.xml"/>
+  <include name="T10Y3M.xml"/>
+  <include name="SP500.xml"/>
 
-    <chart label="Gross Domestic Product"
-           span="60">
-
-      <series ref="GDP.pc1"/>
-      <series ref="RC" color="LightCyan"/>
-    </chart>
-
-    <chart label="Yield Curve"
-           span="40"
-           ngridlines="12">
-
-      <series ref="T10Y3M" color="Red"/>
-      <series ref="RC" color="LightCyan"/>
-      <series ref="T10Y3M.inv" color="Yellow"/>
-    </chart>
-  </panel>
-
-  <panel label="S&amp;P 500"
-         dxincr="1"
-         backgroundcolor="LightYellow"
-         frequency="months">
-
-    <chart label="S&amp;P 500"
-           scale="log">
-
-      <series ref="SP500"/>
-      <series ref="RC" color="LightCyan"/>
-      <series ref="T10Y3M.inv" color="Yellow"/>
-    </chart>
-  </panel>
-
+<!--
   <panel label="Consumer Sentiment"
          dxincr="1"
          backgroundcolor="LightYellow"
@@ -59,11 +28,10 @@
     <chart label="Adjusted Market Cap to GDP"
            ngridlines="8"
            span="33">
-
-      <series ref="VM"/>
-      <series ref="RC" color="LightCyan"/>
     </chart>
     
   </panel>
+-->
+
 </context>
 
