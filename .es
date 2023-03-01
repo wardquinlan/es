@@ -57,36 +57,11 @@ setNotes(MKCAPGDP, DESC);
 F = NULL;
 
 include "RSAFS.es";
-
-SP500 = load(500);
-
-DGORDER = load(27);
-DGORDER.pc1 = pchange(DGORDER, 12);
-setName(DGORDER.pc1, "DGORDER.pc1");
-setTitle(DGORDER.pc1, getTitle(DGORDER) + ", YoY Percentage Change");
-setSource(DGORDER.pc1, "[DERIVED]");
-
-T10Y3M = load(117);
-T10Y3M.inv = T10Y3M < 0;
-setName(T10Y3M.inv, "T10Y3M.inv");
-setTitle(T10Y3M.inv, getTitle(T10Y3M));
-setNotes(T10Y3M.inv, getNotes(T10Y3M));
-setSource(T10Y3M.inv, "[DERIVED]");
-
-SP500_EPS_Q = load(512);
-SP500_EPS = sum(SP500_EPS_Q, 4);
-SP500_PE = LOGF * SP500 / SP500_EPS;
-
-SP500_SALES_Q = load(510);
-SP500_SALES = sum(SP500_SALES_Q, 4);
-SP500_PS = LOGF * SP500 / SP500_SALES;
+include "DGORDER.es";
+include "T10Y3M.es";
+include "SP500.es";
 
 NFCI = load(18);
 
-JTSJOL = load(77);
-UNEMPLOY = load(57);
-JU = JTSJOL / UNEMPLOY;
-setName(JU, "JU");
-setTitle(JU, "Job Openings / Unemployment");
-setSource(JU, "[DERIVED]");
+include "JU.es";
 
