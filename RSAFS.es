@@ -1,6 +1,6 @@
 RSAFS = load(37);
 RSAFS.pc1 = pchange(RSAFS, 12);
-const LIMIT = 12;
+LIMIT = 12;
 RSAFS.pc1 = min(RSAFS.pc1, +LIMIT);
 RSAFS.pc1 = max(RSAFS.pc1, -LIMIT);
 setName(RSAFS.pc1, "RSAFS.pc1");

@@ -6,5 +6,6 @@
   <include name="UMCSENT.xml"/>
   <include name="RSAFS.xml"/>
   <include name="PCEPILFE.xml"/>
+  <include name="DGORDER.xml"/>
 </context>
 

@@ -1,5 +1,5 @@
 <context>
-  <panel label="NFCI"
+  <panel label="Financial Conditions"
          dxincr="1"
          backgroundcolor="LightYellow"
          frequency="months">
@@ -11,9 +11,6 @@
 
       <series ref="SP500"/>
       <series ref="RC" color="LightCyan"/>
-<!--
-      <series ref="T10Y3M.inv" color="Yellow"/>
--->
     </chart>
 
     <chart label="Gross Domestic Product, YoY Percentage Change"
