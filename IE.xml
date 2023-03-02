@@ -1,0 +1,38 @@
+<context>
+  <panel label="Inflation Expectations"
+         dxincr="1"
+         backgroundcolor="LightYellow"
+         frequency="months">
+
+    <chart label="Gross Domestic Product, YoY Percentage Change"
+           ngridlines="18"
+           span="40">
+
+      <series ref="GDP.pc1"/>
+      <series ref="RC" color="LightCyan"/>
+      <series ref="T10Y3M.inv" color="Yellow"/>
+    </chart>
+
+    <chart label="5-Year Breakeven Inflation Rate"
+           span="20"
+           ngridlines="8">
+
+      <series ref="T5YIE" color="Red"/>
+    </chart>
+
+    <chart label="10-Year Breakeven Inflation Rate"
+           span="20"
+           ngridlines="8">
+
+      <series ref="T10YIE" color="Red"/>
+    </chart>
+
+    <chart label="University of Michigan: Inflation Expectation"
+           span="20"
+           ngridlines="8">
+
+      <series ref="MICH" color="Red"/>
+    </chart>
+  </panel>
+</context>
+

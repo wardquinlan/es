@@ -7,5 +7,6 @@
   <include name="RSAFS.xml"/>
   <include name="PCEPILFE.xml"/>
   <include name="DGORDER.xml"/>
+  <include name="IE.xml"/>
 </context>
 
