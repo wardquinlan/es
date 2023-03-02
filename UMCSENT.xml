@@ -1,5 +1,5 @@
 <context>
-  <panel label="UMCSENT"
+  <panel label="U.M. Consumer Sentiment"
          dxincr="1"
          backgroundcolor="LightYellow"
          frequency="months">

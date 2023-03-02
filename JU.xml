@@ -1,5 +1,5 @@
 <context>
-  <panel label="JU"
+  <panel label="Job Openings"
          dxincr="1"
          backgroundcolor="LightYellow"
          frequency="months">
