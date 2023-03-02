@@ -8,5 +8,6 @@
   <include name="PCEPILFE.xml"/>
   <include name="DGORDER.xml"/>
   <include name="IE.xml"/>
+  <include name="VIX.xml"/>
 </context>
 

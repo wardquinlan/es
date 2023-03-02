@@ -15,4 +15,5 @@ UMCSENT = load(31);
 MICH = load(29);
 T5YIE = load(83);
 T10YIE = load(84);
+VIXCLS = load(23);
 
