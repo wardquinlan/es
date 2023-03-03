@@ -9,5 +9,6 @@
   <include name="DGORDER.xml"/>
   <include name="IE.xml"/>
   <include name="VIX.xml"/>
+  <include name="PPIACO.xml"/>
 </context>
 

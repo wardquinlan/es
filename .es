@@ -9,6 +9,7 @@ include "SP500.es";
 include "JU.es";
 include "PCEPILFE.es";
 include "DGORDER.es";
+include "PPIACO.es";
 
 NFCI = load(18);
 UMCSENT = load(31);

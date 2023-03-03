@@ -1,0 +1,33 @@
+<context>
+  <panel label="Producer Price Index"
+         dxincr="1"
+         backgroundcolor="LightYellow"
+         frequency="months">
+
+    <chart label="S&amp;P 500"
+           ngridlines="16"
+           span="60"
+           scale="log">
+
+      <series ref="SP500"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+
+    <chart label="Gross Domestic Product, YoY Percentage Change"
+           ngridlines="18"
+           span="25">
+
+      <series ref="GDP.pc1"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+
+    <chart label="Producer Price Index by Commodity: All Commodities"
+           span="15"
+           ngridlines="6">
+
+      <series ref="PPIACO.pc1" color="Red"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+  </panel>
+</context>
+
