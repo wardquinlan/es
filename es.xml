@@ -10,5 +10,6 @@
   <include name="IE.xml"/>
   <include name="VIX.xml"/>
   <include name="PPIACO.xml"/>
+  <include name="Treasurys.xml"/>
 </context>
 

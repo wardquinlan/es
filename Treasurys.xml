@@ -1,0 +1,40 @@
+<context>
+  <panel label="Treasurys"
+         dxincr="1"
+         backgroundcolor="LightYellow"
+         frequency="months">
+
+    <chart label="Market Yield on U.S. Treasury Securities at 10-Year Constant Maturity, Quoted on an Investment Basis"
+           span="25"
+           ngridlines="8">
+
+      <series ref="DGS10"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+
+    <chart label="Market Yield on U.S. Treasury Securities at 2-Year Constant Maturity, Quoted on an Investment Basis"
+           span="25"
+           ngridlines="8">
+
+      <series ref="DGS2"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+
+    <chart label="Market Yield on U.S. Treasury Securities at 1-Year Constant Maturity, Quoted on an Investment Basis"
+           span="25"
+           ngridlines="8">
+
+      <series ref="DGS1"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+
+    <chart label="3-Month Treasury Bill Secondary Market Rate, Discount Basis"
+           span="25"
+           ngridlines="8">
+
+      <series ref="DTB3"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+  </panel>
+</context>
+
