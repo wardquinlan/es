@@ -11,6 +11,7 @@
 
       <series ref="SP500"/>
       <series ref="RC" color="LightCyan"/>
+      <series ref="VIXCLS.H" color="Yellow"/>
     </chart>
 
     <chart label="Gross Domestic Product, YoY Percentage Change"
@@ -19,6 +20,7 @@
 
       <series ref="GDP.pc1"/>
       <series ref="RC" color="LightCyan"/>
+      <series ref="VIXCLS.H" color="Yellow"/>
     </chart>
 
     <chart label="CBOE Volatility Index: VIX"
@@ -27,6 +29,7 @@
 
       <series ref="VIXCLS" color="Red"/>
       <series ref="RC" color="LightCyan"/>
+      <series ref="VIXCLS.H" color="Yellow"/>
     </chart>
   </panel>
 </context>

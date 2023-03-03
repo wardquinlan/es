@@ -29,8 +29,8 @@
 
       <series ref="T10Y3M" color="Red"/>
       <series ref="T10Y2Y" color="Blue"/>
-      <series ref="T10Y3M.inv" color="Yellow"/>
       <series ref="RC" color="LightCyan"/>
+      <series ref="T10Y3M.inv" color="Yellow"/>
     </chart>
   </panel>
 </context>
