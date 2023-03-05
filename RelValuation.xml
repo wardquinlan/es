@@ -1,0 +1,25 @@
+<context>
+  <panel label="Relative Valuation"
+         dxincr="1"
+         backgroundcolor="LightYellow"
+         frequency="months">
+
+    <chart label="S&amp;P 500"
+           span="60"
+           ngridlines="16"
+           scale="log">
+
+      <series ref="SP500"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+
+    <chart label="Relative Valuation"
+           span="40"
+           ngridlines="8">
+
+      <series ref="DGS2" color="Blue"/>
+      <series ref="SP500_EY" color="Red"/>
+    </chart>
+  </panel>
+</context>
+

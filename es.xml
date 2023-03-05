@@ -11,5 +11,7 @@
   <include name="VIX.xml"/>
   <include name="PPIACO.xml"/>
   <include name="Treasurys.xml"/>
+  <include name="RelValuation.xml"/>
+  <include name="PMI.xml"/>
 </context>
 

@@ -5,6 +5,10 @@ SP500_PE = LOGF * SP500 / SP500_EPS;
 setName(SP500_PE, "SP500_PE");
 setTitle(SP500_PE, "Adjusted SP500 Price / Earnings");
 setSource(SP500_PE, "[DERIVED]");
+SP500_EY = SP500_EPS / SP500 * 100;
+setName(SP500_EY, "SP500_EY");
+setTitle(SP500_EY, "S&P 500 Earnings Yield (Unadjusted)");
+setSource(SP500_EY, "[DERIVED]");
 SP500_EPS = NULL;
 SP500_EPS_Q = NULL;
 
