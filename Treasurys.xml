@@ -8,7 +8,7 @@
            span="25"
            ngridlines="8">
 
-      <series ref="DGS10"/>
+      <series ref="DGS10" color="Red"/>
       <series ref="RC" color="LightCyan"/>
     </chart>
 
@@ -16,7 +16,7 @@
            span="25"
            ngridlines="8">
 
-      <series ref="DGS2"/>
+      <series ref="DGS2" color="Red"/>
       <series ref="RC" color="LightCyan"/>
     </chart>
 
@@ -24,7 +24,8 @@
            span="25"
            ngridlines="8">
 
-      <series ref="DGS1"/>
+      <series ref="DGS1" color="Red"/>
+      <series ref="DGS1.fc" color="Blue"/>
       <series ref="RC" color="LightCyan"/>
     </chart>
 
@@ -32,7 +33,7 @@
            span="25"
            ngridlines="8">
 
-      <series ref="DTB3"/>
+      <series ref="DTB3" color="Red"/>
       <series ref="RC" color="LightCyan"/>
     </chart>
   </panel>

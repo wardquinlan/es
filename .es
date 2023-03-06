@@ -11,15 +11,14 @@ include "PCEPILFE.es";
 include "DGORDER.es";
 include "PPIACO.es";
 include "VIXCLS.es";
+include "DGS.es";
 
+SOFR = load(17);
 NFCI = load(18);
 UMCSENT = load(31);
 MICH = load(29);
 T5YIE = load(83);
 T10YIE = load(84);
-DTB3 = load(3);
-DGS1 = load(12);
-DGS2 = load(24);
-DGS10 = load(120);
 PMI = load(173);
+OECDCLI = load(87);
 

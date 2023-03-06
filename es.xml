@@ -2,6 +2,7 @@
   <include name="NFCI.xml"/>
   <include name="T10Y3M.xml"/>
   <include name="SP500.xml"/>
+  <include name="RelValuation.xml"/>
   <include name="JU.xml"/>
   <include name="UMCSENT.xml"/>
   <include name="RSAFS.xml"/>
@@ -11,7 +12,8 @@
   <include name="VIX.xml"/>
   <include name="PPIACO.xml"/>
   <include name="Treasurys.xml"/>
-  <include name="RelValuation.xml"/>
   <include name="PMI.xml"/>
+  <include name="SOFR.xml"/>
+  <include name="OECDCLI.xml"/>
 </context>
 
