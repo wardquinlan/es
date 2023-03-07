@@ -7,6 +7,8 @@
   <include name="UMCSENT.xml"/>
   <include name="RSAFS.xml"/>
   <include name="PCEPILFE.xml"/>
+  <include name="PCEDG.xml"/>
+  <include name="PCES.xml"/>
   <include name="DGORDER.xml"/>
   <include name="IE.xml"/>
   <include name="VIX.xml"/>
