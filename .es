@@ -19,6 +19,7 @@ UMCSENT = load(31);
 MICH = load(29);
 T5YIE = load(83);
 T10YIE = load(84);
-PMI = load(173);
+PMI.M = load(173);
+PMI.NM = load(176);
 OECDCLI = load(87);
 

@@ -14,7 +14,8 @@
   <include name="VIX.xml"/>
   <include name="PPIACO.xml"/>
   <include name="Treasurys.xml"/>
-  <include name="PMI.xml"/>
+  <include name="PMI-M.xml"/>
+  <include name="PMI-NM.xml"/>
   <include name="SOFR.xml"/>
   <include name="OECDCLI.xml"/>
 </context>

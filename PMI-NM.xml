@@ -1,5 +1,5 @@
 <context>
-  <panel label="PMI"
+  <panel label="PMI-NM"
          dxincr="1"
          backgroundcolor="LightYellow"
          frequency="months">
@@ -21,11 +21,11 @@
       <series ref="RC" color="LightCyan"/>
     </chart>
 
-    <chart label="U.S. ISM Manufacturing Purchasing Managers Index"
+    <chart label="U.S. ISM Non-Manufacturing Purchasing Managers Index"
            span="15"
            ngridlines="6">
 
-      <series ref="PMI" color="Red"/>
+      <series ref="PMI.NM" color="Red"/>
       <series ref="RC" color="LightCyan"/>
     </chart>
   </panel>
