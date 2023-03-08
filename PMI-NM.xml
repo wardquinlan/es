@@ -23,6 +23,7 @@
 
     <chart label="U.S. ISM Non-Manufacturing Purchasing Managers Index"
            span="15"
+           gridlines="50"
            ngridlines="6">
 
       <series ref="PMI.NM" color="Red"/>

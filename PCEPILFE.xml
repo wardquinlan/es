@@ -23,6 +23,7 @@
 
     <chart label="Personal Consumption Expenditures Excluding Food and Energy (Chain-Type Price Index)"
            span="15"
+           gridlines="2"
            ngridlines="6">
 
       <series ref="PCEPILFE.pc1" color="Red"/>
