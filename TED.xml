@@ -1,0 +1,34 @@
+<context>
+  <panel label="TED Spread"
+         dxincr="1"
+         backgroundcolor="Black"
+         frequency="months">
+
+    <chart label="S&amp;P 500"
+           backgroundcolor="LightYellow"
+           ngridlines="16"
+           span="60"
+           scale="log">
+
+      <series ref="SP500"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+
+    <chart label="Gross Domestic Product, YoY Percentage Change"
+           ngridlines="18"
+           span="25">
+
+      <series ref="GDP.pc1"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+
+    <chart label="TED Spread"
+           span="15"
+           ngridlines="10">
+
+      <series ref="TED" color="Red"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+  </panel>
+</context>
+

@@ -18,5 +18,6 @@
   <include name="PMI-NM.xml"/>
   <include name="SOFR.xml"/>
   <include name="OECDCLI.xml"/>
+  <include name="TED.xml"/>
 </context>
 

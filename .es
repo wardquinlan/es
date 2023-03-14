@@ -13,7 +13,6 @@ include "PPIACO.es";
 include "VIXCLS.es";
 include "DGS.es";
 
-SOFR = load(17);
 NFCI = load(18);
 UMCSENT = load(31);
 MICH = load(29);
