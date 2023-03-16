@@ -20,14 +20,14 @@ update DTB3 3
 update GDP 10
 update DGS1 12
 update SOFR 17
-updaet NFCI 18
+update NFCI 18
 update VIXCLS 23
 update DGS2 24
 update MICH 29
 update UMCSENT 31
 update RSAFS 37
 update DTWEXBGS 42
-updaet PPIACO 47
+update PPIACO 47
 update PCEPILFE 53
 update UNEMPLOY 57
 update RRPONTSYD 61
@@ -44,4 +44,5 @@ update DGORDER 27
 update USALOLITONOSTSAM 87
 update PCEDG 108
 update PCES 109
+update BAA10Y 14
 
