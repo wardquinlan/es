@@ -1,5 +1,5 @@
 <context>
-  <panel label="Moody's Credit Spread"
+  <panel label="ICE BofA Credit Spread"
          dxincr="1"
          backgroundcolor="LightYellow"
          frequency="months">
@@ -21,11 +21,11 @@
       <series ref="RC" color="LightCyan"/>
     </chart>
 
-    <chart label="Moody's Seasoned Baa Corporate Bond Yield Relative to Yield on 10-Year Treasury Constant Maturity"
+    <chart label="ICE BofA US Corporate Index Option-Adjusted Spread"
            span="15"
            ngridlines="6">
 
-      <series ref="BAA10Y" color="Red"/>
+      <series ref="BAMLC0A0CM" color="Red"/>
       <series ref="RC" color="LightCyan"/>
     </chart>
   </panel>

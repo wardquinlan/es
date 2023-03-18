@@ -123,5 +123,9 @@ S = fred('BAA10Y');
 setId(S, 14);
 merge(S, '--with-inserts');
 
+S = fred('BAMLC0A0CM');
+setId(S, 58);
+merge(S, '--with-inserts');
+
 EOF
 
