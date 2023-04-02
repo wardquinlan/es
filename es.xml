@@ -23,5 +23,7 @@
   -->
   <include name="BAA10Y.xml"/>
   <include name="BAMLC0A0CM.xml"/>
+  <include name="SOFRDGS2.xml"/>
+  <include name="RRPONTSYD.xml"/>
 </context>
 
