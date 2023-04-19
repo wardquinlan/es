@@ -13,4 +13,5 @@ TED = SOFR - DTB3;
 setName(TED, "TED");
 setTitle(TED, "TED Rate");
 setNotes(TED, "Defined as SOFR - DTB3");
+setSource(TED, "[DERIVED]");
 
