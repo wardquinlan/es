@@ -1,0 +1,25 @@
+<context>
+  <panel label="WALCL"
+         dxincr="1"
+         backgroundcolor="LightYellow"
+         frequency="months">
+
+    <chart label="S&amp;P 500"
+           ngridlines="16"
+           span="60"
+           scale="log">
+
+      <series ref="SP500"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+
+    <chart label="Assets: Total Assets: Total Assets (Less Eliminations from Consolidation): Wednesday Level" 
+           span="40"
+           ngridlines="10">
+
+      <series ref="WALCL" color="Red"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+  </panel>
+</context>
+

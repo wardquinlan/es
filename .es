@@ -12,6 +12,7 @@ include "DGORDER.es";
 include "PPIACO.es";
 include "VIXCLS.es";
 include "DGS.es";
+include "WALCL.es";
 
 NFCI = load(18);
 UMCSENT = load(31);

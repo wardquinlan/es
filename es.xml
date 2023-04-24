@@ -25,5 +25,6 @@
   <include name="BAMLC0A0CM.xml"/>
   <include name="SOFRDGS2.xml"/>
   <include name="RRPONTSYD.xml"/>
+  <include name="WALCL.xml"/>
 </context>
 
