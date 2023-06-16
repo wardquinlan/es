@@ -1,5 +1,9 @@
 # Update script
 
+S = fred('DFF');
+setId(S, 1);
+merge(S, '--with-inserts');
+
 S = fred('DTB3');
 setId(S, 3);
 merge(S, '--with-inserts');
@@ -58,6 +62,10 @@ merge(S, '--with-inserts');
 
 S = fred('RRPONTSYD');
 setId(S, 61);
+merge(S, '--with-inserts');
+
+S = fred('RRPONTSYAWARD');
+setId(S, 62);
 merge(S, '--with-inserts');
 
 S = fred('WALCL');
