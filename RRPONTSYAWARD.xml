@@ -1,0 +1,25 @@
+<context>
+  <panel label="RRPAWARD"
+         dxincr="1"
+         backgroundcolor="LightYellow"
+         frequency="months">
+
+    <chart label="S&amp;P 500"
+           ngridlines="16"
+           span="70"
+           scale="log">
+
+      <series ref="SP500"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+
+    <chart label="Overnight Reverse Repurchase Agreements Award Rate"
+           span="30"
+           ngridlines="10">
+
+      <series ref="RRPONTSYAWARD" color="Red"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+  </panel>
+</context>
+

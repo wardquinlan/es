@@ -25,4 +25,16 @@ OECDCLI = load(87);
 BAA10Y = load(14);
 BAMLC0A0CM = load(58);
 RRPONTSYD = load(61);
+RRPONTSYAWARD = load(62);
+
+TMP = load(91);
+# cap to 600
+ICSA = min(600, TMP / 1000);
+# A bit dangerous, so I won't do this:
+# setId(ICSA, 91);
+setName(ICSA, "ICSA");
+setTitle(ICSA, "Initial Claims");
+setSource(ICSA, "FRED");
+setSourceId(ICSA, "ICSA");
+setNotes(ICSA, "Units: Thousands\n\n" + getNotes(TMP));
 
