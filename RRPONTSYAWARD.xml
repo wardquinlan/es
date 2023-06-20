@@ -18,6 +18,7 @@
            ngridlines="10">
 
       <series ref="RRPONTSYAWARD" color="Red"/>
+      <series ref="DTB3" color="Blue"/>
       <series ref="RC" color="LightCyan"/>
     </chart>
   </panel>
