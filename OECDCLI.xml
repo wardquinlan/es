@@ -23,6 +23,7 @@
 
     <chart label="Leading Indicators OECD: Leading indicators: CLI: Normalised for the United States"
            span="15"
+           gridlines="100"
            ngridlines="10">
 
       <series ref="OECDCLI" color="Red"/>
