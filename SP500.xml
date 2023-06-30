@@ -1,7 +1,7 @@
 <context>
   <panel label="S&amp;P 500"
          dxincr="1"
-         backgroundcolor="LightYellow"
+         backgroundcolor="White"
          frequency="months">
 
     <chart label="S&amp;P 500"

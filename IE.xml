@@ -1,7 +1,7 @@
 <context>
   <panel label="Inflation Expectations"
          dxincr="1"
-         backgroundcolor="LightYellow"
+         backgroundcolor="White"
          frequency="months">
 
     <chart label="Gross Domestic Product, YoY Percentage Change"
