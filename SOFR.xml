@@ -1,5 +1,5 @@
 <context>
-  <panel label="SOFR"
+  <panel label="DFF"
          dxincr="1"
          backgroundcolor="White"
          frequency="months">
@@ -21,11 +21,11 @@
       <series ref="RC" color="LightCyan"/>
     </chart>
 
-    <chart label="Secured Overnight Financing Rate"
+    <chart label="Federal Funds Effective Rate"
            span="15"
            ngridlines="10">
 
-      <series ref="SOFR" color="Red"/>
+      <series ref="DFF" color="Red"/>
       <series ref="RC" color="LightCyan"/>
     </chart>
   </panel>
