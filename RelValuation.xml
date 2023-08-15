@@ -18,6 +18,7 @@
            ngridlines="8">
 
       <series ref="DGS2" color="Blue"/>
+      <series ref="DGS10" color="Green"/>
       <series ref="SP500_EY" color="Red"/>
     </chart>
   </panel>
