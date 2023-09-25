@@ -1,16 +1,8 @@
 # Update script
 
-S = fred('DFF');
-setId(S, 1);
-merge(S, '--with-inserts');
-
-S = fred('ICSA');
-setId(S, 91);
-merge(S, '--with-inserts');
-
-S = fred('DTB3');
-setId(S, 3);
-merge(S, '--with-inserts');
+upd(1,  'DFF');
+upd(91, 'ICSA');
+upd(3,  'DTB3');
 
 S = fred('GDP');
 setId(S, 10);
