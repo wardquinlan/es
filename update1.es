@@ -1,8 +1,8 @@
 # Update script
 
-upd(1,  'DFF');
-upd(91, 'ICSA');
-upd(3,  'DTB3');
+up('DFF');
+up('ICSA');
+up('DTB3');
 
 S = fred('GDP');
 setId(S, 10);
