@@ -39,5 +39,6 @@ setSource(ICSA, "FRED");
 setSourceId(ICSA, "ICSA");
 setNotes(ICSA, "Units: Thousands\n\n" + getNotes(TMP));
 
-plot('es.xml');
+# can't do this: will screw up cron jobs
+# plot('es.xml');
 
