@@ -39,3 +39,5 @@ setSource(ICSA, "FRED");
 setSourceId(ICSA, "ICSA");
 setNotes(ICSA, "Units: Thousands\n\n" + getNotes(TMP));
 
+plot('es.xml');
+
