@@ -9,3 +9,20 @@ function updateFredSeries(series) {
   }
 }
 
+METRICS.numberOfSeries = 0;
+METRICS.numberOfRecords = 0;
+function seriesUsageMetrics(series) {
+  if (getSource(series) == 'FRED') {
+    METRICS.numberOfSeries = METRICS.numberOfSeries + 1;
+    METRICS.numberOfRecords = METRICS.numberOfRecords + getSize(series);
+  }
+}
+
+function reportSeriesUsage() {
+  cat(seriesUsageMetrics);
+  print('Series Metrics');
+  print('--------------');
+  print('Series loaded in catalog: ' + METRICS.numberOfSeries);
+  print('Total number of records in catalog: ' + METRICS.numberOfRecords);
+}
+
