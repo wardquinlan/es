@@ -15,12 +15,14 @@ function seriesUsageMetrics(series) {
   S = load(getId(series));
   METRICS.numberOfSeries = METRICS.numberOfSeries + 1;
   METRICS.numberOfRecords = METRICS.numberOfRecords + getSize(S);
+  print(getName(S) + ': ' + getSize(S));
 }
 
 function reportSeriesUsage() {
-  ds(seriesUsageMetrics);
   print('Series Metrics');
   print('--------------');
+  ds(seriesUsageMetrics);
+  print('');
   print('Series loaded in datastore: ' + METRICS.numberOfSeries);
   print('Total number of records in datastore: ' + METRICS.numberOfRecords);
 }
