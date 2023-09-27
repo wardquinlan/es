@@ -1,3 +1,9 @@
+function confirm(cond, message) {
+  if (!cond) {
+    throw '*** CONFIRMATION FAILED: ' + message;
+  }
+}
+
 function updateFredSeries(series) {
   if (getSource(series) == 'FRED') {
     id = getId(series);
@@ -25,5 +31,14 @@ function reportSeriesUsage() {
   print('');
   print('Series loaded in datastore: ' + METRICS.numberOfSeries);
   print('Total number of records in datastore: ' + METRICS.numberOfRecords);
+}
+
+function last(series) {
+  if (getSize(series) == 0) {
+    throw getName(series) + ': no data';
+  }
+  D = date(series);
+  confirm(getSize(series) == getSize(D), 'original series and date series are not the same size');
+  print(get(D, getSize(D) - 1) + ': ' + get(series, getSize(series) - 1));
 }
 
