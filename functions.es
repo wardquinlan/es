@@ -12,6 +12,10 @@ function d(object) {
   data(object);
 }
 
+function println() {
+  print('');
+}
+
 function updateFredSeries(series) {
   if (getSource(series) == 'FRED') {
     id = getId(series);
@@ -48,5 +52,20 @@ function last(series) {
   D = date(series);
   cf(getSize(series) == getSize(D), 'original series and date series are not the same size');
   print(get(D, getSize(D) - 1) + ': ' + get(series, getSize(series) - 1));
+}
+
+function summary() {
+  print('S&P 500:');
+  last(SP500);
+  println();
+  print('3-Month Treasury:');
+  last(DTB3);
+  println();
+  print('2-year Treasury:');
+  last(DGS2);
+  println();
+  print('10-year Treasury:');
+  last(DGS10);
+  println();
 }
 
