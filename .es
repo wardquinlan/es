@@ -1,4 +1,5 @@
 include "functions.es";
+include "DGS.es";
 include "LOGF.es";
 include "GDP.es";
 include "RC.es";
@@ -12,7 +13,6 @@ include "PCE.es";
 include "DGORDER.es";
 include "PPIACO.es";
 include "VIXCLS.es";
-include "DGS.es";
 include "WALCL.es";
 
 NFCI = load(18);
