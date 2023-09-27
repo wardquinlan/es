@@ -1,4 +1,4 @@
-function confirm(cond, message) {
+function cf(cond, message) {
   if (!cond) {
     throw '*** CONFIRMATION FAILED: ' + message;
   }
@@ -46,7 +46,7 @@ function last(series) {
     throw getName(series) + ': no data';
   }
   D = date(series);
-  confirm(getSize(series) == getSize(D), 'original series and date series are not the same size');
+  cf(getSize(series) == getSize(D), 'original series and date series are not the same size');
   print(get(D, getSize(D) - 1) + ': ' + get(series, getSize(series) - 1));
 }
 
