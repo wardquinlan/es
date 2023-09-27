@@ -12,17 +12,16 @@ function updateFredSeries(series) {
 METRICS.numberOfSeries = 0;
 METRICS.numberOfRecords = 0;
 function seriesUsageMetrics(series) {
-  if (getSource(series) == 'FRED') {
-    METRICS.numberOfSeries = METRICS.numberOfSeries + 1;
-    METRICS.numberOfRecords = METRICS.numberOfRecords + getSize(series);
-  }
+  S = load(getId(series));
+  METRICS.numberOfSeries = METRICS.numberOfSeries + 1;
+  METRICS.numberOfRecords = METRICS.numberOfRecords + getSize(S);
 }
 
 function reportSeriesUsage() {
-  cat(seriesUsageMetrics);
+  ds(seriesUsageMetrics);
   print('Series Metrics');
   print('--------------');
-  print('Series loaded in catalog: ' + METRICS.numberOfSeries);
-  print('Total number of records in catalog: ' + METRICS.numberOfRecords);
+  print('Series loaded in datastore: ' + METRICS.numberOfSeries);
+  print('Total number of records in datastore: ' + METRICS.numberOfRecords);
 }
 
