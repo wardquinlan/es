@@ -4,6 +4,14 @@ function confirm(cond, message) {
   }
 }
 
+function m(object) {
+  meta(object);
+}
+
+function d(object) {
+  data(object);
+}
+
 function updateFredSeries(series) {
   if (getSource(series) == 'FRED') {
     id = getId(series);
