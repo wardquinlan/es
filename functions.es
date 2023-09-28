@@ -69,5 +69,11 @@ function summary() {
   print('10-year Treasury:');
   last(DGS10);
   println();
+  print('RRP:');
+  last(RRPONTSYD);
+  println();
+  print('WALCL:');
+  last(WALCL);
+  println();
 }
 
