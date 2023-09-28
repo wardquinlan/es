@@ -42,3 +42,5 @@ setNotes(ICSA, "Units: Thousands\n\n" + getNotes(TMP));
 # can't do this: will screw up cron jobs
 # plot('es.xml');
 
+summary();
+
