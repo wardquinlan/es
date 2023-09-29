@@ -7,6 +7,7 @@ include "MKCAPGDP.es";
 include "RSAFS.es";
 include "DGORDER.es";
 include "T10Y3M.es";
+include "T10Y2Y.es";
 include "SP500.es";
 include "JU.es";
 include "PCE.es";

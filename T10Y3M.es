@@ -1,5 +1,4 @@
 T10Y3M = load(117);
-T10Y2Y = load(96);
 T10Y3M.inv = T10Y3M < 0;
 setName(T10Y3M.inv, "T10Y3M.inv");
 setTitle(T10Y3M.inv, getTitle(T10Y3M));
