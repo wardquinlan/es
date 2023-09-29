@@ -1,3 +1,6 @@
+## we probably want to replace this with confirm() which actually asks the user for input
+## And then, rename this function to assert().  And then, remove the assert() command.
+
 function cf(cond, message) {
   if (!cond) {
     throw '*** CONFIRMATION FAILED: ' + message;
@@ -18,6 +21,17 @@ function println() {
 
 function s() {
   summary();
+}
+
+function backup(id, idNew) {
+  if (!isAdmin()) {
+    throw 'you must be running in administrative mode to run this function';
+  }
+  print('backuping up series ' + id + '...');
+  S = load(id);
+  setId(S, idNew);
+  setName(S, getName(S) + '.orig');
+  save(S);
 }
 
 function updateFredSeries(series) {
