@@ -16,6 +16,10 @@ function println() {
   print('');
 }
 
+function s() {
+  summary();
+}
+
 function updateFredSeries(series) {
   if (getSource(series) == 'FRED') {
     id = getId(series);
@@ -36,13 +40,13 @@ function seriesUsageMetrics(series) {
   print(getName(S) + ': ' + getSize(S));
 }
 
-function reportSeriesUsage() {
+function usage() {
   print('Series Metrics');
   print('--------------');
   ds(seriesUsageMetrics);
   print('');
-  print('Series loaded in datastore: ' + METRICS.numberOfSeries);
-  print('Total number of records in datastore: ' + METRICS.numberOfRecords);
+  print('Series stored in datastore: ' + METRICS.numberOfSeries);
+  print('Total number of records store in datastore: ' + METRICS.numberOfRecords);
 }
 
 function last(series) {
