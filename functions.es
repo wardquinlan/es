@@ -53,7 +53,7 @@ function last(series) {
   C = change(series);
   cf(getSize(series) == getSize(D), 'original series and date series are not consistent');
   cf(getSize(series) == getSize(C) + 1, 'original series and change series are not consistent');
-  print(get(D, getSize(D) - 1) + ': ' + get(series, getSize(series) - 1) + ' (change=' + get(C, getSize(C) - 1) + ')');
+  print(get(D, getSize(D) - 1) + ': ' + get(series, getSize(series) - 1) + ' (change = ' + get(C, getSize(C) - 1) + ')');
 }
 
 function summary() {
