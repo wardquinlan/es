@@ -1,12 +1,3 @@
-## we probably want to replace this with confirm() which actually asks the user for input
-## And then, rename this function to assert().  And then, remove the assert() command.
-
-function cf(cond, message) {
-  if (!cond) {
-    throw '*** CONFIRMATION FAILED: ' + message;
-  }
-}
-
 function m(object) {
   meta(object);
 }
@@ -71,8 +62,8 @@ function last(series) {
   }
   D = date(series);
   C = change(series);
-  cf(getSize(series) == getSize(D), 'original series and date series are not consistent');
-  cf(getSize(series) == getSize(C) + 1, 'original series and change series are not consistent');
+  assert(getSize(series) == getSize(D), 'original series and date series are not consistent');
+  assert(getSize(series) == getSize(C) + 1, 'original series and change series are not consistent');
   print(get(D, getSize(D) - 1) + ': ' + get(series, getSize(series) - 1) + ' (change = ' + get(C, getSize(C) - 1) + ')');
 }
 
