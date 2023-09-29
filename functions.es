@@ -72,6 +72,7 @@ function last(series) {
 }
 
 function summary() {
+  print('--------------------');
   print('S&P 500:');
   last(SP500);
   println();
