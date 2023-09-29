@@ -18,6 +18,9 @@ function backup(id) {
   if (!isAdmin()) {
     throw 'you must be running in administrative mode to do backups';
   }
+  if (!defined('id')) {
+    throw 'usage: backup(series-id)';
+  }
   print('backuping up series ' + id + '...');
   S = load(id);
   setName(S, getName(S) + '.orig');
