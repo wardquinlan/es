@@ -22,6 +22,7 @@ function backup(id) {
   S = load(id);
   setName(S, getName(S) + '.orig');
   setId(S, getId(S) + 10000);
+  setSource(S, getSource(S) + '.orig');
   print('backup series name = ' + getName(S));
   print('backup series id = ' + getId(S));
   save(S);
