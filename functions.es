@@ -23,14 +23,16 @@ function s() {
   summary();
 }
 
-function backup(id, idNew) {
+function backup(id) {
   if (!isAdmin()) {
     throw 'you must be running in administrative mode to run this function';
   }
   print('backuping up series ' + id + '...');
   S = load(id);
-  setId(S, idNew);
   setName(S, getName(S) + '.orig');
+  setId(S, getId(S) + 10000);
+  print('backup series name = ' + getName(S));
+  print('backup series id = ' + getId(S));
   save(S);
 }
 
