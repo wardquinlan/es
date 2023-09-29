@@ -16,7 +16,7 @@ function s() {
 
 function backup(id) {
   if (!isAdmin()) {
-    throw 'you must be running in administrative mode to run this function';
+    throw 'you must be running in administrative mode to do backups';
   }
   print('backuping up series ' + id + '...');
   S = load(id);
