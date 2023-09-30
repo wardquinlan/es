@@ -103,13 +103,32 @@ function createRC() {
   R2007 = DT >= '2007-12-01' and DT <= '2009-06-30';
   R2020 = DT >= '2020-02-01' and DT <= '2020-04-30';
   RC = (R1969 or R1973 or R1980 or R1981 or R1990 or R2001 or R2007 or R2020);
+  setName(RC, 'RC');
   setTitle(RC, "NBER-defined Recessions");
   setNotes(RC, "Source: https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions");
   setSource(RC, "NBER");
-  return RC;
+  gPut('RC', RC);
 } 
 
 function println() {
   print('');
+}
+
+function createInv(base) {
+  series = base < 0;
+  setName(series, getName(base) + '.inv');
+  setTitle(series, getTitle(base));
+  setSource(series, '[DERIVED]');
+  setNotes(series, getNotes(base));
+  gPut(getName(series), series);
+}
+
+function createPC1(base, freq) {
+  series = pchange(base, freq);
+  setName(series, getName(base) + '.pc1');
+  setTitle(series, getTitle(base) + "(YoY Percentage Change)");
+  setSource(series, "[DERIVED]");
+  setNotes(series, getNotes(base));
+  gPut(getName(series), series);
 }
 
