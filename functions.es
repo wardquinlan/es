@@ -132,3 +132,27 @@ function createPC1(base, freq) {
   gPut(getName(series), series);
 }
 
+function createSP500(r) {
+  SP500_EPS = sum(SP500_EPS_Q, 4);
+  SP500_SALES = sum(SP500_SALES_Q, 4);
+
+  SP500_PE = logf(SP500 / SP500_EPS, r);
+  setName(SP500_PE, "SP500_PE");
+  setTitle(SP500_PE, "Adjusted SP500 Price / Earnings");
+  setSource(SP500_PE, "[DERIVED]");
+
+  SP500_PS = logf(SP500 / SP500_SALES, r);
+  setName(SP500_PS, "SP500_PS");
+  setTitle(SP500_PS, "Adjusted SP500 Price / Sales");
+  setSource(SP500_PS, "[DERIVED]");
+
+  SP500_EY = SP500_EPS / SP500 * 100;
+  setName(SP500_EY, "SP500_EY");
+  setTitle(SP500_EY, "S&P 500 Earnings Yield (Unadjusted)");
+  setSource(SP500_EY, "[DERIVED]");
+
+  gPut(getName(SP500_PE), SP500_PE);
+  gPut(getName(SP500_PS), SP500_PS);
+  gPut(getName(SP500_EY), SP500_EY);
+}
+
