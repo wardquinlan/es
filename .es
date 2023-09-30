@@ -1,4 +1,6 @@
+. 'constants.es';
 . 'functions.es';
+. 'series.es';
 
 ds(autoload);
 
