@@ -139,8 +139,8 @@ function createPC1WithLimit(base, freq, limit) {
   setTitle(series, getTitle(base) + ' (YoY Percentage Change)');
   setSource(series, '[DERIVED]');
   setNotes(series,
-    "<strong>Note:</strong> I have capped percentage changes to +/- " + limit +
-    "%\n\n" + getNotes(base));
+    '<strong>Note:</strong> I have capped percentage changes to +/- ' + limit +
+    '%\n\n' + getNotes(base));
   gPut(getName(series), series);
 }
 
@@ -180,26 +180,46 @@ function createSP500(r) {
 
 function createJU() {
   JU = JTSJOL / UNEMPLOY;
-  setName(JU, "JU");
-  setTitle(JU, "Job Openings / Unemployment");
-  setSource(JU, "[DERIVED]");
+  setName(JU, 'JU');
+  setTitle(JU, 'Job Openings / Unemployment');
+  setSource(JU, '[DERIVED]');
   gPut(getName(JU), JU);
 }
 
 function createVIX() {
   VIXCLS.H = VIXCLS > 36;
-  setName(VIXCLS.H, "VIXCLS.H");
+  setName(VIXCLS.H, 'VIXCLS.H');
   setTitle(VIXCLS.H, getTitle(VIXCLS));
-  setSource(VIXCLS.H, "[DERIVED]");
-  setNotes(VIXCLS.H, "Condition is true when VIXCLS > 36");
+  setSource(VIXCLS.H, '[DERIVED]');
+  setNotes(VIXCLS.H, 'Condition is true when VIXCLS > 36');
   gPut(getName(VIXCLS.H), VIXCLS.H);
 }
 
 function createDGS1FC() {
   DGS1.fc = (100 + DGS2)^2 / (100 + DGS1) - 100;
-  setName(DGS1.fc, "DGS1.fc");
-  setTitle(DGS1.fc, "1-year DGS1 Forecasted Rate");
-  setSource(DGS1.fc, "[DERIVED]");
+  setName(DGS1.fc, 'DGS1.fc');
+  setTitle(DGS1.fc, '1-year DGS1 Forecasted Rate');
+  setSource(DGS1.fc, '[DERIVED]');
   gPut(getName(DGS1.fc), DGS1.fc);
+}
+
+function createWALCL() {
+  X = WALCL;
+  WALCL = X / 1000;
+  setName(WALCL, 'WALCL');
+  setTitle(WALCL, getTitle(X));
+  setSource(WALCL, getSource(X));
+  setSource(WALCL, getSourceId(X));
+  setNotes(WALCL, 'Units are in Billions of US Dollars');
+}
+
+function createICSA() {
+  X = ICSA;
+  ICSA = min(600, X / 1000);
+  setName(ICSA, 'ICSA');
+  setTitle(ICSA, getTitle(X));
+  setSource(ICSA, getSource(X));
+  setSourceId(ICSA, getSourceId(X));
+  setNotes(ICSA, 'Units: Thousands\n\n' + getNotes(X));
 }
 

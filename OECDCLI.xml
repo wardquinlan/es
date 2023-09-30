@@ -26,7 +26,7 @@
            gridlines="100"
            ngridlines="10">
 
-      <series ref="OECDCLI" color="Red"/>
+      <series ref="USALOLITONOSTSAM" color="Red"/>
       <series ref="RC" color="LightCyan"/>
     </chart>
   </panel>

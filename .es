@@ -16,4 +16,6 @@ createPC1WithLimit(DGORDER, 12, 12);
 createVIX();
 createPC1WithLimit(PPIACO, 12, 12);
 createDGS1FC();
+createWALCL();
+createICSA();
 
