@@ -88,6 +88,10 @@ function summary() {
   println();
 }
 
+function println() {
+  print('');
+}
+
 function createRC() {
   DT = date(GDP);
   R1953 = DT >= '1953-07-01' and DT <= '1954-05-31';
@@ -108,10 +112,6 @@ function createRC() {
   setSource(RC, 'NBER');
   gPut('RC', RC);
 } 
-
-function println() {
-  print('');
-}
 
 function createInv(base) {
   series = base < 0;
@@ -193,5 +193,13 @@ function createVIX() {
   setSource(VIXCLS.H, "[DERIVED]");
   setNotes(VIXCLS.H, "Condition is true when VIXCLS > 36");
   gPut(getName(VIXCLS.H), VIXCLS.H);
+}
+
+function createDGS1FC() {
+  DGS1.fc = (100 + DGS2)^2 / (100 + DGS1) - 100;
+  setName(DGS1.fc, "DGS1.fc");
+  setTitle(DGS1.fc, "1-year DGS1 Forecasted Rate");
+  setSource(DGS1.fc, "[DERIVED]");
+  gPut(getName(DGS1.fc), DGS1.fc);
 }
 

@@ -13,11 +13,11 @@
   <include name="IE.xml"/>
   <include name="VIX.xml"/>
   <include name="PPIACO.xml"/>
-<!--
   <include name="Treasurys.xml"/>
   <include name="PMI-M.xml"/>
   <include name="PMI-NM.xml"/>
-  <include name="SOFR.xml"/>
+  <include name="DFF.xml"/>
+<!--
   <include name="OECDCLI.xml"/>
   <include name="BAA10Y.xml"/>
   <include name="BAMLC0A0CM.xml"/>
