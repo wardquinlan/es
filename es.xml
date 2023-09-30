@@ -1,5 +1,6 @@
 <context>
   <include name="NFCI.xml"/>
+<!--
   <include name="T10Y3M.xml"/>
   <include name="SP500.xml"/>
   <include name="RelValuation.xml"/>
@@ -25,5 +26,6 @@
   <include name="RRPONTSYAWARD.xml"/>
   <include name="WALCL.xml"/>
   <include name="ICSA.xml"/>
+-->
 </context>
 
