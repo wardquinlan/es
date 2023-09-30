@@ -1,3 +1,3 @@
 # Update script
-ds(updateFredSeries);
+ds(updateFred);
 
