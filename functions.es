@@ -125,9 +125,22 @@ function createInv(base) {
 function createPC1(base, freq) {
   series = pchange(base, freq);
   setName(series, getName(base) + '.pc1');
-  setTitle(series, getTitle(base) + '(YoY Percentage Change)');
+  setTitle(series, getTitle(base) + ' (YoY Percentage Change)');
   setSource(series, '[DERIVED]');
   setNotes(series, getNotes(base));
+  gPut(getName(series), series);
+}
+
+function createPC1WithLimit(base, freq, limit) {
+  series = pchange(base, freq);
+  series = min(series, +limit);
+  series = max(series, -limit);
+  setName(series, getName(base) + '.pc1');
+  setTitle(series, getTitle(base) + ' (YoY Percentage Change)');
+  setSource(series, '[DERIVED]');
+  setNotes(series,
+    "<strong>Note:</strong> I have capped percentage changes to +/- " + limit +
+    "%\n\n" + getNotes(base));
   gPut(getName(series), series);
 }
 
@@ -163,5 +176,13 @@ function createSP500(r) {
   gPut(getName(SP500_PS), SP500_PS);
   gPut(getName(SP500_EY), SP500_EY);
   gPut(getName(MKCAPGDP), MKCAPGDP);
+}
+
+function createJU() {
+  JU = JTSJOL / UNEMPLOY;
+  setName(JU, "JU");
+  setTitle(JU, "Job Openings / Unemployment");
+  setSource(JU, "[DERIVED]");
+  gPut(getName(JU), JU);
 }
 
