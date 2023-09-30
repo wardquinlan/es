@@ -1,4 +1,4 @@
-include 'constants.es';
+. 'constants.es';
 
 function autoload(series) {
   # don't load the backups...
@@ -184,5 +184,14 @@ function createJU() {
   setTitle(JU, "Job Openings / Unemployment");
   setSource(JU, "[DERIVED]");
   gPut(getName(JU), JU);
+}
+
+function createVIX() {
+  VIXCLS.H = VIXCLS > 36;
+  setName(VIXCLS.H, "VIXCLS.H");
+  setTitle(VIXCLS.H, getTitle(VIXCLS));
+  setSource(VIXCLS.H, "[DERIVED]");
+  setNotes(VIXCLS.H, "Condition is true when VIXCLS > 36");
+  gPut(getName(VIXCLS.H), VIXCLS.H);
 }
 

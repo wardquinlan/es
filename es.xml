@@ -9,11 +9,11 @@
   <include name="PCEPILFE.xml"/>
   <include name="PCEDG.xml"/>
   <include name="PCES.xml"/>
-<!--
   <include name="DGORDER.xml"/>
   <include name="IE.xml"/>
   <include name="VIX.xml"/>
   <include name="PPIACO.xml"/>
+<!--
   <include name="Treasurys.xml"/>
   <include name="PMI-M.xml"/>
   <include name="PMI-NM.xml"/>
