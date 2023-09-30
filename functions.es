@@ -1,3 +1,5 @@
+include 'constants.es';
+
 function autoload(series) {
   # don't load the backups...
   if (getId(series) < 10000) {
@@ -9,9 +11,6 @@ function autoload(series) {
 } 
   
 function logf(series, r) {
-  const LOGF.K = 0.5;   # scaling factor
-  const LOGF.NR = 3.25; # neutral rate
-  
   F = (E - E^LOGF.K) * r / LOGF.NR + E^LOGF.K;
   return ln(F) * series;
 }
@@ -37,7 +36,7 @@ function updateFred(series) {
   if (getSource(series) == 'FRED') {
     id = getId(series);
     name = getName(series);
-    log(INFO, 'updating ' + id + ":" + name + '...');
+    log(INFO, 'updating ' + id + ':' + name + '...');
     series = fred(name);
     setId(series, id);
     merge(series, '--with-inserts');
@@ -52,8 +51,8 @@ function metrics(series) {
 }
 
 function usage() {
-  gPut(METRICS.numberOfSeries, 0);
-  gPut(METRICS.numberOfRecords, 0);
+  gPut('METRICS.numberOfSeries', 0);
+  gPut('METRICS.numberOfRecords', 0);
   print('Series Metrics');
   print('--------------');
   ds(metrics);
@@ -104,9 +103,9 @@ function createRC() {
   R2020 = DT >= '2020-02-01' and DT <= '2020-04-30';
   RC = (R1969 or R1973 or R1980 or R1981 or R1990 or R2001 or R2007 or R2020);
   setName(RC, 'RC');
-  setTitle(RC, "NBER-defined Recessions");
-  setNotes(RC, "Source: https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions");
-  setSource(RC, "NBER");
+  setTitle(RC, 'NBER-defined Recessions');
+  setNotes(RC, 'Source: https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions');
+  setSource(RC, 'NBER');
   gPut('RC', RC);
 } 
 
@@ -126,8 +125,8 @@ function createInv(base) {
 function createPC1(base, freq) {
   series = pchange(base, freq);
   setName(series, getName(base) + '.pc1');
-  setTitle(series, getTitle(base) + "(YoY Percentage Change)");
-  setSource(series, "[DERIVED]");
+  setTitle(series, getTitle(base) + '(YoY Percentage Change)');
+  setSource(series, '[DERIVED]');
   setNotes(series, getNotes(base));
   gPut(getName(series), series);
 }
@@ -137,22 +136,32 @@ function createSP500(r) {
   SP500_SALES = sum(SP500_SALES_Q, 4);
 
   SP500_PE = logf(SP500 / SP500_EPS, r);
-  setName(SP500_PE, "SP500_PE");
-  setTitle(SP500_PE, "Adjusted SP500 Price / Earnings");
-  setSource(SP500_PE, "[DERIVED]");
+  setName(SP500_PE, 'SP500_PE');
+  setTitle(SP500_PE, 'Adjusted SP500 Price / Earnings');
+  setSource(SP500_PE, '[DERIVED]');
 
   SP500_PS = logf(SP500 / SP500_SALES, r);
-  setName(SP500_PS, "SP500_PS");
-  setTitle(SP500_PS, "Adjusted SP500 Price / Sales");
-  setSource(SP500_PS, "[DERIVED]");
+  setName(SP500_PS, 'SP500_PS');
+  setTitle(SP500_PS, 'Adjusted SP500 Price / Sales');
+  setSource(SP500_PS, '[DERIVED]');
 
   SP500_EY = SP500_EPS / SP500 * 100;
-  setName(SP500_EY, "SP500_EY");
-  setTitle(SP500_EY, "S&P 500 Earnings Yield (Unadjusted)");
-  setSource(SP500_EY, "[DERIVED]");
+  setName(SP500_EY, 'SP500_EY');
+  setTitle(SP500_EY, 'S&P 500 Earnings Yield (Unadjusted)');
+  setSource(SP500_EY, '[DERIVED]');
+
+  MKCAPGDP = 100 * logf(WILL5000PRFC / GDP, r);
+  setName(MKCAPGDP, 'MKCAPGDP');
+  setTitle(MKCAPGDP, 'Market Cap to GDP');
+  setSource(MKCAPGDP, '[DERIVED]');
+  DESC = 'Adjusted Market Cap to GDP with:\n\n' +
+    'K=' + LOGF.K + '\n' +
+    'NR=' + LOGF.NR;
+  setNotes(MKCAPGDP, DESC);
 
   gPut(getName(SP500_PE), SP500_PE);
   gPut(getName(SP500_PS), SP500_PS);
   gPut(getName(SP500_EY), SP500_EY);
+  gPut(getName(MKCAPGDP), MKCAPGDP);
 }
 
