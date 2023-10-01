@@ -1,3 +1,0 @@
-# Update script
-ds(updateFred);
-

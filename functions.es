@@ -41,7 +41,7 @@ function backup(id) {
   save(S);
 }
 
-function updateFred(series) {
+function updateSeries(series) {
   if (getSource(series) == 'FRED') {
     id = getId(series);
     name = getName(series);
@@ -81,9 +81,5 @@ function last(series) {
   assert(getSize(series) == getSize(D), 'original series and date series are not consistent');
   assert(getSize(series) == getSize(C) + 1, 'original series and change series are not consistent');
   print(get(D, getSize(D) - 1) + ': ' + get(series, getSize(series) - 1) + ' (change = ' + get(C, getSize(C) - 1) + ')');
-}
-
-function println() {
-  print('');
 }
 
