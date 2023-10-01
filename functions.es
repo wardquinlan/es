@@ -13,6 +13,12 @@ function logf(series, r) {
   return ln(F) * series;
 }
 
+function resetId(id, idNew) {
+  if (!isAdmin()) {
+    throw 'you must be running in administrative mode to reset id\'s';
+  }
+}
+
 function backup(id) {
   if (!isAdmin()) {
     throw 'you must be running in administrative mode to do backups';
