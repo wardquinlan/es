@@ -20,7 +20,8 @@ function resetId(id, idNew) {
 }
 
 function reload() {
-  log(INFO, 'loading series...');
+  log(INFO, 'loading series from datastore...');
+  . 'series.es';
   . 'load.es';
 }
 
