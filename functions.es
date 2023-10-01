@@ -8,10 +8,20 @@ function autoload(series) {
   } 
 } 
   
-function resetId(id, idNew) {
+function reset(id, idNew) {
   if (!isAdmin()) {
     throw 'you must be running in administrative mode to reset id\'s';
   }
+  if (!defined('id') or !defined('idNew')) {
+    throw 'usage: reset(id, idNew)';
+  }
+  if (exists(idNew)) {
+    throw 'series already exists: ' + idNew;
+  } 
+  S = load(id);
+  setId(S, idNew);
+  drop(id);
+  save(S);
 }
 
 function backup(id) {
@@ -19,7 +29,7 @@ function backup(id) {
     throw 'you must be running in administrative mode to do backups';
   }
   if (!defined('id')) {
-    throw 'usage: backup(series-id)';
+    throw 'usage: backup(id)';
   }
   print('backuping up series ' + id + '...');
   S = load(id);
