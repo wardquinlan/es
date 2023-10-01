@@ -19,6 +19,19 @@ function resetId(id, idNew) {
   }
 }
 
+function reload() {
+  log(INFO, 'loading series...');
+  . 'load.es';
+}
+
+function p() {
+  if (!defined('SERIES_LOADED')) {
+    reload();
+    gPut('SERIES_LOADED', true);
+  }
+  plot('es.xml');
+}
+
 function backup(id) {
   if (!isAdmin()) {
     throw 'you must be running in administrative mode to do backups';
