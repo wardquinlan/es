@@ -8,29 +8,10 @@ function autoload(series) {
   } 
 } 
   
-function logf(series, r) {
-  F = (E - E^LOGF.K) * r / LOGF.NR + E^LOGF.K;
-  return ln(F) * series;
-}
-
 function resetId(id, idNew) {
   if (!isAdmin()) {
     throw 'you must be running in administrative mode to reset id\'s';
   }
-}
-
-function reload() {
-  log(INFO, 'loading series from datastore...');
-  . 'series.es';
-  . 'load.es';
-}
-
-function p() {
-  if (!defined('SERIES_LOADED')) {
-    reload();
-    gPut('SERIES_LOADED', true);
-  }
-  plot('es.xml');
 }
 
 function backup(id) {
@@ -90,22 +71,6 @@ function last(series) {
   assert(getSize(series) == getSize(D), 'original series and date series are not consistent');
   assert(getSize(series) == getSize(C) + 1, 'original series and change series are not consistent');
   print(get(D, getSize(D) - 1) + ': ' + get(series, getSize(series) - 1) + ' (change = ' + get(C, getSize(C) - 1) + ')');
-}
-
-function summary() {
-  print('--------------------');
-  print('S&P 500:');
-  last(SP500);
-  println();
-  print('10-year Treasury:');
-  last(DGS10);
-  println();
-  print('2-year Treasury:');
-  last(DGS2);
-  println();
-  print('3-Month Treasury:');
-  last(DTB3);
-  println();
 }
 
 function println() {

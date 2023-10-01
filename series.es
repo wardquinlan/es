@@ -1,3 +1,53 @@
+function reload() {
+  log(INFO, 'loading series from datastore...');
+  ds(autoload);
+  createRC();
+  createPC1(GDP, 4);
+  createInv(T10Y3M);
+  createInv(T10Y2Y);
+  createSP500(DGS2);
+  createJU();
+  createPC1WithLimit(RSAFS, 12, 12);
+  createPC1(PCEPILFE, 12);
+  createPC1WithLimit(PCEDG, 12, 12);
+  createPC1WithLimit(PCES, 12, 12);
+  createPC1WithLimit(DGORDER, 12, 12);
+  createVIX();
+  createPC1WithLimit(PPIACO, 12, 12);
+  createDGS1FC();
+  createWALCL();
+  createICSA();
+}
+
+function plt() {
+  if (!defined('DFF')) {
+    reload();
+    assert(defined('DFF'), 'DFF not loaded');
+  }
+  plot('es.xml');
+}
+
+function logf(series, r) {
+  F = (E - E^LOGF.K) * r / LOGF.NR + E^LOGF.K;
+  return ln(F) * series;
+}
+
+function summary() {
+  print('--------------------');
+  print('S&P 500:');
+  last(SP500);
+  println();
+  print('10-year Treasury:');
+  last(DGS10);
+  println();
+  print('2-year Treasury:');
+  last(DGS2);
+  println();
+  print('3-Month Treasury:');
+  last(DTB3);
+  println();
+}
+
 function createRC() {
   DT = date(GDP);
   R1953 = DT >= '1953-07-01' and DT <= '1954-05-31';
