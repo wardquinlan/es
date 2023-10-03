@@ -33,6 +33,10 @@ function logf(series, r) {
 }
 
 function summary() {
+  if (!defined('DFF')) {
+    reload();
+    assert(defined('DFF'), 'DFF not loaded');
+  }
   print('--------------------');
   print('S&P 500:');
   last(SP500);
