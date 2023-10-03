@@ -8,12 +8,12 @@ function autoload(series) {
   } 
 } 
   
-function reset(id, idNew) {
+function resetId(id, idNew) {
   if (!isAdmin()) {
     throw 'you must be running in administrative mode to reset id\'s';
   }
   if (!defined('id') or !defined('idNew')) {
-    throw 'usage: reset(id, idNew)';
+    throw 'usage: resetId(id, idNew)';
   }
   if (exists(idNew)) {
     throw 'series already exists: ' + idNew;
@@ -24,6 +24,22 @@ function reset(id, idNew) {
   save(S);
 }
 
+function resetName(name, nameNew) {
+  if (!isAdmin()) {
+    throw 'you must be running in administrative mode to reset name\'s';
+  }
+  if (!defined('name') or !defined('nameNew')) {
+    throw 'usage: resetName(name, nameNew)';
+  }
+  if (exists(nameNew)) {
+    throw 'series already exists: ' + nameNew;
+  } 
+  S = load(name);
+  setName(S, nameNew);
+  drop(getId(S));
+  save(S);
+}
+
 function backup(id) {
   if (!isAdmin()) {
     throw 'you must be running in administrative mode to do backups';
@@ -31,18 +47,20 @@ function backup(id) {
   if (!defined('id')) {
     throw 'usage: backup(id)';
   }
-  print('backuping up series ' + id + '...');
   S = load(id);
-  setName(S, getName(S) + '.orig');
+  if (exists(getId(S) + 10000)) {
+    throw 'backup for series already exists: ' + id + '; drop the backup first and try again';
+  }
+  print('backuping up series ' + id + '...');
+  setName(S, getName(S) + '.bak');
   setId(S, getId(S) + 10000);
-  setSource(S, getSource(S) + '.orig');
   print('backup series name = ' + getName(S));
   print('backup series id = ' + getId(S));
   save(S);
 }
 
 function updateSeries(series) {
-  if (getSource(series) == 'FRED') {
+  if (getSource(series) == 'FRED' and getId(series) < 10000) {
     id = getId(series);
     name = getName(series);
     log(INFO, 'updating ' + id + ':' + name + '...');

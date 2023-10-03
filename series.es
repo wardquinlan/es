@@ -19,7 +19,7 @@ function reload() {
   createICSA();
 }
 
-function plt() {
+function view() {
   if (!defined('DFF')) {
     reload();
     assert(defined('DFF'), 'DFF not loaded');
