@@ -36,16 +36,16 @@ function summary() {
   print('--------------------');
   print('S&P 500:');
   last(SP500);
-  println();
+  print();
   print('10-year Treasury:');
   last(DGS10);
-  println();
+  print();
   print('2-year Treasury:');
   last(DGS2);
-  println();
+  print();
   print('3-Month Treasury:');
   last(DTB3);
-  println();
+  print();
 }
 
 function createRC() {
