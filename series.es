@@ -19,6 +19,18 @@ function reload() {
   createICSA();
 }
 
+function sp500(value) {
+  if (value == UNDEFINED) {
+    throw 'usage: sp500(value)';
+  }
+  S = load(500);
+  D = date(S);
+  if (get(D, getSize(D) - 1) < today()) {
+    insert(S, today(), value);
+    merge(S, '--with-inserts');
+  }
+}
+
 function view() {
   if (!defined('DFF')) {
     reload();
