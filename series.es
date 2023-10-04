@@ -51,16 +51,16 @@ function summary() {
   }
   print('--------------------');
   print('S&P 500:');
-  last(SP500);
+  print(last(SP500));
   print();
   print('10-year Treasury:');
-  last(DGS10);
+  print(last(DGS10));
   print();
   print('2-year Treasury:');
-  last(DGS2);
+  print(last(DGS2));
   print();
   print('3-Month Treasury:');
-  last(DTB3);
+  print(last(DTB3));
   print();
 }
 
