@@ -5,5 +5,5 @@ export JAVA_HOME
 ES_HOME=/home/ward/workspace/econ/output
 export ES_HOME
 
-$ES_HOME/es.sh --command 'ds(updateSeries);'
+$ES_HOME/es.sh --command 'updateAll();'
 

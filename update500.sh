@@ -5,5 +5,5 @@ export JAVA_HOME
 ES_HOME=/home/ward/workspace/econ/output
 export ES_HOME
 
-$ES_HOME/es.sh --command 'updateSeries(load(500));'
+$ES_HOME/es.sh --command 'updateSeries(500);'
 
