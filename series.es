@@ -5,7 +5,8 @@ function reload() {
   createPC1(GDP, 4);
   createInv(T10Y3M);
   createInv(T10Y2Y);
-  createSP500(DGS2);
+  #createSP500(DGS2);
+  createSP500(DGS10);
   createJU();
   createPC1WithLimit(RSAFS, 12, 12);
   createPC1(PCEPILFE, 12);
