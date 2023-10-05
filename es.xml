@@ -25,5 +25,6 @@
   <include name="includes/RRPONTSYAWARD.xml"/>
   <include name="includes/WALCL.xml"/>
   <include name="includes/ICSA.xml"/>
+  <include name="includes/M2REAL.xml"/>
 </context>
 

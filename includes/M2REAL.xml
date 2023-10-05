@@ -1,0 +1,25 @@
+<context>
+  <panel label="REAL M2"
+         dxincr="1"
+         backgroundcolor="White"
+         frequency="months">
+
+    <chart label="S&amp;P 500"
+           ngridlines="16"
+           span="60"
+           scale="log">
+
+      <series ref="SP500"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+
+    <chart label="Real M2 Money Stock"
+           span="40"
+           ngridlines="10">
+
+      <series ref="M2REAL" color="Red"/>
+      <series ref="RC" color="LightCyan"/>
+    </chart>
+  </panel>
+</context>
+
