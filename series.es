@@ -47,18 +47,17 @@ function summary() {
     reload();
     assert(defined('DFF'), 'DFF not loaded');
   }
-  print('--------------------');
-  print('S&P 500:');
-  print(last(SP500));
-  print();
-  print('10-year Treasury:');
-  print(last(DGS10));
-  print();
-  print('2-year Treasury:');
-  print(last(DGS2));
-  print();
-  print('3-Month Treasury:');
-  print(last(DTB3));
+  print('');
+  summarize('S&P 500:', SP500);
+  summarize('10-year Treasury:', DGS10);
+  summarize('2-year Treasury:', DGS2);
+  summarize('3-Month Treasury:', DTB3);
+  summarize('Reverse Repo Facility', RRPONTSYD);
+}
+
+function summarize(title, series) {
+  print(getTitle(series) + ' [' + last(date(series)) + ']');
+  print('' + last(series) + ' => ' + last(change(series)));
   print();
 }
 
