@@ -48,14 +48,14 @@ function summary() {
     assert(defined('DFF'), 'DFF not loaded');
   }
   print('');
-  summarize('S&P 500:', SP500);
-  summarize('10-year Treasury:', DGS10);
-  summarize('2-year Treasury:', DGS2);
-  summarize('3-Month Treasury:', DTB3);
-  summarize('Reverse Repo Facility', RRPONTSYD);
+  summarize(SP500);
+  summarize(DGS10);
+  summarize(DGS2);
+  summarize(DTB3);
+  summarize(RRPONTSYD);
 }
 
-function summarize(title, series) {
+function summarize(series) {
   print(getTitle(series) + ' [' + last(date(series)) + ']');
   print('' + last(series) + ' => ' + last(change(series)));
   print();
