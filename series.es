@@ -56,7 +56,8 @@ function summary() {
 }
 
 function summarize(series) {
-  print(getTitle(series) + ' [' + last(date(series)) + ']');
+  print(getTitle(series));
+  print('[' + last(date(series)) + ']');
   print('' + last(series) + ' => ' + last(change(series)));
   print();
 }
