@@ -20,48 +20,40 @@ function reload() {
   createICSA();
 }
 
-function p1(obj) {
-  if (getType(obj) == 'String' and obj  == 'undefined') {
-    throw 'usage: p1(obj);';
-  }
-  if (getType(obj) == 'int' or getType(obj) == 'String') {
+# generic function to plot a stand-alone object
+function p(obj) {
+  if (getType(obj) == 'int') {
+    if (!exists(obj)) {
+      throw '' + obj + ' does not exist in the datastore';
+    }
+    log(INFO, 'loading ' + obj + ' from the datastore...');
     obj = load(obj);
+  } else if (getType(obj) == 'String') {
+    if (obj == 'undefined') {
+      throw obj + ' does not exist in the datastore';
+    }
+    if (exists(obj)) {
+      log(INFO, 'loading ' + obj + ' from the datastore...');
+      obj = load(obj);
+    } else {
+      log(INFO, 'attempting to download ' + obj + ' from FRED...');
+      obj = fred(obj);
+    }
   }
-  defaults.panel.dxincr = 1;
-  defaults.panel.frequency = MONTHS;
+  if (getFrequencyShort(obj) == 'D') {
+    defaults.panel.dxincr = 1;
+    defaults.panel.frequency = MONTHS;
+  } else if (getFrequencyShort(obj) == 'W') {
+    defaults.panel.dxincr = 8;
+    defaults.panel.frequency = MONTHS;
+  } else if (getFrequencyShort(obj) == 'M') {
+    defaults.panel.dxincr = 18;
+    defaults.panel.frequency = MONTHS;
+  } else if (getFrequencyShort(obj) == 'Q') {
+    defaults.panel.dxincr = 18;
+    defaults.panel.frequency = MONTHS;
+  } 
   plot(obj);
-}
-
-function p2(obj) {
-  if (getType(obj) == 'String' and obj  == 'undefined') {
-    throw 'usage: p2(obj);';
-  }
-  if (getType(obj) == 'int' or getType(obj) == 'String') {
-    obj = load(obj);
-  }
-  defaults.panel.dxincr = 16;
-  defaults.panel.frequency = MONTHS;
-  plot(obj);
-}
-
-function pf1(name) {
-  if (getType(name) != 'String' or name == 'undefined') {
-    throw 'usage: pf1(name);';
-  }
-  series = fred(name);
-  defaults.panel.dxincr = 1;
-  defaults.panel.frequency = MONTHS;
-  plot(series);
-}
-
-function pf2(name) {
-  if (getType(name) != 'String' or name == 'undefined') {
-    throw 'usage: pf2(name);';
-  }
-  series = fred(name);
-  defaults.panel.dxincr = 16;
-  defaults.panel.frequency = MONTHS;
-  plot(series);
 }
 
 function sp500(value) {
