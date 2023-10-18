@@ -20,6 +20,50 @@ function reload() {
   createICSA();
 }
 
+function p1(obj) {
+  if (getType(obj) == 'String' and obj  == 'undefined') {
+    throw 'usage: p1(obj);';
+  }
+  if (getType(obj) == 'int' or getType(obj) == 'String') {
+    obj = load(obj);
+  }
+  defaults.panel.dxincr = 1;
+  defaults.panel.frequency = MONTHS;
+  plot(obj);
+}
+
+function p2(obj) {
+  if (getType(obj) == 'String' and obj  == 'undefined') {
+    throw 'usage: p1(obj);';
+  }
+  if (getType(obj) == 'int' or getType(obj) == 'String') {
+    obj = load(obj);
+  }
+  defaults.panel.dxincr = 16;
+  defaults.panel.frequency = MONTHS;
+  plot(obj);
+}
+
+function pf1(name) {
+  if (getType(name) != 'String' or name == 'undefined') {
+    throw 'usage: pf(name);';
+  }
+  series = fred(name);
+  defaults.panel.dxincr = 1;
+  defaults.panel.frequency = MONTHS;
+  plot(series);
+}
+
+function pf2(name) {
+  if (getType(name) != 'String' or name == 'undefined') {
+    throw 'usage: pf(name);';
+  }
+  series = fred(name);
+  defaults.panel.dxincr = 16;
+  defaults.panel.frequency = MONTHS;
+  plot(series);
+}
+
 function sp500(value) {
   S = load(500);
   D = date(S);
