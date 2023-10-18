@@ -237,4 +237,24 @@ function createICSA() {
   setNotes(ICSA, 'Units: Thousands\n\n' + getNotes(X));
 }
 
+# updates units / frequency fields from Fred (runs as a callback)
+function uf(series) {
+  if (!isAdmin()) {
+    throw 'you must be running in administrative mode to do this';
+  }
+  name = getName(series);
+  log(INFO, 'consolidating ' + name);
+  if (getSource(series) != 'FRED' or getId(series) >= 10000) {
+    log(INFO, 'skipping ' + name);
+    return;
+  }
+  F = fred(getName(series));
+  setUnits(series, getUnits(F));
+  setUnitsShort(series, getUnitsShort(F));
+  setFrequency(series, getFrequency(F));
+  setFrequencyShort(series, getFrequencyShort(F));
+  log(INFO, getUnits(series) + ':' + getUnitsShort(series));
+  log(INFO, getFrequency(series) + ':' + getFrequencyShort(series));
+  merge(series, '--with-metadata');
+}
 
