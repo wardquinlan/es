@@ -34,7 +34,7 @@ function p1(obj) {
 
 function p2(obj) {
   if (getType(obj) == 'String' and obj  == 'undefined') {
-    throw 'usage: p1(obj);';
+    throw 'usage: p2(obj);';
   }
   if (getType(obj) == 'int' or getType(obj) == 'String') {
     obj = load(obj);
@@ -46,7 +46,7 @@ function p2(obj) {
 
 function pf1(name) {
   if (getType(name) != 'String' or name == 'undefined') {
-    throw 'usage: pf(name);';
+    throw 'usage: pf1(name);';
   }
   series = fred(name);
   defaults.panel.dxincr = 1;
@@ -56,7 +56,7 @@ function pf1(name) {
 
 function pf2(name) {
   if (getType(name) != 'String' or name == 'undefined') {
-    throw 'usage: pf(name);';
+    throw 'usage: pf2(name);';
   }
   series = fred(name);
   defaults.panel.dxincr = 16;
