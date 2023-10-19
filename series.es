@@ -213,23 +213,25 @@ function createDGS1FC() {
 }
 
 function createWALCL() {
-  X = WALCL;
-  WALCL = X / 1000;
-  setName(WALCL, 'WALCL');
-  setTitle(WALCL, getTitle(X));
-  setSource(WALCL, getSource(X));
-  setSource(WALCL, getSourceId(X));
-  setNotes(WALCL, 'Units are in Billions of US Dollars');
+  X = WALCL / 1000;
+  setName(X, getName(WALCL));
+  setTitle(X, getTitle(WALCL));
+  setSource(X, getSource(WALCL));
+  setSource(X, getSourceId(WALCL));
+  setUnits(X, 'Billions of Dollars');
+  setUnitsShort(X, 'Bil. of $');
+  gPut('WALCL', X);
 }
 
 function createICSA() {
-  X = ICSA;
-  ICSA = min(600, X / 1000);
-  setName(ICSA, 'ICSA');
-  setTitle(ICSA, getTitle(X));
-  setSource(ICSA, getSource(X));
-  setSourceId(ICSA, getSourceId(X));
-  setNotes(ICSA, 'Units: Thousands\n\n' + getNotes(X));
+  X = min(600, ICSA / 1000);
+  setName(X, getName(ICSA));
+  setTitle(X, getTitle(ICSA));
+  setSource(X, getSource(ICSA));
+  setSourceId(X, getSourceId(ICSA));
+  setUnits(X, 'Level in Thousands');
+  setUnitsShort(X, 'Level in Thous.');
+  gPut('ICSA', X);
 }
 
 # updates units / frequency fields from Fred (runs as a callback)
