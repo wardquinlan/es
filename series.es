@@ -220,6 +220,9 @@ function createWALCL() {
   setSource(X, getSourceId(WALCL));
   setUnits(X, 'Billions of Dollars');
   setUnitsShort(X, 'Bil. of $');
+  if (!isNull(getNotes(WALCL))) {
+    setNotes(X, getNotes(WALCL));
+  }
   gPut('WALCL', X);
 }
 
@@ -231,7 +234,9 @@ function createICSA() {
   setSourceId(X, getSourceId(ICSA));
   setUnits(X, 'Level in Thousands');
   setUnitsShort(X, 'Level in Thous.');
-  setNotes(X, getNotes(ICSA));
+  if (!isNull(getNotes(ICSA))) {
+    setNotes(X, getNotes(ICSA));
+  }
   gPut('ICSA', X);
 }
 
@@ -240,6 +245,8 @@ function uf(series) {
   if (!isAdmin()) {
     throw 'you must be running in administrative mode to do this';
   }
+  throw '*** you probably don't want to do this...';
+
   name = getName(series);
   log(INFO, 'consolidating ' + name);
   if (getSource(series) != 'FRED' or getId(series) >= 10000) {
