@@ -245,7 +245,7 @@ function uf(series) {
   if (!isAdmin()) {
     throw 'you must be running in administrative mode to do this';
   }
-  throw '*** you probably don't want to do this...';
+  throw '*** you probably don\'t want to this...';
 
   name = getName(series);
   log(INFO, 'consolidating ' + name);
