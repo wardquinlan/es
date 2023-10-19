@@ -57,6 +57,9 @@ function p(obj) {
 }
 
 function sp500(value) {
+  if (getType(value) != 'float') {
+    throw 'sp500(): value must be a float';
+  } 
   S = load(500);
   D = date(S);
   if (get(D, getSize(D) - 1) < today()) {
