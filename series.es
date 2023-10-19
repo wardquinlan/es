@@ -220,7 +220,6 @@ function createWALCL() {
   setSource(X, getSourceId(WALCL));
   setUnits(X, 'Billions of Dollars');
   setUnitsShort(X, 'Bil. of $');
-  setNotes(X, getNotes(WALCL));
   gPut('WALCL', X);
 }
 
