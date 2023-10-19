@@ -220,6 +220,7 @@ function createWALCL() {
   setSource(X, getSourceId(WALCL));
   setUnits(X, 'Billions of Dollars');
   setUnitsShort(X, 'Bil. of $');
+  setNotes(X, getNotes(WALCL));
   gPut('WALCL', X);
 }
 
@@ -231,6 +232,7 @@ function createICSA() {
   setSourceId(X, getSourceId(ICSA));
   setUnits(X, 'Level in Thousands');
   setUnitsShort(X, 'Level in Thous.');
+  setNotes(X, getNotes(ICSA));
   gPut('ICSA', X);
 }
 
