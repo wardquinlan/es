@@ -56,6 +56,30 @@ function p(obj) {
   plot(obj);
 }
 
+function input() {
+  n = dlgInput('Enter the series number:');
+  if (n == null) {
+    return;
+  }
+  id = parseInt(n);
+  
+  d = dlgInput('Enter the date:');
+  if (d == null) {
+    return;
+  }
+
+  v = dlgInput('Enter the value:');
+  if (v == null) {
+    return;
+  }
+  v = parseFloat(v);
+  
+  S = load(id);
+  insert(S, d, v);
+  merge(S, '--with-inserts', '--dry-run');
+  dlgMessage(getName(S) + ' has been merged');
+}
+
 function sp500() {
   value = dlgInput('Enter today\'s value of SP500:');
   if (isNull(value)) {
