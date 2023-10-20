@@ -75,6 +75,11 @@ function input() {
   v = parseFloat(v);
   
   S = load(id);
+  message = 'updating ' + getName(S) + ':' + id + ' on ' + d + ' with ' + v;
+  if (!dlgConfirm(message)) {
+    return;
+  }
+
   insert(S, d, v);
   merge(S, '--with-inserts', '--dry-run');
   dlgMessage(getName(S) + ' has been merged');
