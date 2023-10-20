@@ -56,16 +56,22 @@ function p(obj) {
   plot(obj);
 }
 
-function sp500(value) {
-  if (getType(value) != 'float') {
-    throw 'sp500(): value must be a float';
-  } 
+function sp500() {
+  value = dlgInput('Enter today\'s value of SP500:');
+  if (isNull(value)) {
+    return;
+  }
+  value = parseFloat(value);
+
   S = load(500);
   D = date(S);
   if (get(D, getSize(D) - 1) < today()) {
     insert(S, today(), value);
     merge(S, '--with-inserts');
+    dlgMessage('SP500 has been merged');
+    return;
   }
+  dlgMessage('SP500 already has a value for that date');
 }
 
 function view() {
