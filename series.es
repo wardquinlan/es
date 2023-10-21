@@ -280,6 +280,10 @@ function uf(series) {
   if (!isAdmin()) {
     throw 'you must be running in administrative mode to do this';
   }
+  response = dlgConfirm('!!! Are you absolutely sure you want to update this series\' units and frequency?');
+  if (!response) {
+    return;
+  }
   throw '*** you probably don\'t want to this...';
 
   name = getName(series);
