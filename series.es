@@ -62,6 +62,10 @@ function input() {
     return;
   }
   id = parseInt(n);
+  if (id == null) {
+    dlgMessage('Series number must be an int', ERROR);
+    return;
+  }
   
   d = dlgInput('Enter the date:');
   if (d == null) {
@@ -73,6 +77,10 @@ function input() {
     return;
   }
   v = parseFloat(v);
+  if (v == null) {
+    dlgMessage('Value must be a float', ERROR);
+    return;
+  }
   
   S = load(id);
   message = 'updating ' + getName(S) + ':' + id + ' on ' + d + ' with ' + v;
