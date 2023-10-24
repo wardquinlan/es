@@ -99,6 +99,10 @@ function sp500() {
     return;
   }
   value = parseFloat(value);
+  if (value == null) {
+    dlgMessage('Value must be a float', ERROR);
+    return; 
+  }
 
   S = load(500);
   D = date(S);

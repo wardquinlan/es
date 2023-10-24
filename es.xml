@@ -26,5 +26,6 @@
   <include name="includes/WALCL.xml"/>
   <include name="includes/ICSA.xml"/>
   <include name="includes/M2REAL.xml"/>
+  <include name="includes/DTWEXBGS.xml"/>
 </context>
 
