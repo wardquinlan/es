@@ -95,7 +95,7 @@ function input() {
 
 function sp500() {
   value = dlgInput('Enter today\'s value of SP500:');
-  if (isNull(value)) {
+  if (value == null) {
     return;
   }
   value = parseFloat(value);
@@ -267,7 +267,7 @@ function createWALCL() {
   setSource(X, getSourceId(WALCL));
   setUnits(X, 'Billions of Dollars');
   setUnitsShort(X, 'Bil. of $');
-  if (!isNull(getNotes(WALCL))) {
+  if (getNotes(WALCL) != null) {
     setNotes(X, getNotes(WALCL));
   }
   gPut('WALCL', X);
@@ -281,7 +281,7 @@ function createICSA() {
   setSourceId(X, getSourceId(ICSA));
   setUnits(X, 'Level in Thousands');
   setUnitsShort(X, 'Level in Thous.');
-  if (!isNull(getNotes(ICSA))) {
+  if (getNotes(ICSA) != null) {
     setNotes(X, getNotes(ICSA));
   }
   gPut('ICSA', X);
