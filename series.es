@@ -29,9 +29,6 @@ function p(obj) {
     log(INFO, 'loading ' + obj + ' from the datastore...');
     obj = load(obj);
   } else if (getType(obj) == 'String') {
-    if (obj == 'undefined') {
-      throw obj + ' does not exist in the datastore';
-    }
     if (exists(obj)) {
       log(INFO, 'loading ' + obj + ' from the datastore...');
       obj = load(obj);
