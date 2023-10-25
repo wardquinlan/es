@@ -141,6 +141,11 @@ function summary() {
   summarize(RRPONTSYD);
 }
 
+function last(series) {
+  series = loadSeries(series);
+  return get(series, getSize(series) - 1);
+}
+
 function summarize(series) {
   print(getTitle(series));
   print('[' + last(date(series)) + ']');
