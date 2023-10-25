@@ -267,9 +267,7 @@ function createWALCL() {
   setSource(X, getSourceId(WALCL));
   setUnits(X, 'Billions of Dollars');
   setUnitsShort(X, 'Bil. of $');
-  if (getNotes(WALCL) != null) {
-    setNotes(X, getNotes(WALCL));
-  }
+  setNotes(X, getNotes(WALCL));
   gPut('WALCL', X);
 }
 
@@ -281,9 +279,7 @@ function createICSA() {
   setSourceId(X, getSourceId(ICSA));
   setUnits(X, 'Level in Thousands');
   setUnitsShort(X, 'Level in Thous.');
-  if (getNotes(ICSA) != null) {
-    setNotes(X, getNotes(ICSA));
-  }
+  setNotes(X, getNotes(ICSA));
   gPut('ICSA', X);
 }
 
