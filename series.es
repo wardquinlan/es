@@ -1,6 +1,6 @@
 function reload() {
   log(INFO, 'loading series from datastore...');
-  ds(autoload);
+  ds(ES:AutoLoad);
   createRC();
   createPC1(GDP, 4);
   createInv(T10Y3M);
@@ -181,7 +181,7 @@ function createInv(base) {
 }
 
 function createPC1(base, freq) {
-  series = pchange(base, freq);
+  series = ES:PChange(base, freq);
   setName(series, getName(base) + '.pc1');
   setTitle(series, getTitle(base) + ' (YoY Percentage Change)');
   setSource(series, '[DERIVED]');
@@ -190,7 +190,7 @@ function createPC1(base, freq) {
 }
 
 function createPC1WithLimit(base, freq, limit) {
-  series = pchange(base, freq);
+  series = ES:PChange(base, freq);
   series = min(series, +limit);
   series = max(series, -limit);
   setName(series, getName(base) + '.pc1');
