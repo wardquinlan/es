@@ -39,17 +39,17 @@ function MY:P(arg1, arg2, arg3, arg4) {
   arg3 = ES:LoadSeries(arg3);
   arg4 = ES:LoadSeries(arg4);
 
-  l1 = l2 = l3 = l4 = 1;
-  if (arg1 != null) {
+  l1 = l2 = l3 = l4 = 0.01;
+  if (arg1 != null and ES:GetSeriesType(arg1) == 'float') {
     l1 = ES:Lowest(arg1);
   }
-  if (arg2 != null) {
+  if (arg2 != null and ES:GetSeriesType(arg2) == 'float') {
     l2 = ES:Lowest(arg2);
   }
-  if (arg3 != null) {
+  if (arg3 != null and ES:GetSeriesType(arg4) == 'float') {
     l3 = ES:Lowest(arg3);
   }
-  if (arg4 != null) {
+  if (arg4 != null and ES:GetSeriesType(arg4) == 'float') {
     l4 = ES:Lowest(arg4);
   }
 
