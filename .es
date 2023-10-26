@@ -1,3 +1,3 @@
 . 'constants.es';
-. 'series.es';
+. 'my.es';
 

@@ -1,4 +1,4 @@
-function reload() {
+function MY:Reload() {
   log(INFO, 'loading series from datastore...');
   ds(ES:AutoLoad);
   createRC();
@@ -19,6 +19,7 @@ function reload() {
   createWALCL();
   createICSA();
 }
+reload = MY:Reload;
 
 function MY:DXIncr(series) {
   if (series == null) {
@@ -71,40 +72,7 @@ function MY:P(arg1, arg2, arg3, arg4) {
 }
 p = MY:P;
 
-# generic function to plot a stand-alone object
-function px(obj) {
-  if (getType(obj) == 'int') {
-    if (!exists(obj)) {
-      throw '' + obj + ' does not exist in the datastore';
-    }
-    log(INFO, 'loading ' + obj + ' from the datastore...');
-    obj = load(obj);
-  } else if (getType(obj) == 'String') {
-    if (exists(obj)) {
-      log(INFO, 'loading ' + obj + ' from the datastore...');
-      obj = load(obj);
-    } else {
-      log(INFO, 'attempting to download ' + obj + ' from FRED...');
-      obj = fred(obj);
-    }
-  }
-  if (getFrequencyShort(obj) == 'D') {
-    defaults.panel.dxincr = 1;
-    defaults.panel.frequency = MONTHS;
-  } else if (getFrequencyShort(obj) == 'W') {
-    defaults.panel.dxincr = 8;
-    defaults.panel.frequency = MONTHS;
-  } else if (getFrequencyShort(obj) == 'M') {
-    defaults.panel.dxincr = 18;
-    defaults.panel.frequency = MONTHS;
-  } else if (getFrequencyShort(obj) == 'Q') {
-    defaults.panel.dxincr = 18;
-    defaults.panel.frequency = MONTHS;
-  } 
-  plot(obj);
-}
-
-function input() {
+function MY:Input() {
   n = dlgInput('Enter the series number:');
   if (n == null) {
     return;
@@ -140,8 +108,9 @@ function input() {
   merge(S, '--with-inserts', '--dry-run');
   dlgMessage(getName(S) + ' has been merged');
 }
+input = MY:Input;
 
-function sp500() {
+function MY:Sp500() {
   value = dlgInput('Enter today\'s value of SP500:');
   if (value == null) {
     return;
@@ -155,6 +124,10 @@ function sp500() {
   S = load(500);
   D = date(S);
   if (get(D, getSize(D) - 1) < today()) {
+    message = 'updating SP500 on ' + today() + ' with ' + value + '; proceed?';
+    if (!dlgConfirm(message)) {
+      return;
+    }
     insert(S, today(), value);
     merge(S, '--with-inserts');
     dlgMessage('SP500 has been merged');
@@ -162,6 +135,7 @@ function sp500() {
   }
   dlgMessage('SP500 already has a value for that date');
 }
+sp500 = MY:Sp500;
 
 function view() {
   if (!defined('DFF')) {
