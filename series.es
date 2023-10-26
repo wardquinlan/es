@@ -20,8 +20,59 @@ function reload() {
   createICSA();
 }
 
+function MY:DXIncr(series) {
+  if (series == null) {
+    return 18;
+  }
+  if (ES:GetFrequencyShort(series) == 'D') {
+    return 1;
+  } else if (ES:GetFrequencyShort(series) == 'W') {
+    return 8;
+  } else {
+    return 18;
+  }
+}
+
+function MY:P(arg1, arg2, arg3, arg4) {
+  arg1 = ES:LoadSeries(arg1);
+  arg2 = ES:LoadSeries(arg2);
+  arg3 = ES:LoadSeries(arg3);
+  arg4 = ES:LoadSeries(arg4);
+
+  l1 = l2 = l3 = l4 = 1;
+  if (arg1 != null) {
+    l1 = ES:Lowest(arg1);
+  }
+  if (arg2 != null) {
+    l2 = ES:Lowest(arg2);
+  }
+  if (arg3 != null) {
+    l3 = ES:Lowest(arg3);
+  }
+  if (arg4 != null) {
+    l4 = ES:Lowest(arg4);
+  }
+
+  if (l1 > 0 and l2 > 0 and l3 > 0 and l4 > 0) {
+    ES:Log(INFO, 'LOG scaling detected');
+    defaults.chart.scaletype = LOG;
+  } else {
+    ES:Log(INFO, 'LINEAR scaling detected');
+    defaults.chart.scaletype = LINEAR;
+  }
+  defaults.panel.frequency = MONTHS;
+  dx = MY:DXIncr(arg1);
+  dx = ES:Min(dx, MY:DXIncr(arg2));
+  dx = ES:Min(dx, MY:DXIncr(arg3));
+  dx = ES:Min(dx, MY:DXIncr(arg4));
+  ES:Log(INFO, 'detected dxincr = ' + dx);
+  defaults.panel.dxincr = dx;
+  plot(arg1, arg2, arg3, arg4);
+}
+p = MY:P;
+
 # generic function to plot a stand-alone object
-function p(obj) {
+function px(obj) {
   if (getType(obj) == 'int') {
     if (!exists(obj)) {
       throw '' + obj + ' does not exist in the datastore';
