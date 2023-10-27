@@ -2,6 +2,10 @@ function ds() {
   :Ds();
 }
 
+function cat() {
+  :Cat();
+}
+
 function status() {
   :Status();
 }
@@ -33,10 +37,10 @@ function print(obj) {
 updateAll = ES:UpdateAll;
 usage     = ES:Usage;
 
-reload  = MY:Reload;
-plot    = MY:Plot;
-input   = MY:Input;
-sp500   = MY:SP500;
-view    = MY:View;
-summary = MY:Summary;
-
+reload   = MY:Reload;
+plot     = MY:Plot;
+input    = MY:Input;
+sp500    = MY:SP500;
+view     = MY:View;
+summary  = MY:Summary;
+defaults = ES:Defaults;

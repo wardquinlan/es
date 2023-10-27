@@ -33,6 +33,11 @@ function MY:Plot(arg1, arg2, arg3, arg4) {
     }
   }
 
+  if (arg1 == null) {
+    :Log(INFO, 'no series passed, nothing to do');
+    return;
+  }
+
   :Log(DEBUG, 'loading series...');
   arg1 = ES:Load(arg1);
   arg2 = ES:Load(arg2);
@@ -71,6 +76,19 @@ function MY:Plot(arg1, arg2, arg3, arg4) {
   dx = :Min(dx, dxincr(arg4));
   :Log(DEBUG, 'detected dxincr = ' + dx);
   defaults.panel.dxincr = dx;
+
+  defaults.panel.label = 'Consolidated Panel';
+
+  defaults.chart.label = :GetTitle(arg1);
+  if (arg2 != null) {
+    defaults.chart.label = defaults.chart.label + ' / ' + :GetTitle(arg2);
+  }  
+  if (arg3 != null) {
+    defaults.chart.label = defaults.chart.label + ' / ' + :GetTitle(arg3);
+  }  
+  if (arg4 != null) {
+    defaults.chart.label = defaults.chart.label + ' / ' + :GetTitle(arg4);
+  }  
   :Plot(arg1, arg2, arg3, arg4);
 }
 
