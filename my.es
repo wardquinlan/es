@@ -21,25 +21,27 @@ function MY:Reload() {
 }
 reload = MY:Reload;
 
-function MY:DXIncr(series) {
-  if (series == null) {
-    return 18;
-  }
-  if (:GetFrequencyShort(series) == 'D') {
-    return 1;
-  } else if (:GetFrequencyShort(series) == 'W') {
-    return 8;
-  } else {
-    return 18;
-  }
-}
-
 function MY:P(arg1, arg2, arg3, arg4) {
+  function dxincr(series) {
+    if (series == null) {
+      return 18;
+    }
+    if (:GetFrequencyShort(series) == 'D') {
+      return 1;
+    } else if (:GetFrequencyShort(series) == 'W') {
+      return 8;
+    } else {
+      return 18;
+    }
+  }
+
+  :Log(DEBUG, 'loading series...');
   arg1 = ES:Load(arg1);
   arg2 = ES:Load(arg2);
   arg3 = ES:Load(arg3);
   arg4 = ES:Load(arg4);
 
+  :Log(DEBUG, 'computing lowest values...');
   l1 = l2 = l3 = l4 = 0.01;
   if (arg1 != null and :GetSeriesType(arg1) == 'float') {
     l1 = ES:Lowest(arg1);
@@ -54,19 +56,22 @@ function MY:P(arg1, arg2, arg3, arg4) {
     l4 = ES:Lowest(arg4);
   }
 
+  :Log(DEBUG, 'computing scaling type...');
   if (l1 > 0 and l2 > 0 and l3 > 0 and l4 > 0) {
-    :Log(INFO, 'LOG scaling detected');
+    :Log(DEBUG, 'LOG scaling detected');
     defaults.chart.scaletype = LOG;
   } else {
-    :Log(INFO, 'LINEAR scaling detected');
+    :Log(DEBUG, 'LINEAR scaling detected');
     defaults.chart.scaletype = LINEAR;
   }
+
+  :Log(DEBUG, 'computing dxincr...');
   defaults.panel.frequency = MONTHS;
-  dx = MY:DXIncr(arg1);
-  dx = :Min(dx, MY:DXIncr(arg2));
-  dx = :Min(dx, MY:DXIncr(arg3));
-  dx = :Min(dx, MY:DXIncr(arg4));
-  :Log(INFO, 'detected dxincr = ' + dx);
+  dx = dxincr(arg1);
+  dx = :Min(dx, dxincr(arg2));
+  dx = :Min(dx, dxincr(arg3));
+  dx = :Min(dx, dxincr(arg4));
+  :Log(DEBUG, 'detected dxincr = ' + dx);
   defaults.panel.dxincr = dx;
   :Plot(arg1, arg2, arg3, arg4);
 }
@@ -77,7 +82,7 @@ function MY:Input() {
   if (n == null) {
     return;
   }
-  id = parseInt(n);
+  id = :ParseInt(n);
   if (id == null) {
     :DlgMessage('Series number must be an int', ERROR);
     return;
@@ -92,13 +97,13 @@ function MY:Input() {
   if (v == null) {
     return;
   }
-  v = parseFloat(v);
+  v = :ParseFloat(v);
   if (v == null) {
     :DlgMessage('Value must be a float', ERROR);
     return;
   }
   
-  S = load(id);
+  S = :Load(id);
   message = 'updating ' + :GetName(S) + ':' + id + ' on ' + d + ' with ' + v;
   if (!:DlgConfirm(message)) {
     return;
@@ -110,50 +115,50 @@ function MY:Input() {
 }
 input = MY:Input;
 
-function MY:Sp500() {
+function MY:SP500() {
   value = :DlgInput('Enter today\'s value of SP500:');
   if (value == null) {
     return;
   }
-  value = parseFloat(value);
+  value = :ParseFloat(value);
   if (value == null) {
     :DlgMessage('Value must be a float', ERROR);
     return; 
   }
 
-  S = load(500);
-  D = date(S);
-  if (:Get(D, :GetSize(D) - 1) < today()) {
-    message = 'updating SP500 on ' + today() + ' with ' + value + '; proceed?';
+  S = :Load(500);
+  D = :Date(S);
+  if (:Get(D, :GetSize(D) - 1) < :Today()) {
+    message = 'updating SP500 on ' + :Today() + ' with ' + value + '; proceed?';
     if (!:DlgConfirm(message)) {
       return;
     }
-    insert(S, today(), value);
+    insert(S, :Today(), value);
     merge(S, '--with-inserts');
     :DlgMessage('SP500 has been merged');
     return;
   }
   :DlgMessage('SP500 already has a value for that date');
 }
-sp500 = MY:Sp500;
+sp500 = MY:SP500;
 
 function view() {
-  if (!defined('DFF')) {
+  if (!:Defined('DFF')) {
     reload();
-    assert(defined('DFF'), 'DFF not loaded');
+    :Assert(:Defined('DFF'), 'DFF not loaded');
   }
-  plot('es.xml');
+  :Plot('es.xml');
 }
 
 function logf(series, r) {
   F = (E - E^LOGF.K) * r / LOGF.NR + E^LOGF.K;
-  return ln(F) * series;
+  return :Ln(F) * series;
 }
 
 function summary() {
-  if (!defined('DFF')) {
+  if (!:Defined('DFF')) {
     reload();
-    assert(defined('DFF'), 'DFF not loaded');
+    :Assert(:Defined('DFF'), 'DFF not loaded');
   }
   :Print('');
   summarize(SP500);
@@ -164,14 +169,14 @@ function summary() {
 }
 
 function last(series) {
-  series = loadSeries(series);
+  series = ES:Load(series);
   return :Get(series, :GetSize(series) - 1);
 }
 
 function summarize(series) {
   :Print(:GetTitle(series));
   :Print('[' + last(:Date(series)) + ']');
-  :Print('' + last(series) + ' => ' + last(change(series)));
+  :Print('' + last(series) + ' => ' + last(:Change(series)));
   :Print();
 }
 
@@ -193,7 +198,7 @@ function createRC() {
   :SetTitle(RC, 'NBER-defined Recessions');
   :SetNotes(RC, 'Source: https://www.nber.org/research/data/us-business-cycle-expansions-and-contractions');
   :SetSource(RC, 'NBER');
-  gPut('RC', RC);
+  :GPut('RC', RC);
 } 
 
 function createInv(base) {
@@ -202,7 +207,7 @@ function createInv(base) {
   :SetTitle(series, :GetTitle(base));
   :SetSource(series, '[DERIVED]');
   :SetNotes(series, :GetNotes(base));
-  gPut(:GetName(series), series);
+  :GPut(:GetName(series), series);
 }
 
 function createPC1(base, freq) {
@@ -211,25 +216,25 @@ function createPC1(base, freq) {
   :SetTitle(series, :GetTitle(base) + ' (YoY Percentage Change)');
   :SetSource(series, '[DERIVED]');
   :SetNotes(series, :GetNotes(base));
-  gPut(:GetName(series), series);
+  :GPut(:GetName(series), series);
 }
 
 function createPC1WithLimit(base, freq, limit) {
   series = :PChange(base, freq);
-  series = min(series, +limit);
-  series = max(series, -limit);
+  series = :Min(series, +limit);
+  series = :Max(series, -limit);
   :SetName(series, :GetName(base) + '.pc1');
   :SetTitle(series, :GetTitle(base) + ' (YoY Percentage Change)');
   :SetSource(series, '[DERIVED]');
   :SetNotes(series,
     '<strong>Note:</strong> I have capped percentage changes to +/- ' + limit +
     '%\n\n' + :GetNotes(base));
-  gPut(:GetName(series), series);
+  :GPut(:GetName(series), series);
 }
 
 function createSP500(r) {
-  SP500_EPS = sum(SP500_EPS_Q, 4);
-  SP500_SALES = sum(SP500_SALES_Q, 4);
+  SP500_EPS = :Sum(SP500_EPS_Q, 4);
+  SP500_SALES = :Sum(SP500_SALES_Q, 4);
 
   SP500_PE = logf(SP500 / SP500_EPS, r);
   :SetName(SP500_PE, 'SP500_PE');
@@ -255,10 +260,10 @@ function createSP500(r) {
     'NR=' + LOGF.NR;
   :SetNotes(MKCAPGDP, DESC);
 
-  gPut(:GetName(SP500_PE), SP500_PE);
-  gPut(:GetName(SP500_PS), SP500_PS);
-  gPut(:GetName(SP500_EY), SP500_EY);
-  gPut(:GetName(MKCAPGDP), MKCAPGDP);
+  :GPut(:GetName(SP500_PE), SP500_PE);
+  :GPut(:GetName(SP500_PS), SP500_PS);
+  :GPut(:GetName(SP500_EY), SP500_EY);
+  :GPut(:GetName(MKCAPGDP), MKCAPGDP);
 }
 
 function createJU() {
@@ -266,7 +271,7 @@ function createJU() {
   :SetName(JU, 'JU');
   :SetTitle(JU, 'Job Openings / Unemployment');
   :SetSource(JU, '[DERIVED]');
-  gPut(:GetName(JU), JU);
+  :GPut(:GetName(JU), JU);
 }
 
 function createVIX() {
@@ -275,7 +280,7 @@ function createVIX() {
   :SetTitle(VIXCLS.H, :GetTitle(VIXCLS));
   :SetSource(VIXCLS.H, '[DERIVED]');
   :SetNotes(VIXCLS.H, 'Condition is true when VIXCLS > 36');
-  gPut(:GetName(VIXCLS.H), VIXCLS.H);
+  :GPut(:GetName(VIXCLS.H), VIXCLS.H);
 }
 
 function createDGS1FC() {
@@ -283,7 +288,7 @@ function createDGS1FC() {
   :SetName(DGS1.fc, 'DGS1.fc');
   :SetTitle(DGS1.fc, '1-year DGS1 Forecasted Rate');
   :SetSource(DGS1.fc, '[DERIVED]');
-  gPut(:GetName(DGS1.fc), DGS1.fc);
+  :GPut(:GetName(DGS1.fc), DGS1.fc);
 }
 
 function createWALCL() {
@@ -295,11 +300,11 @@ function createWALCL() {
   :SetUnits(X, 'Billions of Dollars');
   :SetUnitsShort(X, 'Bil. of $');
   :SetNotes(X, :GetNotes(WALCL));
-  gPut('WALCL', X);
+  :GPut('WALCL', X);
 }
 
 function createICSA() {
-  X = min(600, ICSA / 1000);
+  X = :Min(600, ICSA / 1000);
   :SetName(X, :GetName(ICSA));
   :SetTitle(X, :GetTitle(ICSA));
   :SetSource(X, :GetSource(ICSA));
@@ -307,12 +312,12 @@ function createICSA() {
   :SetUnits(X, 'Level in Thousands');
   :SetUnitsShort(X, 'Level in Thous.');
   :SetNotes(X, :GetNotes(ICSA));
-  gPut('ICSA', X);
+  :GPut('ICSA', X);
 }
 
 # updates units / frequency fields from Fred (runs as a callback)
 function uf(series) {
-  if (!isAdmin()) {
+  if (!:IsAdmin()) {
     throw 'you must be running in administrative mode to do this';
   }
   response = :DlgConfirm('!!! Are you absolutely sure you want to update this series\' units and frequency?');
