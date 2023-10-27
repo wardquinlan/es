@@ -153,8 +153,8 @@ function MY:Logf(series, r) {
 function MY:Summary() {
   function summarize(series) {
     :Print(:GetTitle(series));
-    :Print('[' + last(:Date(series)) + ']');
-    :Print('' + last(series) + ' => ' + last(:Change(series)));
+    :Print('[' + MY:Last(:Date(series)) + ']');
+    :Print('' + MY:Last(series) + ' => ' + MY:Last(:Change(series)));
     :Print();
   }
   
