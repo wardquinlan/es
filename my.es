@@ -1,26 +1,25 @@
 function MY:Reload() {
   :Log(INFO, 'loading series from datastore...');
   :Ds(ES:AutoLoad);
-  createRC();
-  createPC1(GDP, 4);
-  createInv(T10Y3M);
-  createInv(T10Y2Y);
-  #createSP500(DGS2);
-  createSP500(DGS10);
-  createJU();
-  createPC1WithLimit(RSAFS, 12, 12);
-  createPC1(PCEPILFE, 12);
-  createPC1WithLimit(PCEDG, 12, 12);
-  createPC1WithLimit(PCES, 12, 12);
-  createPC1WithLimit(DGORDER, 12, 12);
-  createVIX();
-  createPC1WithLimit(PPIACO, 12, 12);
-  createDGS1FC();
-  createWALCL();
-  createICSA();
+  MY:CreateRC();
+  MY:CreatePC1(GDP, 4);
+  MY:CreateInv(T10Y3M);
+  MY:CreateInv(T10Y2Y);
+  MY:CreateSP500(DGS10);
+  MY:CreateJU();
+  MY:CreatePC1WithLimit(RSAFS, 12, 12);
+  MY:CreatePC1(PCEPILFE, 12);
+  MY:CreatePC1WithLimit(PCEDG, 12, 12);
+  MY:CreatePC1WithLimit(PCES, 12, 12);
+  MY:CreatePC1WithLimit(DGORDER, 12, 12);
+  MY:CreateVIX();
+  MY:CreatePC1WithLimit(PPIACO, 12, 12);
+  MY:CreateDGS1FC();
+  MY:CreateWALCL();
+  MY:CreateICSA();
 }
 
-function MY:P(arg1, arg2, arg3, arg4) {
+function MY:Plot(arg1, arg2, arg3, arg4) {
   function dxincr(series) {
     if (series == null) {
       return 18;
@@ -130,34 +129,40 @@ function MY:SP500() {
     if (!:DlgConfirm(message)) {
       return;
     }
-    insert(S, :Today(), value);
-    merge(S, '--with-inserts');
+    :Insert(S, :Today(), value);
+    :Merge(S, '--with-inserts');
     :DlgMessage('SP500 has been merged');
     return;
   }
   :DlgMessage('SP500 already has a value for that date');
 }
-sp500 = MY:SP500;
 
-function view() {
+function MY:View() {
   if (!:Defined('DFF')) {
-    reload();
+    MY:Reload();
     :Assert(:Defined('DFF'), 'DFF not loaded');
   }
   :Plot('es.xml');
 }
 
-function logf(series, r) {
+function MY:Logf(series, r) {
   F = (E - E^LOGF.K) * r / LOGF.NR + E^LOGF.K;
   return :Ln(F) * series;
 }
 
-function summary() {
+function MY:Summary() {
+  function summarize(series) {
+    :Print(:GetTitle(series));
+    :Print('[' + last(:Date(series)) + ']');
+    :Print('' + last(series) + ' => ' + last(:Change(series)));
+    :Print();
+  }
+  
   if (!:Defined('DFF')) {
     reload();
     :Assert(:Defined('DFF'), 'DFF not loaded');
   }
-  :Print('');
+  :Print();
   summarize(SP500);
   summarize(DGS10);
   summarize(DGS2);
@@ -165,19 +170,15 @@ function summary() {
   summarize(RRPONTSYD);
 }
 
-function last(series) {
+function MY:Last(series) {
   series = ES:Load(series);
+  if (:GetSize(series) == 0) {
+    return null;
+  }
   return :Get(series, :GetSize(series) - 1);
 }
 
-function summarize(series) {
-  :Print(:GetTitle(series));
-  :Print('[' + last(:Date(series)) + ']');
-  :Print('' + last(series) + ' => ' + last(:Change(series)));
-  :Print();
-}
-
-function createRC() {
+function MY:CreateRC() {
   DT = :Date(GDP);
   R1953 = DT >= '1953-07-01' and DT <= '1954-05-31';
   R1957 = DT >= '1957-08-01' and DT <= '1958-04-30';
@@ -198,7 +199,7 @@ function createRC() {
   :GPut('RC', RC);
 } 
 
-function createInv(base) {
+function MY:CreateInv(base) {
   series = base < 0;
   :SetName(series, :GetName(base) + '.inv');
   :SetTitle(series, :GetTitle(base));
@@ -207,7 +208,7 @@ function createInv(base) {
   :GPut(:GetName(series), series);
 }
 
-function createPC1(base, freq) {
+function MY:CreatePC1(base, freq) {
   series = :PChange(base, freq);
   :SetName(series, :GetName(base) + '.pc1');
   :SetTitle(series, :GetTitle(base) + ' (YoY Percentage Change)');
@@ -216,7 +217,7 @@ function createPC1(base, freq) {
   :GPut(:GetName(series), series);
 }
 
-function createPC1WithLimit(base, freq, limit) {
+function MY:CreatePC1WithLimit(base, freq, limit) {
   series = :PChange(base, freq);
   series = :Min(series, +limit);
   series = :Max(series, -limit);
@@ -229,16 +230,16 @@ function createPC1WithLimit(base, freq, limit) {
   :GPut(:GetName(series), series);
 }
 
-function createSP500(r) {
+function MY:CreateSP500(r) {
   SP500_EPS = :Sum(SP500_EPS_Q, 4);
   SP500_SALES = :Sum(SP500_SALES_Q, 4);
 
-  SP500_PE = logf(SP500 / SP500_EPS, r);
+  SP500_PE = MY:Logf(SP500 / SP500_EPS, r);
   :SetName(SP500_PE, 'SP500_PE');
   :SetTitle(SP500_PE, 'Adjusted SP500 Price / Earnings');
   :SetSource(SP500_PE, '[DERIVED]');
 
-  SP500_PS = logf(SP500 / SP500_SALES, r);
+  SP500_PS = MY:Logf(SP500 / SP500_SALES, r);
   :SetName(SP500_PS, 'SP500_PS');
   :SetTitle(SP500_PS, 'Adjusted SP500 Price / Sales');
   :SetSource(SP500_PS, '[DERIVED]');
@@ -248,7 +249,7 @@ function createSP500(r) {
   :SetTitle(SP500_EY, 'S&P 500 Earnings Yield (Unadjusted)');
   :SetSource(SP500_EY, '[DERIVED]');
 
-  MKCAPGDP = 100 * logf(WILL5000PRFC / GDP, r);
+  MKCAPGDP = 100 * MY:Logf(WILL5000PRFC / GDP, r);
   :SetName(MKCAPGDP, 'MKCAPGDP');
   :SetTitle(MKCAPGDP, 'Market Cap to GDP');
   :SetSource(MKCAPGDP, '[DERIVED]');
@@ -263,7 +264,7 @@ function createSP500(r) {
   :GPut(:GetName(MKCAPGDP), MKCAPGDP);
 }
 
-function createJU() {
+function MY:CreateJU() {
   JU = JTSJOL / UNEMPLOY;
   :SetName(JU, 'JU');
   :SetTitle(JU, 'Job Openings / Unemployment');
@@ -271,7 +272,7 @@ function createJU() {
   :GPut(:GetName(JU), JU);
 }
 
-function createVIX() {
+function MY:CreateVIX() {
   VIXCLS.H = VIXCLS > 36;
   :SetName(VIXCLS.H, 'VIXCLS.H');
   :SetTitle(VIXCLS.H, :GetTitle(VIXCLS));
@@ -280,7 +281,7 @@ function createVIX() {
   :GPut(:GetName(VIXCLS.H), VIXCLS.H);
 }
 
-function createDGS1FC() {
+function MY:CreateDGS1FC() {
   DGS1.fc = (100 + DGS2)^2 / (100 + DGS1) - 100;
   :SetName(DGS1.fc, 'DGS1.fc');
   :SetTitle(DGS1.fc, '1-year DGS1 Forecasted Rate');
@@ -288,7 +289,7 @@ function createDGS1FC() {
   :GPut(:GetName(DGS1.fc), DGS1.fc);
 }
 
-function createWALCL() {
+function MY:CreateWALCL() {
   X = WALCL / 1000;
   :SetName(X, :GetName(WALCL));
   :SetTitle(X, :GetTitle(WALCL));
@@ -300,7 +301,7 @@ function createWALCL() {
   :GPut('WALCL', X);
 }
 
-function createICSA() {
+function MY:CreateICSA() {
   X = :Min(600, ICSA / 1000);
   :SetName(X, :GetName(ICSA));
   :SetTitle(X, :GetTitle(ICSA));
@@ -310,32 +311,5 @@ function createICSA() {
   :SetUnitsShort(X, 'Level in Thous.');
   :SetNotes(X, :GetNotes(ICSA));
   :GPut('ICSA', X);
-}
-
-# updates units / frequency fields from Fred (runs as a callback)
-function uf(series) {
-  if (!:IsAdmin()) {
-    throw 'you must be running in administrative mode to do this';
-  }
-  response = :DlgConfirm('!!! Are you absolutely sure you want to update this series\' units and frequency?');
-  if (!response) {
-    return;
-  }
-  throw '*** you probably don\'t want to this...';
-
-  name = :GetName(series);
-  :Log(INFO, 'consolidating ' + name);
-  if (:GetSource(series) != 'FRED' or :GetId(series) >= 10000) {
-    :Log(INFO, 'skipping ' + name);
-    return;
-  }
-  F = fred(:GetName(series));
-  :SetUnits(series, :GetUnits(F));
-  :SetUnitsShort(series, :GetUnitsShort(F));
-  :SetFrequency(series, :GetFrequency(F));
-  :SetFrequencyShort(series, :GetFrequencyShort(F));
-  :Log(INFO, :GetUnits(series) + ':' + :GetUnitsShort(series));
-  :Log(INFO, :GetFrequency(series) + ':' + :GetFrequencyShort(series));
-  merge(series, '--with-metadata');
 }
 
