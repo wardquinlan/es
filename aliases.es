@@ -26,6 +26,10 @@ function exit() {
   :Exit();
 }
 
+function print(obj) {
+  :Print(obj);
+}
+
 updateAll = ES:UpdateAll;
 usage     = ES:Usage;
 
