@@ -22,6 +22,10 @@ function debug() {
   :SetLogLevel(DEBUG);
 }
 
+function exit() {
+  :Exit();
+}
+
 updateAll = ES:UpdateAll;
 usage     = ES:Usage;
 
