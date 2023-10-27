@@ -19,7 +19,6 @@ function MY:Reload() {
   createWALCL();
   createICSA();
 }
-reload = MY:Reload;
 
 function MY:P(arg1, arg2, arg3, arg4) {
   function dxincr(series) {
@@ -75,7 +74,6 @@ function MY:P(arg1, arg2, arg3, arg4) {
   defaults.panel.dxincr = dx;
   :Plot(arg1, arg2, arg3, arg4);
 }
-p = MY:P;
 
 function MY:Input() {
   n = :DlgInput('Enter the series number:');
@@ -113,7 +111,6 @@ function MY:Input() {
   merge(S, '--with-inserts', '--dry-run');
   :DlgMessage(:GetName(S) + ' has been merged');
 }
-input = MY:Input;
 
 function MY:SP500() {
   value = :DlgInput('Enter today\'s value of SP500:');
