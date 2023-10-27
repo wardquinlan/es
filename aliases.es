@@ -14,6 +14,14 @@ function meta(obj) {
   :Meta(obj);
 }
 
+function info() {
+  :SetLogLevel(INFO);
+}
+
+function debug() {
+  :SetLogLevel(DEBUG);
+}
+
 updateAll = ES:UpdateAll;
 usage     = ES:Usage;
 
