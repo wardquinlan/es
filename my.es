@@ -47,7 +47,7 @@ function MY:Plot(arg1, arg2, arg3, arg4) {
   if (arg2 != null and :GetSeriesType(arg2) == 'float') {
     l2 = ES:Lowest(arg2);
   }
-  if (arg3 != null and :GetSeriesType(arg4) == 'float') {
+  if (arg3 != null and :GetSeriesType(arg3) == 'float') {
     l3 = ES:Lowest(arg3);
   }
   if (arg4 != null and :GetSeriesType(arg4) == 'float') {
