@@ -36,11 +36,13 @@ function print(obj) {
 
 updateAll = ES:UpdateAll;
 usage     = ES:Usage;
+defaults  = ES:Defaults;
+load      = ES:Load;
 
-reload   = MY:Reload;
-plot     = MY:Plot;
-input    = MY:Input;
-sp500    = MY:SP500;
-view     = MY:View;
-summary  = MY:Summary;
-defaults = ES:Defaults;
+reload    = MY:Reload;
+plot      = MY:Plot;
+input     = MY:Input;
+sp500     = MY:SP500;
+view      = MY:View;
+summary   = MY:Summary;
+
