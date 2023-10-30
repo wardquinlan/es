@@ -40,4 +40,5 @@ input      = MY:Input;
 sp500      = MY:SP500;
 view       = MY:View;
 summary    = MY:Summary;
+updateMain = MY:UpdateMain;
 
