@@ -42,13 +42,13 @@ function MY:Plot(arg1, arg2, arg3, arg4) {
     :Log(DEBUG, 'arg1 detected as xml file, loading xml: ' + arg1);
     if (arg2 != null) {
       :Log(WARN, 'xml file detected, ignoring additional argument(s)');
-      if (!:Defined('DFF')) {
-        MY:Reload();
-        ES:Assert(:Defined('DFF'), 'DFF not loaded');
-      }
-      :Plot(arg1);
-      return;
     }
+    if (!:Defined('DFF')) {
+      MY:Reload();
+      ES:Assert(:Defined('DFF'), 'DFF not loaded');
+    }
+    :Plot(arg1);
+    return;
   }
 
   :Log(DEBUG, 'loading series...');
