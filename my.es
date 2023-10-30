@@ -192,11 +192,6 @@ function MY:Summary() {
     :Print('[' + MY:Last(:Date(series)) + '] ' + MY:Last(series) + ' => ' + MY:Last(:Change(series)));
     :Print();
   }
-  
-  if (!:Defined('DFF')) {
-    reload();
-    ES:Assert(:Defined('DFF'), 'DFF not loaded');
-  }
   :Print();
   :Iterate(summarize, 500, 120, 24, 3, 61);
 }
