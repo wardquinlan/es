@@ -19,6 +19,10 @@ function MY:Reload() {
   MY:CreateICSA();
 }
 
+function MY:UpdateMain() {
+  :Iterate(ES:Update, 500, 120, 24, 3, 61);
+}
+
 function MY:Plot(arg1, arg2, arg3, arg4) {
   function dxincr(series) {
     if (series == null) {
@@ -182,10 +186,10 @@ function MY:Logf(series, r) {
 }
 
 function MY:Summary() {
-  function summarize(series) {
-    :Print(:GetTitle(series));
-    :Print('[' + MY:Last(:Date(series)) + ']');
-    :Print('' + MY:Last(series) + ' => ' + MY:Last(:Change(series)));
+  function summarize(id) {
+    series = :Load(id);
+    :Print('[' + :GetId(series) + '] ' + :GetTitle(series));
+    :Print('[' + MY:Last(:Date(series)) + '] ' + MY:Last(series) + ' => ' + MY:Last(:Change(series)));
     :Print();
   }
   
@@ -194,11 +198,7 @@ function MY:Summary() {
     ES:Assert(:Defined('DFF'), 'DFF not loaded');
   }
   :Print();
-  summarize(SP500);
-  summarize(DGS10);
-  summarize(DGS2);
-  summarize(DTB3);
-  summarize(RRPONTSYD);
+  :Iterate(summarize, 500, 120, 24, 3, 61);
 }
 
 function MY:Last(series) {
