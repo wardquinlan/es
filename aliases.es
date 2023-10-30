@@ -1,22 +1,13 @@
-function ds() {
-  :Ds();
-}
-
-function cat() {
-  :Cat();
-}
-
-function status() {
-  :Status();
-}
-
-function data(obj) {
-  :Data(obj);
-}
-
-function meta(obj) {
-  :Meta(obj);
-}
+:Alias('alias', ':Alias');
+alias('ds', ':Ds');
+alias('cat', ':Cat');
+alias('status', ':Status');
+alias('data', ':Data');
+alias('meta', ':Meta');
+alias('exit', ':Exit');
+alias('print', ':Print');
+alias('getEnv', ':GetEnv');
+alias('getLength', ':GetLength');
 
 function info() {
   :SetLogLevel(INFO);
@@ -24,22 +15,6 @@ function info() {
 
 function debug() {
   :SetLogLevel(DEBUG);
-}
-
-function exit() {
-  :Exit();
-}
-
-function print(obj) {
-  :Print(obj);
-}
-
-function getEnv(obj) {
-  return :GetEnv(obj);
-}
-
-function getLength(obj) {
-  return :GetLength(obj);
 }
 
 function subString(obj, beginIndex, endIndex) {
