@@ -56,6 +56,7 @@ defaults   = ES:Defaults;
 load       = ES:Load;
 startsWith = ES:StartsWith;
 endsWith   = ES:EndsWith;
+assert     = ES:Assert;
 
 reload     = MY:Reload;
 plot       = MY:Plot;

@@ -44,7 +44,7 @@ function MY:Plot(arg1, arg2, arg3, arg4) {
       :Log(WARN, 'xml file detected, ignoring additional argument(s)');
       if (!:Defined('DFF')) {
         MY:Reload();
-        :Assert(:Defined('DFF'), 'DFF not loaded');
+        ES:Assert(:Defined('DFF'), 'DFF not loaded');
       }
       :Plot(arg1);
       return;
@@ -171,7 +171,7 @@ function MY:SP500() {
 function MY:View() {
   if (!:Defined('DFF')) {
     MY:Reload();
-    :Assert(:Defined('DFF'), 'DFF not loaded');
+    ES:Assert(:Defined('DFF'), 'DFF not loaded');
   }
   :Plot('es.xml');
 }
@@ -191,7 +191,7 @@ function MY:Summary() {
   
   if (!:Defined('DFF')) {
     reload();
-    :Assert(:Defined('DFF'), 'DFF not loaded');
+    ES:Assert(:Defined('DFF'), 'DFF not loaded');
   }
   :Print();
   summarize(SP500);
