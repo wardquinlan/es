@@ -38,6 +38,19 @@ function MY:Plot(arg1, arg2, arg3, arg4) {
     return;
   }
 
+  if (:GetType(arg1) == 'String' and ES:EndsWith(arg1, '.xml')) {
+    :Log(DEBUG, 'arg1 detected as xml file, loading xml: ' + arg1);
+    if (arg2 != null) {
+      :Log(WARN, 'xml file detected, ignoring additional argument(s)');
+      if (!:Defined('DFF')) {
+        MY:Reload();
+        :Assert(:Defined('DFF'), 'DFF not loaded');
+      }
+      :Plot(arg1);
+      return;
+    }
+  }
+
   :Log(DEBUG, 'loading series...');
   arg1 = ES:Load(arg1);
   arg2 = ES:Load(arg2);
