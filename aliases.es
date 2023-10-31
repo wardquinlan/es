@@ -27,7 +27,7 @@ function subString(obj, beginIndex, endIndex) {
   }
 }
 
-updateAll     = ES:UpdateAll;
+update        = ES:Update;
 usage         = ES:Usage;
 defaults      = ES:Defaults;
 load          = ES:Load;
