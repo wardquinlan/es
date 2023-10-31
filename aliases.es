@@ -27,13 +27,14 @@ function subString(obj, beginIndex, endIndex) {
   }
 }
 
-updateAll  = ES:UpdateAll;
-usage      = ES:Usage;
-defaults   = ES:Defaults;
-load       = ES:Load;
-startsWith = ES:StartsWith;
-endsWith   = ES:EndsWith;
-assert     = ES:Assert;
+updateAll     = ES:UpdateAll;
+usage         = ES:Usage;
+defaults      = ES:Defaults;
+load          = ES:Load;
+startsWith    = ES:StartsWith;
+endsWith      = ES:EndsWith;
+assert        = ES:Assert;
+checkMetaData = ES:CheckMetaData;
 
 reload     = MY:Reload;
 plot       = MY:Plot;
