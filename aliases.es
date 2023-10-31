@@ -35,6 +35,7 @@ startsWith    = ES:StartsWith;
 endsWith      = ES:EndsWith;
 assert        = ES:Assert;
 checkMetaData = ES:CheckMetaData;
+lastUpdated   = ES:LastUpdated;
 
 reload     = MY:Reload;
 plot       = MY:Plot;
