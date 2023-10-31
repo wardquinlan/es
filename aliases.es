@@ -9,6 +9,7 @@ alias('print', ':Print');
 alias('getEnv', ':GetEnv');
 alias('getLength', ':GetLength');
 alias('iterate', ':Iterate');
+alias('functions', ':Functions');
 
 function info() {
   :SetLogLevel(INFO);
