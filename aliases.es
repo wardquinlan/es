@@ -1,4 +1,5 @@
 :Alias('alias', ':Alias');
+alias('help', ':Help');
 alias('ds', ':Ds');
 alias('cat', ':Cat');
 alias('status', ':Status');
