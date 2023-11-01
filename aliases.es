@@ -1,16 +1,17 @@
-:Alias('alias', ':Alias');
-alias('help', ':Help');
-alias('ds', ':Ds');
-alias('cat', ':Cat');
-alias('status', ':Status');
-alias('data', ':Data');
-alias('meta', ':Meta');
-alias('exit', ':Exit');
-alias('print', ':Print');
-alias('getEnv', ':GetEnv');
-alias('getLength', ':GetLength');
-alias('iterate', ':Iterate');
-alias('functions', ':Functions');
+:SystemAlias('sAlias', ':SystemAlias');
+sAlias('uAlias', ':UserAlias');
+sAlias('functions', ':Functions');
+sAlias('help', ':Help');
+sAlias('ds', ':Ds');
+sAlias('cat', ':Cat');
+sAlias('status', ':Status');
+sAlias('data', ':Data');
+sAlias('meta', ':Meta');
+sAlias('exit', ':Exit');
+sAlias('print', ':Print');
+sAlias('getEnv', ':GetEnv');
+sAlias('getLength', ':GetLength');
+sAlias('iterate', ':Iterate');
 
 function info() {
   :SetLogLevel(INFO);
