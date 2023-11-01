@@ -1,17 +1,17 @@
-:SystemAlias('salias', ':SystemAlias');
-salias('ualias', ':UserAlias');
-salias('functions', ':Functions');
-salias('help', ':Help');
-salias('ds', ':Ds');
-salias('cat', ':Cat');
-salias('status', ':Status');
-salias('data', ':Data');
-salias('meta', ':Meta');
-salias('exit', ':Exit');
-salias('print', ':Print');
-salias('getEnv', ':GetEnv');
-salias('getLength', ':GetLength');
-salias('iterate', ':Iterate');
+:SystemAlias('sysalias', ':SystemAlias');
+sysalias('alias', ':UserAlias');
+sysalias('functions', ':Functions');
+sysalias('help', ':Help');
+sysalias('ds', ':Ds');
+sysalias('cat', ':Cat');
+sysalias('status', ':Status');
+sysalias('data', ':Data');
+sysalias('meta', ':Meta');
+sysalias('exit', ':Exit');
+sysalias('print', ':Print');
+sysalias('getEnv', ':GetEnv');
+sysalias('getLength', ':GetLength');
+sysalias('iterate', ':Iterate');
 
 function info() {
   :SetLogLevel(INFO);
