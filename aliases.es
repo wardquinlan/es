@@ -12,6 +12,8 @@ sysalias('print', ':Print');
 sysalias('getEnv', ':GetEnv');
 sysalias('getLength', ':GetLength');
 sysalias('iterate', ':Iterate');
+sysalias('parseInt', ':ParseInt');
+sysalias('parseFloat', ':ParseFloat');
 
 const function info() {
   :SetLogLevel(INFO);

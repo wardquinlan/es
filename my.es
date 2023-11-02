@@ -284,10 +284,31 @@ function MY:CreateSP500(r) {
     'NR=' + LOGF.NR;
   :SetNotes(MKCAPGDP, DESC);
 
+  #K = :DlgInput("Enter the value for K:");
+  #if (K == null) {
+  #  throw 'Operation aborted by user';
+  #}
+  #K = parseFloat(K);
+  #if (K == null) {
+  #  throw 'Invalid value for K';
+  #}
+  K = 10;
+  
+  SP500GDP = 100 * MY:Logf(SP500 / GDP, r) * K;
+  :SetName(SP500GDP, 'SP500GDP');
+  :SetTitle(SP500GDP, 'SP500 to GDP');
+  :SetSource(SP500GDP, '[DERIVED]');
+  DESC = 'Adjusted SP500 to GDP with:\n\n' +
+    'LOGF.K=' + LOGF.K + '\n' +
+    'LOGF.NR=' + LOGF.NR + '\n' +
+    'K=' + K;
+  :SetNotes(SP500GDP, DESC);
+
   :GPut(:GetName(SP500_PE), SP500_PE);
   :GPut(:GetName(SP500_PS), SP500_PS);
   :GPut(:GetName(SP500_EY), SP500_EY);
   :GPut(:GetName(MKCAPGDP), MKCAPGDP);
+  :GPut(:GetName(SP500GDP), SP500GDP);
 }
 
 function MY:CreateJU() {
