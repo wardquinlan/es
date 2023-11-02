@@ -13,15 +13,15 @@ sysalias('getEnv', ':GetEnv');
 sysalias('getLength', ':GetLength');
 sysalias('iterate', ':Iterate');
 
-function info() {
+const function info() {
   :SetLogLevel(INFO);
 }
 
-function debug() {
+const function debug() {
   :SetLogLevel(DEBUG);
 }
 
-function subString(obj, beginIndex, endIndex) {
+const function subString(obj, beginIndex, endIndex) {
   if (endIndex == null) {
     return :SubString(obj, beginIndex);
   } else {
@@ -29,21 +29,21 @@ function subString(obj, beginIndex, endIndex) {
   }
 }
 
-update        = ES:Update;
-usage         = ES:Usage;
-defaults      = ES:Defaults;
-load          = ES:Load;
-startsWith    = ES:StartsWith;
-endsWith      = ES:EndsWith;
-assert        = ES:Assert;
-checkMetaData = ES:CheckMetaData;
-lastUpdated   = ES:LastUpdated;
+const update        = ES:Update;
+const usage         = ES:Usage;
+const defaults      = ES:Defaults;
+const load          = ES:Load;
+const startsWith    = ES:StartsWith;
+const endsWith      = ES:EndsWith;
+const assert        = ES:Assert;
+const checkMetaData = ES:CheckMetaData;
+const lastUpdated   = ES:LastUpdated;
 
-reload     = MY:Reload;
-plot       = MY:Plot;
-input      = MY:Input;
-sp500      = MY:SP500;
-view       = MY:View;
-summary    = MY:Summary;
-updateMain = MY:UpdateMain;
+const reload     = MY:Reload;
+const plot       = MY:Plot;
+const input      = MY:Input;
+const sp500      = MY:SP500;
+const view       = MY:View;
+const summary    = MY:Summary;
+const updateMain = MY:UpdateMain;
 
