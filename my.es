@@ -1,3 +1,10 @@
+function MY:Update() {
+  flag = ES:Update();
+  if (flag) {
+    MY:Reload();
+  }
+}
+
 function MY:Reload() {
   :Log(INFO, 'loading series from datastore...');
   :Ds(ES:AutoLoad);

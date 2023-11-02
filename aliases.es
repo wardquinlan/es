@@ -31,7 +31,7 @@ const function subString(obj, beginIndex, endIndex) {
   }
 }
 
-const update        = ES:Update;
+const update        = MY:Update;
 const usage         = ES:Usage;
 const defaults      = ES:Defaults;
 const load          = ES:Load;
