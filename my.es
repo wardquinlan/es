@@ -1,6 +1,5 @@
-function MY:Update() {
-  flag = ES:Update();
-  if (flag) {
+function MY:Update(object) {
+  if (ES:Update(object)) {
     MY:Reload();
   }
 }
