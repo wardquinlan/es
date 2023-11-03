@@ -281,14 +281,14 @@ function MY:CreateSP500(r) {
   :SetTitle(SP500_EY, 'S&P 500 Earnings Yield (Unadjusted)');
   :SetSource(SP500_EY, '[DERIVED]');
 
-  MKCAPGDP = 100 * MY:Logf(WILL5000PRFC / GDP, r);
-  :SetName(MKCAPGDP, 'MKCAPGDP');
-  :SetTitle(MKCAPGDP, 'Market Cap to GDP');
-  :SetSource(MKCAPGDP, '[DERIVED]');
-  DESC = 'Adjusted Market Cap to GDP with:\n\n' +
-    'K=' + LOGF.K + '\n' +
-    'NR=' + LOGF.NR;
-  :SetNotes(MKCAPGDP, DESC);
+  #MKCAPGDP = 100 * MY:Logf(WILL5000PRFC / GDP, r);
+  #:SetName(MKCAPGDP, 'MKCAPGDP');
+  #:SetTitle(MKCAPGDP, 'Market Cap to GDP');
+  #:SetSource(MKCAPGDP, '[DERIVED]');
+  #DESC = 'Adjusted Market Cap to GDP with:\n\n' +
+  #  'K=' + LOGF.K + '\n' +
+  #  'NR=' + LOGF.NR;
+  #:SetNotes(MKCAPGDP, DESC);
 
   MKCAPGDP2 = 100 * MY:Logf(WILL5000PR / GDP, r);
   :SetName(MKCAPGDP2, 'MKCAPGDP2');
@@ -322,7 +322,7 @@ function MY:CreateSP500(r) {
   :GPut(:GetName(SP500_PE), SP500_PE);
   :GPut(:GetName(SP500_PS), SP500_PS);
   :GPut(:GetName(SP500_EY), SP500_EY);
-  :GPut(:GetName(MKCAPGDP), MKCAPGDP);
+  #:GPut(:GetName(MKCAPGDP), MKCAPGDP);
   :GPut(:GetName(SP500GDP), SP500GDP);
   :GPut(:GetName(MKCAPGDP2), MKCAPGDP2);
 }
