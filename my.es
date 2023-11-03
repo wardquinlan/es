@@ -291,6 +291,15 @@ function MY:CreateSP500(r) {
     'NR=' + LOGF.NR;
   :SetNotes(MKCAPGDP, DESC);
 
+  MKCAPGDP2 = 100 * MY:Logf(WILL5000PR / GDP, r);
+  :SetName(MKCAPGDP2, 'MKCAPGDP2');
+  :SetTitle(MKCAPGDP2, 'Market Cap to GDP');
+  :SetSource(MKCAPGDP2, '[DERIVED]');
+  DESC = 'Adjusted Market Cap to GDP with:\n\n' +
+    'K=' + LOGF.K + '\n' +
+    'NR=' + LOGF.NR;
+  :SetNotes(MKCAPGDP2, DESC);
+
   #K = :DlgInput("Enter the value for K:");
   #if (K == null) {
   #  throw 'Operation aborted by user';
@@ -316,6 +325,7 @@ function MY:CreateSP500(r) {
   :GPut(:GetName(SP500_EY), SP500_EY);
   :GPut(:GetName(MKCAPGDP), MKCAPGDP);
   :GPut(:GetName(SP500GDP), SP500GDP);
+  :GPut(:GetName(MKCAPGDP2), MKCAPGDP2);
 }
 
 function MY:CreateJU() {

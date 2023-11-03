@@ -32,7 +32,10 @@
            ngridlines="8">
 
       <series ref="MKCAPGDP" color="Red"/>
+      <series ref="MKCAPGDP2" color="Green"/>
+<!--
       <series ref="SP500GDP" color="Blue"/>
+-->
     </chart>
   </panel>
 </context>
