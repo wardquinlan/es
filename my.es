@@ -185,20 +185,27 @@ function MY:Input() {
     return;
   }
 
-  insert(S, d, v);
-  merge(S, '--with-inserts', '--dry-run');
-  :DlgMessage(:GetName(S) + ' has been merged');
+  try {
+    :Insert(S, d, v);
+    :Merge(S, '--with-inserts');
+    :DlgMessage(:GetName(S) + ' has been merged');
+  } catch (ex) {
+    :DlgMessage('An error has occurred: ' + ex, ERROR);
+  }
 }
 
 function MY:SP500() {
-  value = :DlgInput('Enter today\'s value of SP500:');
-  if (value == null) {
-    return;
-  }
-  value = :ParseFloat(value);
-  if (value == null) {
-    :DlgMessage('Value must be a float', ERROR);
-    return; 
+  while (true) {
+    value = :DlgInput('Enter today\'s value of SP500:');
+    if (value == null) {
+      return;
+    }
+    value = :ParseFloat(value);
+    if (value == null) {
+      :DlgMessage('Value must be a float', ERROR);
+      continue;
+    }
+    break;
   }
 
   S = :Load(500);
