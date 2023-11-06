@@ -4,6 +4,36 @@ function MY:Update(object) {
   }
 }
 
+function MY:Generate(bound) {
+  function ldigits(d) {
+    if (d < 10) {
+      return '0' + d;
+    }
+    return ES:ToString(d);
+  }
+
+  function maxDay(m) {
+    if (m == 2)
+      return 28;
+    if (m == 4 or m == 6 or m == 9 or m == 11)
+      return 30;
+    return 31;
+  }
+
+  my = :Create('my');
+  year = 2023;
+  for (month = 1; month <= 12; month++) {
+    mday = maxDay(month);
+    for (day = 1; day <= mday; day++) {
+      date = ES:ToString(year) + '-';
+      date = date + ldigits(month) + '-';
+      date = date + ldigits(day);
+      :Insert(my, date, :Random(bound));
+    }
+  }
+  return my;
+}
+
 function MY:Reload() {
   :Log(INFO, 'loading series from datastore...');
   :Ds(ES:AutoLoad);
@@ -102,14 +132,16 @@ function MY:Plot(arg1, arg2, arg3, arg4) {
 
   defaults.panel.label = 'Consolidated Panel';
 
-  defaults.chart.label = :GetTitle(arg1);
-  if (arg2 != null) {
+  if (:GetTitle(arg1) != null) {
+    defaults.chart.label = :GetTitle(arg1);
+  }
+  if (arg2 != null and :GetTitle(arg2) != null) {
     defaults.chart.label = defaults.chart.label + ' / ' + :GetTitle(arg2);
   }  
-  if (arg3 != null) {
+  if (arg3 != null and :GetTitle(arg3) != null) {
     defaults.chart.label = defaults.chart.label + ' / ' + :GetTitle(arg3);
   }  
-  if (arg4 != null) {
+  if (arg4 != null and :GetTitle(arg4) != null) {
     defaults.chart.label = defaults.chart.label + ' / ' + :GetTitle(arg4);
   }  
   :Plot(arg1, arg2, arg3, arg4);
