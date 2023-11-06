@@ -4,7 +4,7 @@ function MY:Update(object) {
   }
 }
 
-function MY:Generate(bound) {
+function MY:Generate(year, bound) {
   function ldigits(d) {
     if (d < 10) {
       return '0' + d;
@@ -20,8 +20,14 @@ function MY:Generate(bound) {
     return 31;
   }
 
+  if (year == null) {
+    year = 2023;
+  }
+  if (bound == null) {
+    bound = 1000;
+  }
   my = :Create('my');
-  year = 2023;
+  :SetTitle(my, 'Generated series, year=' + year + ', bound=' + bound);
   for (month = 1; month <= 12; month++) {
     mday = maxDay(month);
     for (day = 1; day <= mday; day++) {
