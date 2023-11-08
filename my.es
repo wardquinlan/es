@@ -239,8 +239,9 @@ function MY:Logf(series, r) {
 function MY:Summary() {
   function summarize(id) {
     series = :Load(id);
-    :Print('[' + :GetId(series) + '] ' + :GetTitle(series));
+    :Print('[' + :GetId(series) + '] ');
     :Print('[' + MY:Last(:Date(series)) + '] ' + MY:Last(series) + ' => ' + MY:Last(:Change(series)));
+    :Print(:GetTitle(series));
     :Print();
   }
   :Print();
