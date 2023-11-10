@@ -34,7 +34,7 @@ printf('HIU Capital   : $%12.2f\n', (1 - HEDGE_FACTOR) * TOTAL);
 printf('Hedge Capital : $%12.2f\n', HEDGE_FACTOR * TOTAL);
 print();
 
-printf('%12s   %12s   %12s   %12s   %8s%%\n', 'YEAR', 'SPRIME', 'SSCALE', 'NET', 'NET');
+printf('%12s   %12s   %12s   %12s   %8s%%\n', 'YEAR', 'SPRIME', 'HEDGE', 'NET', 'NET');
 print();
 for (year = 1996; year <= 2024; year++) {
   simulation(year);
