@@ -3,9 +3,8 @@ DURATION_ASSETS = 62000.0;
 INVERSE_ASSETS = 126000.0;
 HEDGED_ASSETS = 9000.0;
 TOTAL_ASSETS = CASH_ASSETS + DURATION_ASSETS + INVERSE_ASSETS + HEDGED_ASSETS;
-
-HEDGE_FACTOR = HEDGE_ASSETS / INVERSE_ASSETS;
 HEDGE_SCALE = 1.3;
+DURATION = 8.0; # 8 years of duration on duration assets
 
 DAY_START = '04-01';
 DAY_END = '03-31';
@@ -13,8 +12,6 @@ DAY_END = '03-31';
 function simulation(year) {
   date1 = ES:ToString(year - 1) + '-' + DAY_START;
   date2 = ES:ToString(year) + '-' + DAY_END;
-  SP500 = ES:Load(500);
-  DTB3 = ES:Load(3);
 
   S = ES:Chop(SP500, date1, date2);
   INVERSE = ES:Scale(S, -1);
@@ -41,6 +38,11 @@ function simulation(year) {
            PROFIT_NET_PCT);
 }
 
+# load required series
+SP500 = ES:Load(500);
+DTB3 = ES:Load(3);
+DGS10 = ES:Load(120);
+
 print('Asset Model');
 print('-----------');
 printf('Cash Assets     : $%12.2f\n', CASH_ASSETS);
@@ -48,6 +50,8 @@ printf('Duration Assets : $%12.2f\n', DURATION_ASSETS);
 printf('Inverse Assets  : $%12.2f\n', INVERSE_ASSETS);
 printf('Hedged Assets   : $%12.2f\n', HEDGED_ASSETS);
 printf('Total Assets    : $%12.2f\n', TOTAL_ASSETS);
+printf('Hedge Scale     :  %12.2f\n', HEDGE_SCALE);
+printf('Duration        :  %12.2f years\n', DURATION);
 print();
 
 printf('%12s   %12s   %12s   %12s   %12s   %12s\n', 'YEAR', 'Prft Inv', 'Prft Hedge', 'Prft Cash', 'Prft Net', 'Prft Net%');
