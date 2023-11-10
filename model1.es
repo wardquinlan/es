@@ -28,7 +28,7 @@ function model1() {
     PROFIT_NET = PROFIT_INVERSE + PROFIT_HEDGE + PROFIT_CASH + PROFIT_DURATION + DURATION_CAPITAL_GAIN;
     PROFIT_NET_PCT = 100 * PROFIT_NET / TOTAL_ASSETS;
   
-    printf('%12d  $%12.2f  $%12.2f  %12.0f%%  $%12.2f  %12.0f%%  $%12.2f  $%12.2f  $%12.2f  %12.1f%%\n', 
+    printf('%12d  $%12.2f  $%12.2f  %12.1f%%  $%12.2f  %12.1f%%  $%12.2f  $%12.2f  $%12.2f  %12.1f%%\n', 
              year, 
              PROFIT_INVERSE, 
              PROFIT_HEDGE, 
