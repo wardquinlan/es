@@ -1,5 +1,8 @@
-BASE_SPRIME = 80000;
-BASE_X2 = 20000;
+TOTAL = 100000;
+HEDGE_FACTOR = 0.33;
+
+BASE_X2 = HEDGE_FACTOR * TOTAL;
+BASE_SPRIME = TOTAL - BASE_X2;
 
 function simulation(year) {
   SP500 = ES:Load(500);
@@ -8,8 +11,6 @@ function simulation(year) {
   S = ES:Chop(SP500, date1, date2);
   SPRIME = ES:Scale(S, -1);
   SX2 = ES:Scale(S, 2);
-
-  TOTAL = BASE_SPRIME + BASE_X2;
 
   N = :GetSize(SPRIME);
 
@@ -23,10 +24,10 @@ function simulation(year) {
   #print('Total return = ' + (PROFIT1 + PROFIT2));
   #print('Total return = ' + (PROFIT1 + PROFIT2) * 100.0 / TOTAL + '%');
 
-  printf('%10d  %10.2f  %10.2f  $%10.2f  %.0f%%\n', year, PROFIT1, PROFIT2, NET, NETPCT);
+  printf('%12d  $%12.2f  $%12.2f  $%12.2f   %.0f%%\n', year, PROFIT1, PROFIT2, NET, NETPCT);
 }
 
-printf('%10s  %10s  %10s  %10s  %s%%\n', 'YEAR', 'SPRIME', 'SINV', 'NET', 'NET%');
+printf('%12s   %12s   %12s   %12s   %s%%\n', 'YEAR', 'SPRIME', 'SINV', 'NET', 'NET');
 print();
 for (year = 1996; year <= 2024; year++) {
   simulation(year);
