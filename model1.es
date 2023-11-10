@@ -23,13 +23,12 @@ function model1() {
     :Log(DEBUG, 'Interest rate change: ' + INTEREST_RATE_CHG * 100);
     DURATION_CAPITAL_GAIN = -INTEREST_RATE_CHG * DURATION_YEARS * DURATION_ASSETS;
     :Log(DEBUG, 'Duration capital gain: ' + DURATION_CAPITAL_GAIN);
-    PROFIT_DURATION = DURATION_ASSETS * DURATION_YIELD + DURATION_CAPITAL_GAIN;
-    :Log(DEBUG, 'Duration total return: ' + PROFIT_DURATION);
+    PROFIT_DURATION = DURATION_ASSETS * DURATION_YIELD;
 
-    PROFIT_NET = PROFIT_INVERSE + PROFIT_HEDGE + PROFIT_CASH + PROFIT_DURATION;
+    PROFIT_NET = PROFIT_INVERSE + PROFIT_HEDGE + PROFIT_CASH + PROFIT_DURATION + DURATION_CAPITAL_GAIN;
     PROFIT_NET_PCT = 100 * PROFIT_NET / TOTAL_ASSETS;
   
-    printf('%12d  $%12.2f  $%12.2f  %12.0f%%  $%12.2f  %12.0f%%  $%12.2f  $%12.2f  %12.0f%%\n', 
+    printf('%12d  $%12.2f  $%12.2f  %12.0f%%  $%12.2f  %12.0f%%  $%12.2f  $%12.2f  $%12.2f  %12.1f%%\n', 
              year, 
              PROFIT_INVERSE, 
              PROFIT_HEDGE, 
@@ -37,6 +36,7 @@ function model1() {
              PROFIT_CASH, 
              DURATION_YIELD * 100,
              PROFIT_DURATION,
+             DURATION_CAPITAL_GAIN,
              PROFIT_NET,
              PROFIT_NET_PCT);
   }
@@ -70,7 +70,7 @@ function model1() {
   printf('Duration        :  %12.2f years\n', DURATION_YEARS);
   print();
 
-  printf('%12s   %12s   %12s   %12s   %12s   %12s   %12s   %12s   %12s\n', 
+  printf('%12s   %12s   %12s   %12s   %12s   %12s   %12s   %12s   %12s   %12s\n', 
          'YEAR', 
          'Prft Inv', 
          'Prft Hedge', 
@@ -78,6 +78,7 @@ function model1() {
          'Prft Cash', 
          'Dur Yield',
          'Prft Dur', 
+         'Prft Cap G',
          'Prft Net', 
          'Prft Net%');
   print();
