@@ -29,11 +29,13 @@ function model1() {
     PROFIT_NET = PROFIT_INVERSE + PROFIT_HEDGE + PROFIT_CASH + PROFIT_DURATION;
     PROFIT_NET_PCT = 100 * PROFIT_NET / TOTAL_ASSETS;
   
-    printf('%12d  $%12.2f  $%12.2f  $%12.2f  $%12.2f  $%12.2f  %12.0f%%\n', 
+    printf('%12d  $%12.2f  $%12.2f  %12.0f%%  $%12.2f  %12.0f%%  $%12.2f  $%12.2f  %12.0f%%\n', 
              year, 
              PROFIT_INVERSE, 
              PROFIT_HEDGE, 
+             CASH_YIELD * 100,
              PROFIT_CASH, 
+             DURATION_YIELD * 100,
              PROFIT_DURATION,
              PROFIT_NET,
              PROFIT_NET_PCT);
@@ -57,6 +59,8 @@ function model1() {
 
   print('Asset Model');
   print('-----------');
+  printf('Period Start    : %s\n', DAY_START);
+  printf('Period End      : %s\n', DAY_END);
   printf('Cash Assets     : $%12.2f\n', CASH_ASSETS);
   printf('Duration Assets : $%12.2f\n', DURATION_ASSETS);
   printf('Inverse Assets  : $%12.2f\n', INVERSE_ASSETS);
@@ -66,11 +70,13 @@ function model1() {
   printf('Duration        :  %12.2f years\n', DURATION_YEARS);
   print();
 
-  printf('%12s   %12s   %12s   %12s   %12s   %12s   %12s\n', 
+  printf('%12s   %12s   %12s   %12s   %12s   %12s   %12s   %12s   %12s\n', 
          'YEAR', 
          'Prft Inv', 
          'Prft Hedge', 
+         'Cash Yield',
          'Prft Cash', 
+         'Dur Yield',
          'Prft Dur', 
          'Prft Net', 
          'Prft Net%');
