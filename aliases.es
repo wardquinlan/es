@@ -9,6 +9,7 @@ sysalias('data', ':Data');
 sysalias('meta', ':Meta');
 sysalias('exit', ':Exit');
 sysalias('print', ':Print');
+sysalias('printf', ':Printf');
 sysalias('getEnv', ':GetEnv');
 sysalias('getLength', ':GetLength');
 sysalias('iterate', ':Iterate');
