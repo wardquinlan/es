@@ -25,7 +25,7 @@ function simulation(year) {
   printf('%12d  $%12.2f  $%12.2f  $%12.2f   %8.0f%%\n', year, PROFIT1, PROFIT2, NET, NETPCT);
 }
 
-printf('%12s   %12s   %12s   %12s   %8s%%\n', 'YEAR', 'SPRIME', 'SINV', 'NET', 'NET');
+printf('%12s   %12s   %12s   %12s   %8s%%\n', 'YEAR', 'SPRIME', 'SSCALE', 'NET', 'NET');
 print();
 for (year = 1996; year <= 2024; year++) {
   simulation(year);
