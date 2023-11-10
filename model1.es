@@ -1,9 +1,9 @@
-CASH_ASSETS = 212000.0;
 DURATION_ASSETS = 62000.0;
 INVERSE_ASSETS = 126000.0;
-HEDGED_ASSETS = 9000.0;
+HEDGED_ASSETS = :ParseFloat(:DlgInput('Enter the amount of Hedged Assets:'));
+CASH_ASSETS = 221000.0 - HEDGED_ASSETS;
 TOTAL_ASSETS = CASH_ASSETS + DURATION_ASSETS + INVERSE_ASSETS + HEDGED_ASSETS;
-HEDGE_SCALE = 1.3;
+HEDGE_SCALE = :ParseFloat(:DlgInput('Enter the Hedge Scale:'));
 DURATION_YEARS = 8.0; # 8 years of duration on duration assets
 
 DAY_START = '04-01';
