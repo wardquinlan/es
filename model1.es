@@ -1,4 +1,4 @@
-TOTAL = 135500;
+TOTAL = 135500.0;
 HEDGE_FACTOR = 0.07;
 HEDGE_SCALE = 1.3;
 DAY_START = '04-01';
@@ -24,6 +24,15 @@ function simulation(year) {
 
   printf('%12d  $%12.2f  $%12.2f  $%12.2f   %8.0f%%\n', year, PROFIT1, PROFIT2, NET, NETPCT);
 }
+
+print('Hedged HIU Model');
+print('----------------');
+printf('Total Capital : $%12.2f\n', TOTAL);
+printf('Hedge Factor  :  %12.2f\n', HEDGE_FACTOR);
+printf('Hedge Scale   :  %12.2f\n', HEDGE_SCALE);
+printf('HIU Capital   : $%12.2f\n', (1 - HEDGE_FACTOR) * TOTAL);
+printf('Hedge Capital : $%12.2f\n', HEDGE_FACTOR * TOTAL);
+print();
 
 printf('%12s   %12s   %12s   %12s   %8s%%\n', 'YEAR', 'SPRIME', 'SSCALE', 'NET', 'NET');
 print();
