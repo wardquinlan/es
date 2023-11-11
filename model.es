@@ -1,11 +1,3 @@
-M:Initialize       = null;
-M:GetYearStart     = null;
-M:GetYearEnd       = null;
-M:GetCashYield     = null;
-M:GetDurationYield = null;
-M:GetDurationGain  = null;
-M:GetEquityGain    = null;
-
 function M:Run(year) {
   if (year == null) {
     M:Initialize();
@@ -16,6 +8,8 @@ function M:Run(year) {
     }
     return;
   }
+
+  M:ReBalance();
 
   cashYield     = M:GetCashYield(year);
   durationYield = M:GetDurationYield(year);
