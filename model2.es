@@ -5,6 +5,10 @@ DURATION_YEARS = 8;
 function initialize() {
   :GPut('DTB3', ES:Load('DTB3'));
   :GPut('DGS10', ES:Load('DGS10'));
+  :GPut('SP500', ES:Load('SP500'));
+  :GPut('M:CashPosition', 212000);
+  :GPut('M:DurationPosition', 62000);
+  :GPut('M:EquityPosition', 0);
 }
 M:Initialize = initialize;
 
@@ -18,24 +22,31 @@ function getYearEnd() {
 }
 M:GetYearEnd = getYearEnd;
 
-function getCashAssetsYield(year) {
+function getCashYield(year) {
   s = ES:Chop(DTB3, ES:ToString(year) + '-01-01', ES:ToString(year) + '-12-31');
   return :Get(s, 0);
 }
-M:GetCashAssetsYield = getCashAssetsYield;
+M:GetCashYield = getCashYield;
 
-function getDurationAssetsYield(year) {
+function getDurationYield(year) {
   s = ES:Chop(DGS10, ES:ToString(year) + '-01-01', ES:ToString(year) + '-12-31');
   return :Get(s, 0);
 }
-M:GetDurationAssetsYield = getDurationAssetsYield;
+M:GetDurationYield = getDurationYield;
 
-function getDurationAssetsGain(year) {
+function getDurationGain(year) {
   s = ES:Chop(DGS10, ES:ToString(year) + '-01-01', ES:ToString(year) + '-12-31');
   change = :Get(s, :GetSize(s) - 1) - :Get(s, 0);
   return -change * DURATION_YEARS;
 }
-M:GetDurationAssetsGain = getDurationAssetsGain;
+M:GetDurationGain = getDurationGain;
+
+function getEquityGain(year) {
+  s = ES:Chop(SP500, ES:ToString(year) + '-01-01', ES:ToString(year) + '-12-31');
+  change = :Get(s, :GetSize(s) - 1) - :Get(s, 0);
+  return change * 100 / :Get(s, 0);
+}
+M:GetEquityGain = getEquityGain;
 
 function model2() {
   M:Run();
