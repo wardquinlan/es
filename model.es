@@ -31,5 +31,9 @@ function M:Run(year) {
     durationPosition,
     equityPosition,
     netPosition);
+
+  :GPut('M:CashPosition', cashPosition);
+  :GPut('M:DurationPosition', durationPosition);
+  :GPut('M:EquityPosition', equityPosition);
 }
 

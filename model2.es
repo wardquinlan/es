@@ -53,6 +53,9 @@ function M:GetEquityGain(year) {
 }
 
 function M:ReBalance() {
-  :Log(DEBUG, 'M:ReBalance()');
+  netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition;
+  :GPut('M:CashPosition', 0.1 * netPosition);
+  :GPut('M:DurationPosition', 0.5 * netPosition);
+  :GPut('M:EquityPosition', 0.4 * netPosition);
 }
 
