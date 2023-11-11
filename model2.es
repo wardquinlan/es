@@ -6,9 +6,15 @@ function initialize() {
   :GPut('DTB3', ES:Load('DTB3'));
   :GPut('DGS10', ES:Load('DGS10'));
   :GPut('SP500', ES:Load('SP500'));
-  :GPut('M:CashPosition', 212000);
-  :GPut('M:DurationPosition', 62000);
-  :GPut('M:EquityPosition', 0);
+  :GPut('M:CashPosition', 212000.0);
+  :GPut('M:DurationPosition', 62000.0);
+  :GPut('M:EquityPosition', 0.0);
+
+  :Printf('Cash Position     : %10.2f\n', M:CashPosition);
+  :Printf('Duration Position : %10.2f\n', M:DurationPosition);
+  :Printf('Equity Position   : %10.2f\n', M:EquityPosition);
+  :Printf('Net Position      : %10.2f\n', M:CashPosition + M:DurationPosition + M:EquityPosition);
+  :Print();
 }
 M:Initialize = initialize;
 
