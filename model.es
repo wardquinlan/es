@@ -9,7 +9,7 @@ function M:Run(year) {
     return;
   }
 
-  M:ReBalance();
+  M:ReBalance(year);
 
   cashYield     = M:GetCashYield(year);
   durationYield = M:GetDurationYield(year);
