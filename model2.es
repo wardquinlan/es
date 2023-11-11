@@ -1,14 +1,19 @@
 include 'model.es';
 
+# approximate duration (in years) of duration assets
 DURATION_YEARS = 8;
+
+function model2() {
+  M:Run();
+}
 
 function M:Initialize() {
   :GPut('DTB3', ES:Load('DTB3'));
   :GPut('DGS10', ES:Load('DGS10'));
   :GPut('SP500', ES:Load('SP500'));
-  :GPut('M:CashPosition', 212000.0);
-  :GPut('M:DurationPosition', 62000.0);
-  :GPut('M:EquityPosition', 0.0);
+  :GPut('M:CashPosition',     100000.0);
+  :GPut('M:DurationPosition', 0.0);
+  :GPut('M:EquityPosition',   0.0);
 
   :Printf('Cash Position     : %10.2f\n', M:CashPosition);
   :Printf('Duration Position : %10.2f\n', M:DurationPosition);
@@ -49,9 +54,5 @@ function M:GetEquityGain(year) {
 
 function M:ReBalance() {
   :Log(DEBUG, 'M:ReBalance()');
-}
-
-function model2() {
-  M:Run();
 }
 
