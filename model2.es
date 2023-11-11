@@ -1,12 +1,12 @@
 include 'model.es';
 
-M:GetYearStart           = null;
-M:GetYearEnd             = null;
-M:GetCashAssetsYield     = null;
-M:GetDurationAssetsYield = null;
+DURATION_YEARS = 8;
 
-DTB3 = ES:Load('DTB3');
-DGS10 = ES:Load('DGS10');
+function initialize() {
+  :GPut('DTB3', ES:Load('DTB3'));
+  :GPut('DGS10', ES:Load('DGS10'));
+}
+M:Initialize = initialize;
 
 function getYearStart() {
   return 1995;
@@ -30,6 +30,12 @@ function getDurationAssetsYield(year) {
 }
 M:GetDurationAssetsYield = getDurationAssetsYield;
 
+function getDurationAssetsGain(year) {
+  s = ES:Chop(DGS10, ES:ToString(year) + '-01-01', ES:ToString(year) + '-12-31');
+  change = :Get(s, :GetSize(s) - 1) - :Get(s, 0);
+  return -change * DURATION_YEARS;
+}
+M:GetDurationAssetsGain = getDurationAssetsGain;
 
 function model2() {
   M:Run();
