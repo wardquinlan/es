@@ -8,6 +8,13 @@ function getDateIndex(date, series) {
   return null;
 }
 
+function createdScaledSeries(series, scale) {
+  
+  for (i = 1; i < :GetSize(series); i++) {
+    rawScale = (:Get(series, i) - :Get(series, i - 1)) / :Get(series, i - 1);
+  }
+}
+
 function createHSU(date) {
   BASE = 0;
   S = ES:Load(500);

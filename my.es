@@ -209,8 +209,7 @@ function MY:SP500() {
   }
 
   S = :Load(500);
-  D = :Date(S);
-  if (:Get(D, :GetSize(D) - 1) < :Today()) {
+  if (:GetDate(S, :GetSize(S) - 1) < :Today()) {
     message = 'updating SP500 on ' + :Today() + ' with ' + value + '; proceed?';
     if (!:DlgConfirm(message)) {
       return;
@@ -239,7 +238,7 @@ function MY:Logf(series, r) {
 function MY:Summary() {
   function summarize(id) {
     series = :Load(id);
-    :Print('[' + :GetId(series) + '] [' + MY:Last(:Date(series)) + '] ' + MY:Last(series) + ' => ' + MY:Last(:Change(series)));
+    :Print('[' + :GetId(series) + '] [' + MY:LastDate(series) + '] ' + MY:Last(series) + ' => ' + MY:Last(:Change(series)));
     :Print(:GetTitle(series));
     :Print();
   }
@@ -253,6 +252,14 @@ function MY:Last(series) {
     return null;
   }
   return :Get(series, :GetSize(series) - 1);
+}
+
+function MY:LastDate(series) {
+  series = ES:Load(series);
+  if (:GetSize(series) == 0) {
+    return null;
+  }
+  return :GetDate(series, :GetSize(series) - 1);
 }
 
 function MY:CreateRC() {
