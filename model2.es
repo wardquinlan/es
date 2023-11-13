@@ -3,6 +3,14 @@ include 'model.es';
 # approximate duration (in years) of duration assets
 DURATION_YEARS = 8;
 
+# SP500 to GDP limits
+MAX_SP500_GDP = 180;
+MIN_SP500_GDP = 100;
+
+# % Equity Allocation
+MAX_EQUITY_ALLOCATION = 0.6;
+MIN_EQUITY_ALLOCATION = 0.0;
+
 function model2() {
   M:Run();
 }
@@ -52,7 +60,7 @@ function M:GetEquityGain(year) {
   return change * 100 / :Get(s, 0);
 }
 
-function M:ReBalance(year) {
+function M:Rebalance(year) {
   netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition;
 
   # equity allocation.  Also see Utils.transform() - same transformation function
@@ -68,15 +76,12 @@ function M:ReBalance(year) {
     return S * (s - s1) + y1;
   }
 
-  #print(f(0));
-  #print(f(100));
-  #print(f(140));
-  #print(f(180));
-  #print(f(200));
+  #print(M:Transform(150, 100, 200, 0, 10));
 
   S = ES:Chop(SP500GDP, ES:ToString(year) + '-01-01', ES:ToString(year) + '-12-31');
   s = :Get(S, 0);
-  equityPosition = f(s) / 100;
+  #equityPosition = f(s) / 100;
+  equityPosition = M:Transform(s, 100, 180, 60, 0) / 100;
 
   :GPut('M:DurationPosition', 0.4 * netPosition);
   :GPut('M:EquityPosition', equityPosition * netPosition);
