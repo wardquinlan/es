@@ -263,7 +263,7 @@ function MY:LastDate(series) {
 }
 
 function MY:CreateRC() {
-  DT = :Date(GDP);
+  DT = :Date(DTB3);
   R1953 = DT >= '1953-07-01' and DT <= '1954-05-31';
   R1957 = DT >= '1957-08-01' and DT <= '1958-04-30';
   R1960 = DT >= '1960-04-01' and DT <= '1961-02-28';
