@@ -9,7 +9,7 @@ function M:Run(year) {
     return;
   }
 
-  M:ReBalance(year);
+  M:Rebalance(year);
 
   cashYield     = M:GetCashYield(year);
   durationYield = M:GetDurationYield(year);
@@ -42,5 +42,16 @@ function M:Run(year) {
   :GPut('M:CashPosition', cashPosition);
   :GPut('M:DurationPosition', durationPosition);
   :GPut('M:EquityPosition', equityPosition);
+}
+
+# Transforms s1..s2 space into y1..y2 space.  Note that s is force-bounded into s1..s2.
+function M:Transform(s, s1, s2, y1, y2) {
+  # bound s to within s1..s2
+  s = :Min(s, s2);
+  s = :Max(s, s1);
+
+  # transformation constant
+  S = (y2 - y1) / (s2 - s1);
+  return S * (s - s1) + y1;
 }
 
