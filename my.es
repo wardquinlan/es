@@ -209,12 +209,12 @@ function MY:SP500() {
   }
 
   S = :Load(500);
-  if (:GetDate(S, :GetSize(S) - 1) < :Today()) {
-    message = 'updating SP500 on ' + :Today() + ' with ' + value + '; proceed?';
+  if (:GetDate(S, :GetSize(S) - 1) < :Date()) {
+    message = 'updating SP500 on ' + :Date() + ' with ' + value + '; proceed?';
     if (!:DlgConfirm(message)) {
       return;
     }
-    :Insert(S, :Today(), value);
+    :Insert(S, :Date(), value);
     :Merge(S, '--with-inserts');
     :DlgMessage('SP500 has been merged');
     return;
