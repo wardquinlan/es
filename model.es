@@ -27,8 +27,8 @@ function M:Run(type, yearStart, monthStart, count, initialRebalance) {
     M:Rebalance(:Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), period);
   }
 
-  :Printf('%30s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Period Start', 'Cash Yld', 'Drtn Yld', 'Drtn Gn', 'Eqty Gn', 
-          'Cash Pos', '', 'Drtn Pos', '', 'Eqty Pos', '', 'Net Pos');
+  :Printf('%30s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Period-Start', 'Cash-Yld', 'Drtn-Yld', 'Drtn-Gn', 'Eqty-Gn', 
+          'Cash-Pos', '', 'Drtn-Pos', '', 'Eqty-Pos', '', 'Net-Pos');
   :Print();
     
   year = yearStart;
@@ -143,4 +143,6 @@ function M:Transform(s, s1, s2, y1, y2) {
   S = (y2 - y1) / (s2 - s1);
   return S * (s - s1) + y1;
 }
+
+include 'model-base.es';
 

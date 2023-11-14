@@ -3,18 +3,12 @@ include 'model.es';
 # approximate duration (in years) of duration assets
 DURATION_YEARS = 8;
 
-# % Equity Allocation
-MAX_EQUITY_ALLOCATION = 0.6;
-MIN_EQUITY_ALLOCATION = 0.0;
-
-function model2() {
-  M:Run('Y', 1995, 1, 10, true);
+function model() {
+  M:Run('Y', 1995, 1, 40, true);
 }
 
 function M:Initialize() {
-  if (!:Defined('DFF')) {
-    MY:Reload();
-  }
+  MY:Reload();
   :GPut('M:CashPosition',     100000.0);
   :GPut('M:DurationPosition', 0.0);
   :GPut('M:EquityPosition',   0.0);
@@ -43,11 +37,11 @@ function M:GetEquityGain(date, period) {
 }
 
 function M:Rebalance(date, period) {
-  s = :Get(ES:Chop(SP500GDP, date, date + period), 0);
-  equityPosition = M:Transform(s, 100, 180, 60, 0) / 100;
+  #s = :Get(ES:Chop(SP500GDP, date, date + period), 0);
+  #equityPosition = M:Transform(s, 100, 180, 60, 0) / 100;
   netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition;
-  :GPut('M:DurationPosition', 0.4 * netPosition);
-  :GPut('M:EquityPosition', equityPosition * netPosition);
-  :GPut('M:CashPosition', (0.6 - equityPosition) * netPosition);
+  :GPut('M:DurationPosition', 0.3 * netPosition);
+  :GPut('M:EquityPosition', 0.6 * netPosition);
+  :GPut('M:CashPosition', 0.1 * netPosition);
 }
 
