@@ -24,7 +24,7 @@ function M:Run(type, yearStart, monthStart, count, initialRebalance) {
     # very first rebalance at the start of the first period
     :Print('(Rebalancing at beginning of first period...)');
     :Print();
-    M:Rebalance(:Date(ES:ToString(yearStart) + '-' + monthStart + '-01', period);
+    M:Rebalance(:Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), period);
   }
 
   :Printf('%6s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Year', 'Cash Yld', 'Drtn Yld', 'Drtn Gn', 'Eqty Gn', 
