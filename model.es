@@ -1,4 +1,14 @@
-function M:Run(initialRebalance) {
+function M:Run(type, yearStart, monthStart, count, initialRebalance) {
+  if (type == 'Y') {
+    period = 365;
+  } else if (type == 'Q') {
+    period = 90;
+  } else if (type == 'M') {
+    period = 30;
+  } else {
+    throw 'invalid type: ' + type;
+  }
+
   # initialize with balances
   M:Initialize();
 
@@ -10,24 +20,46 @@ function M:Run(initialRebalance) {
   :Printf('Net Position      : %10.2f\n', M:CashPosition + M:DurationPosition + M:EquityPosition);
   :Print();
 
-  if (initialRebalance != null and initialRebalance == true) {
+  if (true == initialRebalance) {
     # very first rebalance at the start of the first period
     :Print('(Rebalancing at beginning of first period...)');
     :Print();
-    M:Rebalance(M:GetYearStart());
+    M:Rebalance(:Date(ES:ToString(yearStart) + '-' + monthStart + '-01', period);
   }
 
   :Printf('%6s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Year', 'Cash Yld', 'Drtn Yld', 'Drtn Gn', 'Eqty Gn', 
           'Cash Pos', '', 'Drtn Pos', '', 'Eqty Pos', '', 'Net Pos');
   :Print();
     
-  for (year = M:GetYearStart(); year <= M:GetYearEnd(); year++) {
-    M:RunYear(year);
+  year = yearStart;
+  month = monthStart;
+  cnt = 0;
+  while (cnt < count) {
+    date = :Date(ES:ToString(year) + '-' + month + '-01');
+    M:RunPeriod(date, period);
+    if (type == 'Y') {
+      year++;
+    } else if (type == 'Q') {
+      month = month + 3;
+      if (month > 12) {
+        year++;
+        month = 1;
+      }
+    } else if (type == 'M') {
+      month++;
+      if (month > 12) {
+        year++;
+        month = 1;
+      }
+    } else {
+      throw 'invalid type: ' + type;
+    }
+    cnt++;
   }
   return;
 }
 
-function M:RunYear(year) {
+function M:RunPeriod(date, period) {
   function printLine(ind) {
     if (ind == 'B') {
       format = '%6s %8.2f %8.2f %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
@@ -51,11 +83,11 @@ function M:RunYear(year) {
       netPosition);
   }
 
-  # get the yields/gains for the current year
-  cashYield     = M:GetCashYield(year);
-  durationYield = M:GetDurationYield(year);
-  durationGain  = M:GetDurationGain(year);
-  equityGain    = M:GetEquityGain(year);
+  # get the yields/gains for the current period
+  cashYield     = M:GetCashYield(date, period);
+  durationYield = M:GetDurationYield(date, period);
+  durationGain  = M:GetDurationGain(date, period);
+  equityGain    = M:GetEquityGain(date, period);
   
   # calculate the positions at the beginning of the period
   cashPosition        = M:CashPosition;
@@ -82,7 +114,7 @@ function M:RunYear(year) {
   :GPut('M:EquityPosition', equityPosition);
 
   # rebalance for the current period
-  M:Rebalance(year);
+  M:Rebalance(date, period);
 
   # calculate the positions after rebalancing
   cashPosition        = M:CashPosition;
