@@ -3,6 +3,7 @@ function M:Run(year) {
     M:Initialize();
     :Printf('%6s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Year', 'Cash Yld', 'Drtn Yld', 'Drtn Gn', 'Eqty Gn', 
             'Cash Pos', '', 'Drtn Pos', '', 'Eqty Pos', '', 'Net Pos');
+    
     for (year = M:GetYearStart(); year <= M:GetYearEnd(); year++) {
       M:Run(year);
     }
@@ -31,11 +32,13 @@ function M:Run(year) {
       netPosition);
   }
 
+  # get the yields/gains for the current year
   cashYield     = M:GetCashYield(year);
   durationYield = M:GetDurationYield(year);
   durationGain  = M:GetDurationGain(year);
   equityGain    = M:GetEquityGain(year);
   
+  # calculate the positions at the beginning of the period
   cashPosition        = M:CashPosition;
   durationPosition    = M:DurationPosition;
   equityPosition      = M:EquityPosition;
@@ -45,8 +48,7 @@ function M:Run(year) {
   equityPositionPct   = equityPosition / netPosition * 100;
   printLine('B');
 
-  M:Rebalance(year);
-
+  # calculate the positions at the end of the period
   cashPosition        = M:CashPosition * (100 + cashYield) / 100;
   durationPosition    = M:DurationPosition * (100 + durationYield + durationGain) / 100;
   equityPosition      = M:EquityPosition * (100 + equityGain) / 100;
@@ -59,6 +61,25 @@ function M:Run(year) {
   :GPut('M:CashPosition', cashPosition);
   :GPut('M:DurationPosition', durationPosition);
   :GPut('M:EquityPosition', equityPosition);
+
+  # rebalance for the current period
+  M:Rebalance(year);
+
+  # calculate the positions after rebalancing
+  cashPosition        = M:CashPosition;
+  durationPosition    = M:DurationPosition;
+  equityPosition      = M:EquityPosition;
+  netPosition         = cashPosition + durationPosition + equityPosition;
+  cashPositionPct     = cashPosition / netPosition * 100;
+  durationPositionPct = durationPosition / netPosition * 100;
+  equityPositionPct   = equityPosition / netPosition * 100;
+  printLine('R');
+
+  :GPut('M:CashPosition', cashPosition);
+  :GPut('M:DurationPosition', durationPosition);
+  :GPut('M:EquityPosition', equityPosition);
+
+  print();
 }
 
 # Transforms s1..s2 space into y1..y2 space.  Note that s is force-bounded into s1..s2.
