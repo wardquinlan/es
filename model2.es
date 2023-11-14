@@ -12,7 +12,7 @@ MAX_EQUITY_ALLOCATION = 0.6;
 MIN_EQUITY_ALLOCATION = 0.0;
 
 function model2() {
-  M:Run();
+  M:Run(true);
 }
 
 function M:Initialize() {
