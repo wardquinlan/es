@@ -157,3 +157,6 @@ function M:Transform(s, s1, s2, y1, y2) {
 
 include 'model-base.es';
 
+defaults.panel.frequency = YEARS;
+defaults.chart.scaletype = LOG;
+

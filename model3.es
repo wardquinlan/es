@@ -2,9 +2,7 @@ include 'model.es';
 
 function model() {
   M:Run('QUARTERLY REALLOC MODEL', 'Q', 1995, 1, 116, true);
-  defaults.panel.frequency = YEARS;
-  defaults.chart.scaletype = LOG;
-  :Plot(RESULTS);
+  :GPut('MODEL3', RESULTS);
 }
 
 function M:Rebalance(date, period) {
