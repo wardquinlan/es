@@ -31,6 +31,10 @@ function M:Run(name, type, yearStart, monthStart, count, initialRebalance) {
     # very first rebalance at the start of the first period
     M:Rebalance(:Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), period);
   }
+  RESULTS = :Create('RESULTS');
+  :SetTitle(RESULTS, name);
+  :Insert(RESULTS, :Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), (M:CashPosition + M:DurationPosition + M:EquityPosition) / 1000);
+  :GPut('RESULTS', RESULTS);
 
   :Printf('%30s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Period-Start', 'Cash-Yld', 'Drtn-Yld', 'Drtn-Gn', 'Eqty-Gn', 
           'Cash-Pos', '', 'Drtn-Pos', '', 'Eqty-Pos', '', 'Net-Pos');
@@ -61,7 +65,6 @@ function M:Run(name, type, yearStart, monthStart, count, initialRebalance) {
     }
     cnt++;
   }
-  return;
 }
 
 function M:RunPeriod(date, period) {
@@ -135,6 +138,9 @@ function M:RunPeriod(date, period) {
   :GPut('M:DurationPosition', durationPosition);
   :GPut('M:EquityPosition', equityPosition);
 
+  RESULTS = :GGet('RESULTS');
+  :Insert(RESULTS, date + period, netPosition / 1000);
+  :GPut('RESULTS', RESULTS);
   :Print();
 }
 
