@@ -25,7 +25,7 @@ function M:Run(year) {
   durationPositionPct = durationPosition / netPosition * 100;
   equityPositionPct   = equityPosition / netPosition * 100;
 
-  :Printf('%4d %8.1f %8.1f %8.1f %8.1f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n', 
+  :Printf('%4d %8.2f %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n', 
     year,
     cashYield,
     durationYield,
