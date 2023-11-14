@@ -27,7 +27,7 @@ function M:Run(type, yearStart, monthStart, count, initialRebalance) {
     M:Rebalance(:Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), period);
   }
 
-  :Printf('%6s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Year', 'Cash Yld', 'Drtn Yld', 'Drtn Gn', 'Eqty Gn', 
+  :Printf('%30s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Period Start', 'Cash Yld', 'Drtn Yld', 'Drtn Gn', 'Eqty Gn', 
           'Cash Pos', '', 'Drtn Pos', '', 'Eqty Pos', '', 'Net Pos');
   :Print();
     
@@ -62,14 +62,14 @@ function M:Run(type, yearStart, monthStart, count, initialRebalance) {
 function M:RunPeriod(date, period) {
   function printLine(ind) {
     if (ind == 'B') {
-      format = '%6s %8.2f %8.2f %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
+      format = '%30s %8.2f %8.2f %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
       durationGain = '';
       equityGain = '';
     } else {
-      format = '%6s %8.2f %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
+      format = '%30s %8.2f %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
     }
     :Printf(format,
-      ES:ToString(year) + ' ' + ind,
+      ES:ToString(date) + ' ' + ind,
       cashYield,
       durationYield,
       durationGain,
