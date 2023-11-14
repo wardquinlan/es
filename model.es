@@ -1,14 +1,29 @@
 function M:Run(year) {
   if (year == null) {
+    # initialize with balances
     M:Initialize();
+
+    :Print('Initial positions');
+    :Print('-----------------');
+    :Printf('Cash Position     : %10.2f\n', M:CashPosition);
+    :Printf('Duration Position : %10.2f\n', M:DurationPosition);
+    :Printf('Equity Position   : %10.2f\n', M:EquityPosition);
+    :Printf('Net Position      : %10.2f\n', M:CashPosition + M:DurationPosition + M:EquityPosition);
+    :Print();
+
+    # very first rebalance at the start of the first period
+    M:Rebalance(M:GetYearStart());
+
     :Printf('%6s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Year', 'Cash Yld', 'Drtn Yld', 'Drtn Gn', 'Eqty Gn', 
             'Cash Pos', '', 'Drtn Pos', '', 'Eqty Pos', '', 'Net Pos');
+    :Print();
     
     for (year = M:GetYearStart(); year <= M:GetYearEnd(); year++) {
       M:Run(year);
     }
     return;
   }
+
   function printLine(ind) {
     if (ind == 'B') {
       format = '%6s %8.2f %8.2f %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';

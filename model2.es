@@ -22,12 +22,6 @@ function M:Initialize() {
   :GPut('M:CashPosition',     100000.0);
   :GPut('M:DurationPosition', 0.0);
   :GPut('M:EquityPosition',   0.0);
-
-  :Printf('Cash Position     : %10.2f\n', M:CashPosition);
-  :Printf('Duration Position : %10.2f\n', M:DurationPosition);
-  :Printf('Equity Position   : %10.2f\n', M:EquityPosition);
-  :Printf('Net Position      : %10.2f\n', M:CashPosition + M:DurationPosition + M:EquityPosition);
-  :Print();
 }
 
 function M:GetYearStart() {
