@@ -1,7 +1,7 @@
 include 'model.es';
 
 function model() {
-  M:Run('Q', 1995, 1, 10, true);
+  M:Run('BASIC QUARTERLY REALLOC MODEL', 'Q', 1995, 1, 112, true);
 }
 
 function M:Rebalance(date, period) {

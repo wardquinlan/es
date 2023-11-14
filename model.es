@@ -1,4 +1,4 @@
-function M:Run(type, yearStart, monthStart, count, initialRebalance) {
+function M:Run(name, type, yearStart, monthStart, count, initialRebalance) {
   if (type == 'Y') {
     period = 365;
   } else if (type == 'Q') {
@@ -12,18 +12,23 @@ function M:Run(type, yearStart, monthStart, count, initialRebalance) {
   # initialize with balances
   M:Initialize();
 
+  :Printf('Model Name         : %s\n', name);
+  :Printf('Model Type         : %s\n', type);
+  :Printf('Year Start         : %d\n', yearStart);
+  :Printf('Month Start        : %d\n', monthStart);
+  :Printf('Count              : %d\n', count);
+  :Printf('Initial rebal flag : %b\n', initialRebalance);
+  :Print();
   :Print('Initial positions');
   :Print('-----------------');
-  :Printf('Cash Position     : %10.2f\n', M:CashPosition);
-  :Printf('Duration Position : %10.2f\n', M:DurationPosition);
-  :Printf('Equity Position   : %10.2f\n', M:EquityPosition);
-  :Printf('Net Position      : %10.2f\n', M:CashPosition + M:DurationPosition + M:EquityPosition);
+  :Printf('Cash Position      : %10.2f\n', M:CashPosition);
+  :Printf('Duration Position  : %10.2f\n', M:DurationPosition);
+  :Printf('Equity Position    : %10.2f\n', M:EquityPosition);
+  :Printf('Net Position       : %10.2f\n', M:CashPosition + M:DurationPosition + M:EquityPosition);
   :Print();
 
   if (true == initialRebalance) {
     # very first rebalance at the start of the first period
-    :Print('(Rebalancing at beginning of first period...)');
-    :Print();
     M:Rebalance(:Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), period);
   }
 

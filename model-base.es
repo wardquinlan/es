@@ -2,7 +2,7 @@
 DURATION_YEARS = 8;
 
 function model() {
-  M:Run('Y', 1995, 1, 10, true);
+  M:Run('BASE ALLOCATION MODEL', 'Y', 1995, 1, 10, true);
 }
 
 function M:Initialize() {
