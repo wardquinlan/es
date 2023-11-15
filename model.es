@@ -73,10 +73,14 @@ function M:Run(name, results, type, yearStart, monthStart, count, initialRebalan
 function M:RunPeriod(date, period, results) {
   function printLine(ind) {
     if (ind == 'B') {
+      cashYield = cashYieldBegin;
+      durationYield = durationYieldBegin;
       format = '%30s %8.2f %8.2f %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
       durationGain = '';
       equityGain = '';
     } else {
+      cashYield = cashYieldEnd;
+      durationYield = durationYieldEnd;
       format = '%30s %8.2f %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
     }
     :Printf(format,
@@ -95,10 +99,12 @@ function M:RunPeriod(date, period, results) {
   }
 
   # get the yields/gains for the current period
-  cashYield     = M:GetCashYield(date, period);
-  durationYield = M:GetDurationYield(date, period);
-  durationGain  = M:GetDurationGain(date, period);
-  equityGain    = M:GetEquityGain(date, period);
+  cashYieldBegin     = M:GetCashYieldBegin(date, period);
+  durationYieldBegin = M:GetDurationYieldBegin(date, period);
+  cashYieldEnd       = M:GetCashYieldEnd(date, period);
+  durationYieldEnd   = M:GetDurationYieldEnd(date, period);
+  durationGain       = M:GetDurationGain(date, period);
+  equityGain         = M:GetEquityGain(date, period);
   
   # calculate the positions at the beginning of the period
   cashPosition        = M:CashPosition;
@@ -111,8 +117,8 @@ function M:RunPeriod(date, period, results) {
   printLine('B');
 
   # calculate the positions at the end of the period
-  cashPosition        = M:CashPosition * (100 + cashYield) / 100;
-  durationPosition    = M:DurationPosition * (100 + durationYield + durationGain) / 100;
+  cashPosition        = M:CashPosition * (100 + cashYieldBegin) / 100;
+  durationPosition    = M:DurationPosition * (100 + durationYieldBegin + durationGain) / 100;
   equityPosition      = M:EquityPosition * (100 + equityGain) / 100;
   netPosition         = cashPosition + durationPosition + equityPosition;
   cashPositionPct     = cashPosition / netPosition * 100;

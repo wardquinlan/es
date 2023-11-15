@@ -7,8 +7,8 @@ function M:Rebalance(date, period) {
   equityPct = M:Transform(s, 60, 180, 75, 0) / 100;
   :GPut('M:EquityPosition', equityPct * netPosition);
 
-  c = M:GetCashYield(date, period);
-  d = M:GetDurationYield(date, period);
+  c = M:GetCashYieldBegin(date, period);
+  d = M:GetDurationYieldBegin(date, period);
 
   netPosition = netPosition - equityPct * netPosition;
   durationPct = d / (d + c);
