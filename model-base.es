@@ -21,13 +21,14 @@ function M:GetCashYield(date, period) {
 
 function M:GetDurationYield(date, period) {
   s = ES:Chop(DGS10, date, date + period);
-  :Log(DEBUG, ES:ToString(date) + ': annual duration yield=' + :Get(s, 0));
+  :Log(DEBUG, ES:ToString(date) + ': annual duration yield (B)=' + :Get(s, 0));
   :Log(DEBUG, ES:ToString(date) + ': period duration yield=' + ES:PeriodYield(:Get(s, 0), period));
   return ES:PeriodYield(:Get(s, 0), period);
 }
 
 function M:GetDurationGain(date, period) {
   s = ES:Chop(DGS10, date, date + period);
+  :Log(DEBUG, ES:ToString(date) + ': annual duration yield (E)=' + :Get(s, :GetSize(s) - 1));
   change = :Get(s, :GetSize(s) - 1) - :Get(s, 0);
   :Log(DEBUG, ES:ToString(date) + ': change in duration yield=' + change);
   :Log(DEBUG, ES:ToString(date) + ': duration gain=' + -change * DURATION_YEARS);
@@ -36,6 +37,8 @@ function M:GetDurationGain(date, period) {
 
 function M:GetEquityGain(date, period) {
   s = ES:Chop(SP500, date, date + period);
+  :Log(DEBUG, 'equity value (B)=' + :Get(s, 0));
+  :Log(DEBUG, 'equity value (E)=' + :Get(s, :GetSize(s) - 1));
   change = :Get(s, :GetSize(s) - 1) - :Get(s, 0);
   :Log(DEBUG, ES:ToString(date) + ': change in equity value=' + change);
   :Log(DEBUG, ES:ToString(date) + ': equity gain=' + change * 100 / :Get(s, 0));
