@@ -44,6 +44,10 @@ function M:GetEquityGain(date, period) {
 
 function M:Rebalance(date, period) {
   netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition;
+  :Log(DEBUG, ES:ToString(date) + ': net position=' + netPosition);
+  :Log(DEBUG, ES:ToString(date) + ': duration position=' + 0.3 * netPosition);
+  :Log(DEBUG, ES:ToString(date) + ': equity position=' + 0.6 * netPosition);
+  :Log(DEBUG, ES:ToString(date) + ': cash position=' + 0.1 * netPosition);
   :GPut('M:DurationPosition', 0.3 * netPosition);
   :GPut('M:EquityPosition', 0.6 * netPosition);
   :GPut('M:CashPosition', 0.1 * netPosition);
