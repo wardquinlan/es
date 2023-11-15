@@ -2,7 +2,43 @@
 DURATION_YEARS = 8;
 
 function model() {
-  M:Run('BASE ALLOCATION MODEL', 'Y', 1995, 1, 10, true);
+  startYear = :DlgInput('Enter the model start year:');
+  if (startYear == null) {
+    throw 'model aborted by user';
+  }
+  startYear = :ParseInt(startYear);
+  if (startYear == null) {
+    throw 'invalid year: ' + year;
+  }
+  startMonth = :DlgInput('Enter the model start month:');
+  if (startMonth == null) {
+    throw 'model aborted by user';
+  }
+  startMonth = :ParseInt(startMonth);
+  if (startMonth == null or startMonth < 1 or startMonth > 12) {
+    throw 'invalid month: ' + startMonth;
+  }
+  type = :DlgInput('Enter the model type (Y / Q / M):');
+  if (type == null) {
+    throw 'model aborted by user';
+  }
+  if (type != 'Y' and type != 'Q' and type != 'M') {
+    throw 'invalid type: ' + type;
+  }
+  periods = :DlgInput('Enter the # of periods:');
+  if (periods == null) {
+    throw 'model aborted by user';
+  }
+  periods = :ParseInt(periods);
+  if (periods == null) {
+    throw 'invalid # of periods: ' + periods;
+  }
+  name = :DlgInput('Enter the model name:');
+  if (name == null) {
+    throw 'model aborted by user';
+  }
+  results = :DlgInput('If you wish to save your results, enter a Global Name:');
+  M:Run(name, results, type, startYear, startMonth, periods, true);
 }
 
 function M:Initialize() {

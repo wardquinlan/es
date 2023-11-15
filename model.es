@@ -1,4 +1,4 @@
-function M:Run(name, type, yearStart, monthStart, count, initialRebalance) {
+function M:Run(name, results, type, yearStart, monthStart, count, initialRebalance) {
   if (type == 'Y') {
     period = 365;
   } else if (type == 'Q') {
@@ -13,6 +13,7 @@ function M:Run(name, type, yearStart, monthStart, count, initialRebalance) {
   M:Initialize();
 
   :Printf('Model Name         : %s\n', name);
+  :Printf('Model Results      : %s\n', results);
   :Printf('Model Type         : %s\n', type);
   :Printf('Year Start         : %d\n', yearStart);
   :Printf('Month Start        : %d\n', monthStart);
@@ -31,10 +32,12 @@ function M:Run(name, type, yearStart, monthStart, count, initialRebalance) {
     # very first rebalance at the start of the first period
     M:Rebalance(:Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), period);
   }
-  RESULTS = :Create('RESULTS');
-  :SetTitle(RESULTS, name);
-  :Insert(RESULTS, :Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), (M:CashPosition + M:DurationPosition + M:EquityPosition) / 1000);
-  :GPut('RESULTS', RESULTS);
+  if (results != null) {
+    r = :Create(results);
+    :SetTitle(r, name);
+    :Insert(r, :Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), (M:CashPosition + M:DurationPosition + M:EquityPosition) / 1000);
+    :GPut(results, r);
+  }
 
   :Printf('%30s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Period-Start', 'Cash-Yld', 'Drtn-Yld', 'Drtn-Gn', 'Eqty-Gn', 
           'Cash-Pos', '', 'Drtn-Pos', '', 'Eqty-Pos', '', 'Net-Pos');
@@ -45,7 +48,7 @@ function M:Run(name, type, yearStart, monthStart, count, initialRebalance) {
   cnt = 0;
   while (cnt < count) {
     date = :Date(ES:ToString(year) + '-' + month + '-01');
-    M:RunPeriod(date, period);
+    M:RunPeriod(date, period, results);
     if (type == 'Y') {
       year++;
     } else if (type == 'Q') {
@@ -67,7 +70,7 @@ function M:Run(name, type, yearStart, monthStart, count, initialRebalance) {
   }
 }
 
-function M:RunPeriod(date, period) {
+function M:RunPeriod(date, period, results) {
   function printLine(ind) {
     if (ind == 'B') {
       format = '%30s %8.2f %8.2f %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
@@ -138,9 +141,11 @@ function M:RunPeriod(date, period) {
   :GPut('M:DurationPosition', durationPosition);
   :GPut('M:EquityPosition', equityPosition);
 
-  RESULTS = :GGet('RESULTS');
-  :Insert(RESULTS, date + period, netPosition / 1000);
-  :GPut('RESULTS', RESULTS);
+  if (results != null) {
+    r = :GGet(results);
+    :Insert(r, date + period, netPosition / 1000);
+    :GPut(results, r);
+  }
   :Print();
 }
 
@@ -156,7 +161,4 @@ function M:Transform(s, s1, s2, y1, y2) {
 }
 
 include 'model-base.es';
-
-defaults.panel.frequency = YEARS;
-defaults.chart.scaletype = LOG;
 
