@@ -79,6 +79,7 @@ function M:RunPeriod(date, period, results) {
       durationGain = '';
       equityGain = '';
     } else {
+      date = date + period;
       cashYield = cashYieldEnd;
       durationYield = durationYieldEnd;
       format = '%30s %8.2f %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
