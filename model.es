@@ -73,13 +73,14 @@ function M:Run(name, results, type, yearStart, monthStart, count, initialRebalan
 function M:RunPeriod(date, period, results) {
   function printLine(ind) {
     if (ind == 'B') {
+      date = dateBegin;
       cashYield = cashYieldBegin;
       durationYield = durationYieldBegin;
       format = '%30s %8.2f %8.2f %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
       durationGain = '';
       equityGain = '';
     } else {
-      date = date + period;
+      date = dateEnd;
       cashYield = cashYieldEnd;
       durationYield = durationYieldEnd;
       format = '%30s %8.2f %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
@@ -100,8 +101,10 @@ function M:RunPeriod(date, period, results) {
   }
 
   # get the yields/gains for the current period
+  dateBegin          = M:GetDateBegin(date, period);
   cashYieldBegin     = M:GetCashYieldBegin(date, period);
   durationYieldBegin = M:GetDurationYieldBegin(date, period);
+  dateEnd            = M:GetDateEnd(date, period);
   cashYieldEnd       = M:GetCashYieldEnd(date, period);
   durationYieldEnd   = M:GetDurationYieldEnd(date, period);
   durationGain       = M:GetDurationGain(date, period);

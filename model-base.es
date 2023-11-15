@@ -38,6 +38,9 @@ function model() {
     throw 'model aborted by user';
   }
   results = :DlgInput('If you wish to save your results, enter a Global Name:');
+  if (results == '') {
+    results = null;
+  }
   M:Run(name, results, type, startYear, startMonth, periods, true);
 }
 
@@ -46,6 +49,18 @@ function M:Initialize() {
   :GPut('M:CashPosition',     100000.0);
   :GPut('M:DurationPosition', 0.0);
   :GPut('M:EquityPosition',   0.0);
+}
+
+function M:GetDateBegin(date, period) {
+  s = ES:Chop(DTB3, date, date + period);
+  :Log(DEBUG, 'date (B)=' + :GetDate(s, 0));
+  return :GetDate(s, 0);
+}
+
+function M:GetDateEnd(date, period) {
+  s = ES:Chop(DTB3, date, date + period);
+  :Log(DEBUG, 'date (B)=' + :GetDate(s, :GetSize(s) - 1));
+  return :GetDate(s, :GetSize(s) - 1);
 }
 
 function M:GetCashYieldBegin(date, period) {
