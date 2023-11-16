@@ -22,6 +22,15 @@ function model() {
   if (type == null) {
     throw 'model aborted by user';
   }
+  if (type == 'y') {
+    type = 'Y';
+  }
+  if (type == 'q') {
+    type = 'Q';
+  }
+  if (type == 'm') {
+    type = 'M';
+  }
   if (type != 'Y' and type != 'Q' and type != 'M') {
     throw 'invalid type: ' + type;
   }
