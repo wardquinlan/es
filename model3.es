@@ -4,10 +4,12 @@ function M:Rebalance(date, period) {
   netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition;
   :Log(DEBUG, 'net position=' + netPosition);
   s = ES:Chop(SP500GDP, date, date + period);
+  d = :GetDate(s, 0);
   s = :Get(s, 0);
-  :Log(DEBUG, ES:ToString(date) + ': SP500GDP=' + s);
+  :Log(DEBUG, ES:ToString(d) + ': SP500GDP=' + s);
   equityPct = M:Transform(s, 60, 180, 75, 0) / 100;
   :Log(DEBUG, 'computed equity pct=' + equityPct);
+  :Log(DEBUG, 'computed equity position=' + equityPct * netPosition);
   :GPut('M:EquityPosition', equityPct * netPosition);
 
   c = M:GetCashYieldBegin(date, period);
@@ -17,7 +19,9 @@ function M:Rebalance(date, period) {
   :Log(DEBUG, 'revised net position=' + netPosition);
   durationPct = d / (d + c);
   :Log(DEBUG, 'computed duration pct=' + durationPct);
+  :Log(DEBUG, 'computed duration position=' + durationPct * netPosition);
   :Log(DEBUG, 'computed cash pct=' + (1 - durationPct));
+  :Log(DEBUG, 'computed cash position=' + (1 - durationPct) * netPosition);
   
   :GPut('M:DurationPosition', durationPct * netPosition);
   :GPut('M:CashPosition', (1 - durationPct) * netPosition);
