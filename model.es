@@ -35,7 +35,6 @@ function M:Run(name, results, type, yearStart, monthStart, count, initialRebalan
   if (results != null) {
     r = :Create(results);
     ES:SetTitle(r, name);
-    ES:SetNotes(r, 'values represent end-of-period results');
     ES:GPut(results, r);
   }
 
@@ -47,8 +46,7 @@ function M:Run(name, results, type, yearStart, monthStart, count, initialRebalan
   month = monthStart;
   cnt = 0;
   while (cnt < count) {
-    date = :Date(ES:ToString(year) + '-' + month + '-01');
-    M:RunPeriod(date, period, results);
+    M:RunPeriod(type, year, month, period, results);
     if (type == 'Y') {
       year++;
     } else if (type == 'Q') {
@@ -70,7 +68,7 @@ function M:Run(name, results, type, yearStart, monthStart, count, initialRebalan
   }
 }
 
-function M:RunPeriod(date, period, results) {
+function M:RunPeriod(type, year, month, period, results) {
   function printLine(ind) {
     if (ind == 'B') {
       date = dateBegin;
@@ -99,6 +97,8 @@ function M:RunPeriod(date, period, results) {
       equityPositionPct,
       netPosition);
   }
+
+  date = :Date(ES:ToString(year) + '-' + month + '-01');
 
   # get the yields/gains for the current period
   dateBegin          = M:GetDateBegin(date, period);
@@ -152,7 +152,24 @@ function M:RunPeriod(date, period, results) {
   ES:GPut('M:EquityPosition', equityPosition);
 
   if (results != null) {
-    r = :GGet(results);
+    if (type == 'Y') {
+      year++;
+    } else if (type == 'Q') {
+      month = month + 3;
+      if (month > 12) {
+        year++;
+        month = 1;
+      }
+    } else if (type == 'M') {
+      month++;
+      if (month > 12) {
+        year++;
+        month = 1;
+      }
+    } else {
+      throw 'invalid type: ' + type;
+    }
+    date = :Date(ES:ToString(year) + '-' + month + '-01');
     ES:Insert(r, date, netPosition / 1000);
     ES:GPut(results, r);
   }
