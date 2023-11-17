@@ -6,7 +6,7 @@ function model() {
   if (startYear == null) {
     throw 'model aborted by user';
   }
-  startYear = :ParseInt(startYear);
+  startYear = ES:ParseInt(startYear);
   if (startYear == null) {
     throw 'invalid year: ' + year;
   }
@@ -14,7 +14,7 @@ function model() {
   if (startMonth == null) {
     throw 'model aborted by user';
   }
-  startMonth = :ParseInt(startMonth);
+  startMonth = ES:ParseInt(startMonth);
   if (startMonth == null or startMonth < 1 or startMonth > 12) {
     throw 'invalid month: ' + startMonth;
   }
@@ -38,7 +38,7 @@ function model() {
   if (periods == null) {
     throw 'model aborted by user';
   }
-  periods = :ParseInt(periods);
+  periods = ES:ParseInt(periods);
   if (periods == null) {
     throw 'invalid # of periods: ' + periods;
   }
