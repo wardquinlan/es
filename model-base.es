@@ -49,12 +49,12 @@ function model() {
   if (name == '') {
     ES:Log(WARN, 'unspecified model name');
   }
-  results = ES:DlgInput('If you wish to save your results, enter a Global Name:');
-  if (results == '') {
-    results = null;
+  resultsBase = ES:DlgInput('If you wish to save your results, enter a Global Name:');
+  if (resultsBase == '') {
+    resultsBase = null;
   }
   rebalance = ES:DlgConfirm('Do you want to rebalance before the first period run?');
-  M:Run(name, results, type, startYear, startMonth, periods, rebalance);
+  M:Run(name, resultsBase, type, startYear, startMonth, periods, rebalance);
 }
 
 function M:Initialize() {
