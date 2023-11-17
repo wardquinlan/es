@@ -33,9 +33,12 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
     M:Rebalance(:Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), period);
   }
   if (resultsBase != null) {
-    r = :Create(resultsBase + ':CASH');
+    r = ES:Create(resultsBase + ':CASH');
     ES:SetTitle(r, name + ':CASH');
     ES:GPut(resultsBase + ':CASH', r);
+    r = ES:Create(resultsBase + ':DURATION');
+    ES:SetTitle(r, name + ':DURATION');
+    ES:GPut(resultsBase + ':DURATION', r);
   }
 
   ES:Printf('%30s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Period-Start', 'Cash-Yld', 'Drtn-Yld', 'Drtn-Gn', 'Eqty-Gn', 
@@ -65,6 +68,10 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
       throw 'invalid type: ' + type;
     }
     cnt++;
+  }
+
+  if (resultsBase != null) {
+    MY:Plot(ES:GGet(resultsBase + ':CASH'), ES:GGet(resultsBase + ':DURATION'));
   }
 }
 
@@ -152,6 +159,9 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
     r = ES:GGet(resultsBase + ':CASH');
     ES:Insert(r, date, cashYieldBegin);
     ES:GPut(resultsBase + ':CASH', r);
+    r = ES:GGet(resultsBase + ':DURATION');
+    ES:Insert(r, date, durationYieldBegin + durationGain);
+    ES:GPut(resultsBase + ':DURATION', r);
   }
 
   ES:GPut('M:CashPosition', cashPosition);
