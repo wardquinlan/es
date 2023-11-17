@@ -1,3 +1,4 @@
+:SystemAlias('sysalias', ':SystemAlias');
 :SystemAlias('salias', ':SystemAlias');
 sysalias('alias', ':UserAlias');
 sysalias('functions', ':Functions');
