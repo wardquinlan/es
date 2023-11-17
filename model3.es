@@ -4,8 +4,8 @@ function M:Rebalance(date, period) {
   netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition;
   ES:Log(DEBUG, 'net position=' + netPosition);
   s = ES:Chop(SP500GDP, date, date + period);
-  d = :GetDate(s, 0);
-  s = :Get(s, 0);
+  d = ES:GetDate(s, 0);
+  s = ES:Get(s, 0);
   ES:Log(DEBUG, ES:ToString(d) + ': SP500GDP=' + s);
   equityPct = M:Transform(s, 60, 180, 75, 0) / 100;
   ES:Log(DEBUG, 'computed equity pct=' + equityPct);
