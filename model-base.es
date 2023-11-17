@@ -66,6 +66,9 @@ function M:Initialize() {
 
 function M:GetDateBegin(date, period) {
   s = ES:Chop(DTB3, date, date + period);
+  if (ES:GetSize(s) == 0) {
+    throw 'ran out of data: ' + date;
+  }
   d = ES:GetDate(s, 0);
   ES:Log(DEBUG, 'date (B)=' + d);
   return ES:GetDate(s, 0);
