@@ -122,12 +122,11 @@ function M:GetDurationGain(date, period) {
 
 function M:GetEquityGain(date, period) {
   s = ES:Chop(SP500, date, date + period);
-  d = ES:GetDate(s, ES:GetSize(s) - 1);
-  ES:Log(DEBUG, ES:ToString(d) + ': equity value (B)=' + ES:Get(s, 0));
-  ES:Log(DEBUG, ES:ToString(d) + ': equity value (E)=' + ES:Get(s, ES:GetSize(s) - 1));
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, 0)) + ': equity value (B)=' + ES:Get(s, 0));
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': equity value (E)=' + ES:Get(s, ES:GetSize(s) - 1));
   change = ES:Get(s, ES:GetSize(s) - 1) - ES:Get(s, 0);
-  ES:Log(DEBUG, ES:ToString(d) + ': change in equity value=' + change);
-  ES:Log(DEBUG, ES:ToString(d) + ': equity gain=' + change * 100 / ES:Get(s, 0));
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, 0)) + ': change in equity value=' + change);
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': equity gain=' + change * 100 / ES:Get(s, 0));
   return change * 100 / ES:Get(s, 0);
 }
 
