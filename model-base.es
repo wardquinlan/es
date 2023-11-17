@@ -8,7 +8,7 @@ function model() {
   }
   startYear = ES:ParseInt(startYear);
   if (startYear == null) {
-    throw 'invalid year: ' + year;
+    throw 'invalid year: ' + startYear;
   }
   startMonth = ES:DlgInput('Enter the model start month:');
   if (startMonth == null) {
