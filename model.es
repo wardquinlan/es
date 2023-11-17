@@ -12,21 +12,21 @@ function M:Run(name, results, type, yearStart, monthStart, count, initialRebalan
   # initialize with balances
   M:Initialize();
 
-  :Printf('Model Name         : %s\n', name);
-  :Printf('Model Results      : %s\n', results);
-  :Printf('Model Type         : %s\n', type);
-  :Printf('Year Start         : %d\n', yearStart);
-  :Printf('Month Start        : %d\n', monthStart);
-  :Printf('Count              : %d\n', count);
-  :Printf('Initial rebal flag : %b\n', initialRebalance);
-  :Print();
-  :Print('Initial positions');
-  :Print('-----------------');
-  :Printf('Cash Position      : %10.2f\n', M:CashPosition);
-  :Printf('Duration Position  : %10.2f\n', M:DurationPosition);
-  :Printf('Equity Position    : %10.2f\n', M:EquityPosition);
-  :Printf('Net Position       : %10.2f\n', M:CashPosition + M:DurationPosition + M:EquityPosition);
-  :Print();
+  ES:Printf('Model Name         : %s\n', name);
+  ES:Printf('Model Results      : %s\n', results);
+  ES:Printf('Model Type         : %s\n', type);
+  ES:Printf('Year Start         : %d\n', yearStart);
+  ES:Printf('Month Start        : %d\n', monthStart);
+  ES:Printf('Count              : %d\n', count);
+  ES:Printf('Initial rebal flag : %b\n', initialRebalance);
+  ES:Print();
+  ES:Print('Initial positions');
+  ES:Print('-----------------');
+  ES:Printf('Cash Position      : %10.2f\n', M:CashPosition);
+  ES:Printf('Duration Position  : %10.2f\n', M:DurationPosition);
+  ES:Printf('Equity Position    : %10.2f\n', M:EquityPosition);
+  ES:Printf('Net Position       : %10.2f\n', M:CashPosition + M:DurationPosition + M:EquityPosition);
+  ES:Print();
 
   if (true == initialRebalance) {
     # very first rebalance at the start of the first period
@@ -34,14 +34,14 @@ function M:Run(name, results, type, yearStart, monthStart, count, initialRebalan
   }
   if (results != null) {
     r = :Create(results);
-    :SetTitle(r, name);
-    :Insert(r, :Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), (M:CashPosition + M:DurationPosition + M:EquityPosition) / 1000);
-    :GPut(results, r);
+    ES:SetTitle(r, name);
+    ES:Insert(r, :Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), (M:CashPosition + M:DurationPosition + M:EquityPosition) / 1000);
+    ES:GPut(results, r);
   }
 
-  :Printf('%30s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Period-Start', 'Cash-Yld', 'Drtn-Yld', 'Drtn-Gn', 'Eqty-Gn', 
+  ES:Printf('%30s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Period-Start', 'Cash-Yld', 'Drtn-Yld', 'Drtn-Gn', 'Eqty-Gn', 
           'Cash-Pos', '', 'Drtn-Pos', '', 'Eqty-Pos', '', 'Net-Pos');
-  :Print();
+  ES:Print();
     
   year = yearStart;
   month = monthStart;
@@ -85,7 +85,7 @@ function M:RunPeriod(date, period, results) {
       durationYield = durationYieldEnd;
       format = '%30s %8.2f %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
     }
-    :Printf(format,
+    ES:Printf(format,
       ES:ToString(date) + ' ' + ind,
       cashYield,
       durationYield,
@@ -130,9 +130,9 @@ function M:RunPeriod(date, period, results) {
   equityPositionPct   = equityPosition / netPosition * 100;
   printLine('E');
 
-  :GPut('M:CashPosition', cashPosition);
-  :GPut('M:DurationPosition', durationPosition);
-  :GPut('M:EquityPosition', equityPosition);
+  ES:GPut('M:CashPosition', cashPosition);
+  ES:GPut('M:DurationPosition', durationPosition);
+  ES:GPut('M:EquityPosition', equityPosition);
 
   # rebalance for the current period
   M:Rebalance(date, period);
@@ -147,16 +147,16 @@ function M:RunPeriod(date, period, results) {
   equityPositionPct   = equityPosition / netPosition * 100;
   printLine('R');
 
-  :GPut('M:CashPosition', cashPosition);
-  :GPut('M:DurationPosition', durationPosition);
-  :GPut('M:EquityPosition', equityPosition);
+  ES:GPut('M:CashPosition', cashPosition);
+  ES:GPut('M:DurationPosition', durationPosition);
+  ES:GPut('M:EquityPosition', equityPosition);
 
   if (results != null) {
     r = :GGet(results);
-    :Insert(r, date + period, netPosition / 1000);
-    :GPut(results, r);
+    ES:Insert(r, date + period, netPosition / 1000);
+    ES:GPut(results, r);
   }
-  :Print();
+  ES:Print();
 }
 
 # Transforms s1..s2 space into y1..y2 space.  Note that s is force-bounded into s1..s2.
