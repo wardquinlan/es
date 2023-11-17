@@ -35,7 +35,7 @@ function M:Run(name, results, type, yearStart, monthStart, count, initialRebalan
   if (results != null) {
     r = :Create(results);
     ES:SetTitle(r, name);
-    ES:Insert(r, :Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), (M:CashPosition + M:DurationPosition + M:EquityPosition) / 1000);
+    ES:SetNotes(r, 'values represent end-of-period results');
     ES:GPut(results, r);
   }
 
@@ -153,7 +153,7 @@ function M:RunPeriod(date, period, results) {
 
   if (results != null) {
     r = :GGet(results);
-    ES:Insert(r, date + period, netPosition / 1000);
+    ES:Insert(r, date, netPosition / 1000);
     ES:GPut(results, r);
   }
   ES:Print();
