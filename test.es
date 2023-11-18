@@ -6,13 +6,16 @@ function test() {
   d = ES:Date(d);
 
   period = ES:DlgInput('Enter the period:');
-  period = :ParseInt(period);
+  period = ES:ParseInt(period);
 
   cash = ES:DlgInput('Enter Cash at beginning of period:');
-  cash = :ParseFloat(cash);
+  cash = ES:ParseFloat(cash);
 
   duration = ES:DlgInput('Enter Duration at beginning of period:');
-  duration = :ParseFloat(duration);
+  duration = ES:ParseFloat(duration);
+
+  equity = ES:DlgInput('Enter Equity at beginning of period:');
+  equity = ES:ParseFloat(equity);
 
   S = ES:Chop(SP500GDP, d, d + period);
   ES:Print(ES:ToString(ES:GetDate(S, 0)) + ': SP500GDP (B)=' + ES:Get(S, 0));
@@ -43,7 +46,7 @@ function test() {
   y = ES:PeriodYield(ES:Get(S, ES:GetSize(S) - 1), period);
   ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) +
     ': period duration yield (E)=' + y);
-  ES:Print('change in annual duration yield=' + (ES:Get(S, ES:GetSize(S) - 1) - ES:Get(S, 0)));
+  #ES:Print('change in annual duration yield=' + (ES:Get(S, ES:GetSize(S) - 1) - ES:Get(S, 0)));
   durationGain = -8 * (ES:Get(S, ES:GetSize(S) - 1) - ES:Get(S, 0));
   ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) +
     ': period duration gain (E)=' + durationGain);
@@ -51,9 +54,9 @@ function test() {
     ': period duration balance (E)=' + duration * (100 + dy + durationGain) / 100);
   
   dpct = dy / (cy + dy);
-  ES:Print('computed duration pct=' + dpct);
+  #ES:Print('computed duration pct=' + dpct);
   cpct = cy / (cy + dy);
-  ES:Print('computed cash pct=' + cpct);
+  #ES:Print('computed cash pct=' + cpct);
   
   S = ES:Load(500);
   S = ES:Chop(S, d, d + period);
