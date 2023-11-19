@@ -60,5 +60,16 @@ function test() {
     ': period equity balance (E)=' + val);
   net = net + val;
   ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) + ' period net balance (E)=' + net);
+
+  SP500GDP = ES:Chop(SP500GDP, d, d + period);
+  eq = ES:Transform(ES:Get(SP500GDP, 0), 60, 180, 75, 0);
+  ES:Print(ES:ToString(ES:GetDate(SP500GDP, 0)) + 
+    ' equity allocation (B)=' + eq);
+
+  eq = ES:Transform(ES:Get(SP500GDP, ES:GetSize(SP500GDP) - 1), 60, 180, 75, 0);
+  ES:Print(ES:ToString(ES:GetDate(SP500GDP, ES:GetSize(SP500GDP) - 1)) + 
+    ' equity allocation (E)=' + eq);
+  ES:Print(ES:ToString(ES:GetDate(SP500GDP, ES:GetSize(SP500GDP) - 1)) + 
+    ' equity allocation (E)=' + eq * net / 100);
 }
 
