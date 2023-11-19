@@ -51,6 +51,8 @@ function test() {
   
   S = ES:Load(500);
   S = ES:Chop(S, d, d + period);
+  ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) +
+    ': period equity gain (E)=' + (ES:Get(S, ES:GetSize(S) - 1) - ES:Get(S, 0)) / ES:Get(S, 0) * 100);
   val = equity * (1 + ((ES:Get(S, ES:GetSize(S) - 1) - ES:Get(S, 0)) / ES:Get(S, 0)));
   ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) + 
     ': period equity balance (E)=' + val);
