@@ -28,6 +28,7 @@ function test() {
   ES:Print(ES:ToString(ES:GetDate(S, 0)) + ': period cash yield (B)=' + y);
   ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) + ': period cash balance (E)=' + 
     cash * (100 + y) / 100);
+  net = cash * (100 + y) / 100;
   cy = y;
   y = ES:PeriodYield(ES:Get(S, ES:GetSize(S) - 1), period);
   ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) + ': period cash yield (E)=' + y);
@@ -45,6 +46,7 @@ function test() {
     ': period duration gain (E)=' + durationGain);
   ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) +
     ': period duration balance (E)=' + duration * (100 + dy + durationGain) / 100);
+  net = net + duration * (100 + dy + durationGain) / 100;
   
   dpct = dy / (cy + dy);
   cpct = cy / (cy + dy);
@@ -56,5 +58,7 @@ function test() {
   val = equity * (1 + ((ES:Get(S, ES:GetSize(S) - 1) - ES:Get(S, 0)) / ES:Get(S, 0)));
   ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) + 
     ': period equity balance (E)=' + val);
+  net = net + val;
+  ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) + ' period net balance (E)=' + net);
 }
 
