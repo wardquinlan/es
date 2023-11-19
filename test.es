@@ -29,16 +29,16 @@ function test() {
   ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) + ': period cash balance (E)=' + 
     cash * (100 + y) / 100);
   net = cash * (100 + y) / 100;
-  cy = y;
   y = ES:PeriodYield(ES:Get(S, ES:GetSize(S) - 1), period);
   ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) + ': period cash yield (E)=' + y);
+  cy = y;
 
   S = ES:Load(120);
   S = ES:Chop(S, d, d + period);
   y = ES:PeriodYield(ES:Get(S, 0), period);
-  dy = y;
   ES:Print(ES:ToString(ES:GetDate(S, 0)) + ': period duration yield (B)=' + y);
   y = ES:PeriodYield(ES:Get(S, ES:GetSize(S) - 1), period);
+  dy = y;
   ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) +
     ': period duration yield (E)=' + y);
   durationGain = -8 * (ES:Get(S, ES:GetSize(S) - 1) - ES:Get(S, 0));
@@ -49,7 +49,9 @@ function test() {
   net = net + duration * (100 + dy + durationGain) / 100;
   
   dpct = dy / (cy + dy);
+ES:Print(dpct);
   cpct = cy / (cy + dy);
+ES:Print(cpct);
   
   S = ES:Load(500);
   S = ES:Chop(S, d, d + period);
@@ -68,8 +70,17 @@ function test() {
 
   eq = ES:Transform(ES:Get(SP500GDP, ES:GetSize(SP500GDP) - 1), 60, 180, 75, 0);
   ES:Print(ES:ToString(ES:GetDate(SP500GDP, ES:GetSize(SP500GDP) - 1)) + 
-    ' equity allocation (E)=' + eq);
+    ' equity allocation (R)=' + eq);
   ES:Print(ES:ToString(ES:GetDate(SP500GDP, ES:GetSize(SP500GDP) - 1)) + 
-    ' equity allocation (E)=' + eq * net / 100);
+    ' equity allocation (R)=' + eq * net / 100);
+
+  net = net - eq * net / 100;
+  S = ES:Load(120);
+  S = ES:Chop(S, d, d + period);
+  ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) +
+    ' duration allocation (R)=' + dpct * net); 
+  net = net - dpct * net;
+  ES:Print(ES:ToString(ES:GetDate(S, ES:GetSize(S) - 1)) +
+    ' cash allocation (R)=' + net); 
 }
 
