@@ -86,9 +86,9 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
       equityGain = '';
     } else {
       date = dateEnd;
-      cashYield = cashYieldEnd;
+      cashYield = '';
       durationYield = durationYieldEnd;
-      format = '%30s %8.2f %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
+      format = '%30s %8s %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
     }
     ES:Printf(format,
       ES:ToString(date) + ' ' + ind,
@@ -112,7 +112,6 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
   cashYieldBegin     = M:GetCashYield(date, period, 'B');
   durationYieldBegin = M:GetDurationYield(date, period, 'B');
   dateEnd            = M:GetDate(date, period, 'E');
-  cashYieldEnd       = M:GetCashYield(date, period, 'E');
   durationYieldEnd   = M:GetDurationYield(date, period, 'E');
   durationGain       = M:GetDurationGain(date, period);
   equityGain         = M:GetEquityGain(date, period);
