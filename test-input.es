@@ -12,3 +12,10 @@ if (flag != 'B' and flag != 'E') {
   throw 'Invalid flag: ' + flag;
 }
 
+if (flag == 'B') {
+  date = start;
+} else {
+  date = start + period;
+}
+date = ES:ToString(date);
+

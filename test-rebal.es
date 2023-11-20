@@ -14,8 +14,26 @@ function rebal() {
   SP500GDP = ES:Chop(SP500GDP, start, start + period);
   idx = getIndex(SP500GDP, flag);
   eq = ES:Transform(ES:Get(SP500GDP, idx), 60, 180, 75, 0);
-  ES:Print(ES:ToString(ES:GetDate(SP500GDP, idx)) + ' equity allocation=' + eq);
-  net = net * eq / 100;
-  ES:Print(ES:ToString(ES:GetDate(SP500GDP, idx)) + ' net position=' + net); 
+  eq = net * eq / 100;
+  ES:Print(date + ' equity position=' + eq); 
+
+  DTB3 = ES:Chop(DTB3, start, start + period);
+  DGS10 = ES:Chop(DGS10, start, start + period);
+
+  idxc = getIndex(DTB3, flag);
+  c = ES:Get(DTB3, idx);
+
+  idxd = getIndex(DGS10, flag);
+  d = ES:Get(DGS10, idx);
+
+  total = c + d;
+  c = c / total;
+  d = d / total;
+  cash = c * (net - eq);
+  duration = d * (net - eq);
+
+  ES:Print(date + ' cash allocation=' + cash);
+  ES:Print(date + ' duration allocation=' + duration);
+  ES:Print(date + ' net allocation=' + (eq + cash + duration));
 }
 
