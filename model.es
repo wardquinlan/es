@@ -72,7 +72,7 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
   }
 
   if (resultsBase != null) {
-    MY:Plot(ES:GGet(resultsBase + ':CASH'), ES:GGet(resultsBase + ':DURATION'), ES:GGet(resultsBase + ':EQUITY'));
+    MY:Plot(ES:GGet(resultsBase + ':CASH'), ES:GGet(resultsBase + ':DURATION'), ES:GGet(resultsBase + ':EQUITY'), ES:GGet(resultsBase + ':NET'));
   }
 }
 
@@ -174,6 +174,12 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
     r = ES:GGet(resultsBase + ':EQUITY');
     ES:Insert(r, date, equityGain);
     ES:GPut(resultsBase + ':EQUITY', r);
+
+    netPositionOrig = ES:GGet('M:CashPosition') + ES:GGet('M:DurationPosition') + ES:GGet('M:EquityPosition');
+    netPositionPct = 100 * (netPosition - netPositionOrig) / netPositionOrig;
+    r = ES:GGet(resultsBase + ':NET');
+    ES:Insert(r, date, netPositionPct);
+    ES:GPut(resultsBase + ':NET', r);
   }
 
   ES:GPut('M:CashPosition', cashPosition);
