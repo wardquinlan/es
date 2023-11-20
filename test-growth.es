@@ -65,8 +65,19 @@ function growth() {
   ES:Print(ES:ToString(start) + ': opening net balance=' + openingNetBalance);
   ES:Print(ES:ToString(start + period) + ': closing net balance=' + closingNetBalance);
 
-  ES:Print(ES:ToString(start) + ': opening cash balance=' + 100 * cash / openingNetBalance + '%');
+  ES:Print(ES:ToString(start) + ': opening cash balance=' + 
+    100 * cash / openingNetBalance + '%');
   ES:Print(ES:ToString(start + period) + ': closing cash balance=' + 
-    100 * cash * (100 + pcy) / 100 / closingNetBalance + '%');
+    cash * (100 + pcy) / closingNetBalance + '%');
+
+  ES:Print(ES:ToString(start) + ': opening duration balance=' + 
+    100 * duration / openingNetBalance + '%');
+  ES:Print(ES:ToString(start + period) + ': closing duration balance=' +
+    duration * (100 + gain + pdy) / closingNetBalance + '%');
+
+  ES:Print(ES:ToString(start) + ': opening equity balance=' +
+    100 * equity / openingNetBalance + '%');
+  ES:Print(ES:ToString(start + period) + ': closing equity balance=' +
+    100 * equity * (1 + pctGain) / closingNetBalance + '%');
 }
 
