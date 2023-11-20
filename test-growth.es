@@ -36,5 +36,21 @@ function growth() {
   ES:Print(ES:ToString(start) + ': period cash yield=' + pcy);
   ES:Print(ES:ToString(start) + ': opening cash balance=' + cash);
   ES:Print(ES:ToString(start + period) + ': closing cash balance=' + cash * (100 + pcy) / 100);
+
+  idxDuration = getIndex(DGS10, 'B');
+  ady = ES:Get(DGS10, idxDuration);
+  pdy = ES:PeriodYield(ady, period);
+  ES:Print(ES:ToString(start) + ': annual duration yield=' + ady);
+  ES:Print(ES:ToString(start) + ': period duration yield=' + pdy);
+  ES:Print(ES:ToString(start) + ': opening duration balance=' + duration);
+
+  idxDuration2 = getIndex(DGS10, 'E');
+  ady2 = ES:Get(DGS10, idxDuration2);
+  delta = ady2 - ady;
+  gain = -8 * delta;
+  ES:Print(ES:ToString(start + period) + ': duration gain=' + gain);
+  ES:Print(ES:ToString(start + period) + ': net duration return=' + (gain + pdy));
+  ES:Print(ES:ToString(start + period) + ': closing duration balance=' + 
+    duration * (100 + gain + pdy) / 100);
 }
 
