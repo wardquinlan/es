@@ -128,8 +128,9 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
   printLine('B');
 
   # calculate the positions at the end of the period
-  cashPosition        = M:CashPosition * (100 + cashYieldBegin) / 100;
-  durationPosition    = M:DurationPosition * (100 + durationYieldBegin + durationGain) / 100;
+  cashPosition        = M:CashPosition * (100 + ES:PeriodYield(cashYieldBegin, period)) / 100;
+  durationPosition    = M:DurationPosition * (100 + ES:PeriodYield(durationYieldBegin, period) +
+                        durationGain) / 100;
   equityPosition      = M:EquityPosition * (100 + equityGain) / 100;
   netPosition         = cashPosition + durationPosition + equityPosition;
   cashPositionPct     = cashPosition / netPosition * 100;

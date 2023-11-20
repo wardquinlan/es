@@ -1,3 +1,12 @@
+function getIndex(S, flag) {
+  if (flag == 'B') {
+    idx = 0;
+  } else {
+    idx = ES:GetSize(S) - 1;
+  }
+  return idx;
+}
+
 function growth() {
   start = ES:DlgInput('Enter the start date:');
   start = ES:Date(start);
@@ -20,7 +29,7 @@ function growth() {
   DGS10 = ES:Chop(DGS10, start, start + period);
   SP500 = ES:Chop(SP500, start, start + period);
 
-  idxCash = M:GetIndex(DTB3, 'B');
+  idxCash = getIndex(DTB3, 'B');
   acy = ES:Get(DTB3, idxCash);
   pcy = ES:PeriodYield(acy, period);
   ES:Print(ES:ToString(start) + ': annual cash yield=' + acy);
