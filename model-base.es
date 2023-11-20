@@ -85,32 +85,28 @@ function M:GetCashYieldBegin(date, period) {
   s = ES:Chop(DTB3, date, date + period);
   d = ES:GetDate(s, 0);
   ES:Log(DEBUG, ES:ToString(d) + ': annual cash yield (B)=' + ES:Get(s, 0));
-  ES:Log(DEBUG, ES:ToString(d) + ': period cash yield (B)=' + ES:PeriodYield(ES:Get(s, 0), period));
-  return ES:PeriodYield(ES:Get(s, 0), period);
+  return ES:Get(s, 0);
 }
 
 function M:GetCashYieldEnd(date, period) {
   s = ES:Chop(DTB3, date, date + period);
   d = ES:GetDate(s, ES:GetSize(s) - 1);
   ES:Log(DEBUG, ES:ToString(d) + ': annual cash yield (E)=' + ES:Get(s, ES:GetSize(s) - 1));
-  ES:Log(DEBUG, ES:ToString(d) + ': period cash yield (E)=' + ES:PeriodYield(ES:Get(s, ES:GetSize(s) - 1), period));
-  return ES:PeriodYield(ES:Get(s, ES:GetSize(s) - 1), period);
+  return ES:Get(s, ES:GetSize(s) - 1);
 }
 
 function M:GetDurationYieldBegin(date, period) {
   s = ES:Chop(DGS10, date, date + period);
   d = ES:GetDate(s, 0);
   ES:Log(DEBUG, ES:ToString(d) + ': annual duration yield (B)=' + ES:Get(s, 0));
-  ES:Log(DEBUG, ES:ToString(d) + ': period duration yield (B)=' + ES:PeriodYield(ES:Get(s, 0), period));
-  return ES:PeriodYield(ES:Get(s, 0), period);
+  return ES:Get(s, 0);
 }
 
 function M:GetDurationYieldEnd(date, period) {
   s = ES:Chop(DGS10, date, date + period);
   d = ES:GetDate(s, ES:GetSize(s) - 1);
   ES:Log(DEBUG, ES:ToString(d) + ': annual duration yield (E)=' + ES:Get(s, ES:GetSize(s) - 1));
-  ES:Log(DEBUG, ES:ToString(d) + ': period duration yield (E)=' + ES:PeriodYield(ES:Get(s, ES:GetSize(s) - 1), period));
-  return ES:PeriodYield(ES:Get(s, ES:GetSize(s) - 1), period);
+  return ES:Get(s, ES:GetSize(s) - 1);
 }
 
 function M:GetDurationGain(date, period) {
