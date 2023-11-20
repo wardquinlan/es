@@ -84,11 +84,18 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
       format = '%30s %8.2f %8.2f %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
       durationGain = '';
       equityGain = '';
-    } else {
+    } else if (ind == 'E') {
       date = dateEnd;
       cashYield = '';
       durationYield = durationYieldEnd;
       format = '%30s %8s %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
+    } else {
+      date = dateEnd;
+      cashYield = '';
+      durationYield = '';
+      durationGain = '';
+      equityGain = '';
+      format = '%30s %8s %8s %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
     }
     ES:Printf(format,
       ES:ToString(date) + ' ' + ind,
