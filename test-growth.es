@@ -33,7 +33,7 @@ function growth() {
   acy = ES:Get(DTB3, idxCash);
   pcy = ES:PeriodYield(acy, period);
   ES:Print(ES:ToString(start) + ': annual cash yield=' + acy);
-  ES:Print(ES:ToString(start) + ': period cash yield=' + pcy);
+  #ES:Print(ES:ToString(start) + ': period cash yield=' + pcy);
   ES:Print(ES:ToString(start) + ': opening cash balance=' + cash);
   ES:Print(ES:ToString(start + period) + ': closing cash balance=' + cash * (100 + pcy) / 100);
 
@@ -41,16 +41,26 @@ function growth() {
   ady = ES:Get(DGS10, idxDuration);
   pdy = ES:PeriodYield(ady, period);
   ES:Print(ES:ToString(start) + ': annual duration yield=' + ady);
-  ES:Print(ES:ToString(start) + ': period duration yield=' + pdy);
   ES:Print(ES:ToString(start) + ': opening duration balance=' + duration);
 
   idxDuration2 = getIndex(DGS10, 'E');
   ady2 = ES:Get(DGS10, idxDuration2);
   delta = ady2 - ady;
   gain = -8 * delta;
-  ES:Print(ES:ToString(start + period) + ': duration gain=' + gain);
-  ES:Print(ES:ToString(start + period) + ': net duration return=' + (gain + pdy));
   ES:Print(ES:ToString(start + period) + ': closing duration balance=' + 
     duration * (100 + gain + pdy) / 100);
+
+  idxEquity = getIndex(SP500, 'B');
+  idxEquity2 = getIndex(SP500, 'E');
+  pctGain = (ES:Get(SP500, idxEquity2) - ES:Get(SP500, idxEquity)) / ES:Get(SP500, idxEquity);
+  ES:Print(ES:ToString(start) + ': opening equity balance=' + equity);
+  ES:Print(ES:ToString(start + period) + ': closing equity balance=' +
+    equity * (1 + pctGain));
+
+  ES:Print(ES:ToString(start) + ': opening net balance=' + (cash + duration + equity));
+  ES:Print(ES:ToString(start + period) + ': closing net balance=' +
+    (cash * (100 + pcy) / 100 +
+     duration * (100 + gain + pdy) / 100 +
+     equity * (1 + pctGain)));
 }
 
