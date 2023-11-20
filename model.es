@@ -49,6 +49,7 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
   month = monthStart;
   cnt = 0;
   while (cnt < count) {
+    ES:Print('[Iteration #' + cnt + ']');
     M:RunPeriod(type, year, month, period, resultsBase);
     if (type == 'Y') {
       year++;
