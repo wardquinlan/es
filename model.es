@@ -145,23 +145,24 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
   printLine('E');
 
   if (resultsBase != null) {
-    if (type == 'Y') {
-      year++;
-    } else if (type == 'Q') {
-      month = month + 3;
-      if (month > 12) {
-        year++;
-        month = 1;
-      }
-    } else if (type == 'M') {
-      month++;
-      if (month > 12) {
-        year++;
-        month = 1;
-      }
-    } else {
-      throw 'invalid type: ' + type;
-    }
+# uncomment this if you want to report results against the beginning of the next period:
+#   if (type == 'Y') {
+#     year++;
+#   } else if (type == 'Q') {
+#     month = month + 3;
+#     if (month > 12) {
+#       year++;
+#       month = 1;
+#     }
+#   } else if (type == 'M') {
+#     month++;
+#     if (month > 12) {
+#       year++;
+#       month = 1;
+#     }
+#   } else {
+#     throw 'invalid type: ' + type;
+#   }
     date = ES:Date(ES:ToString(year) + '-' + month + '-01');
     r = ES:GGet(resultsBase + ':CASH');
     ES:Insert(r, date, cashYieldBegin);
