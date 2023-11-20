@@ -32,14 +32,14 @@ function growth() {
   idxCash = getIndex(DTB3, 'B');
   acy = ES:Get(DTB3, idxCash);
   pcy = ES:PeriodYield(acy, period);
-  ES:Print(ES:ToString(start) + ': annual cash yield=' + acy + '%');
+  ES:Print(ES:ToString(start) + ': opening cash yield=' + acy + '%');
   ES:Print(ES:ToString(start) + ': opening cash balance=' + cash);
   ES:Print(ES:ToString(start + period) + ': closing cash balance=' + cash * (100 + pcy) / 100);
 
   idxDuration = getIndex(DGS10, 'B');
   ady = ES:Get(DGS10, idxDuration);
   pdy = ES:PeriodYield(ady, period);
-  ES:Print(ES:ToString(start) + ': annual duration yield=' + ady + '%');
+  ES:Print(ES:ToString(start) + ': opening duration yield=' + ady + '%');
   ES:Print(ES:ToString(start) + ': opening duration balance=' + duration);
 
   idxDuration2 = getIndex(DGS10, 'E');
