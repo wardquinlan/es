@@ -1,19 +1,20 @@
 include 'model.es';
 
-function M:Rebalance(date, period) {
+function M:Rebalance(date, period, flag) {
   netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition;
   ES:Log(DEBUG, 'net position=' + netPosition);
   s = ES:Chop(SP500GDP, date, date + period);
-  d = ES:GetDate(s, 0);
-  s = ES:Get(s, 0);
+  idx = M:GetIndex(s, flag);
+  d = ES:GetDate(s, idx);
+  s = ES:Get(s, idx);
   ES:Log(DEBUG, ES:ToString(d) + ': SP500GDP=' + s);
-  equityPct = M:Transform(s, 60, 180, 75, 0) / 100;
+  equityPct = ES:Transform(s, 60, 180, 75, 0) / 100;
   ES:Log(DEBUG, 'computed equity pct=' + equityPct);
   ES:Log(DEBUG, 'computed equity position=' + equityPct * netPosition);
   ES:GPut('M:EquityPosition', equityPct * netPosition);
 
-  c = M:GetCashYieldBegin(date, period);
-  d = M:GetDurationYieldBegin(date, period);
+  c = M:GetCashYield(date, period, flag);
+  d = M:GetDurationYield(date, period, flag);
 
   netPosition = netPosition - equityPct * netPosition;
   ES:Log(DEBUG, 'revised net position=' + netPosition);

@@ -57,6 +57,18 @@ function model() {
   M:Run(name, resultsBase, type, startYear, startMonth, periods, rebalance);
 }
 
+function M:GetIndex(S, flag) {
+  if (ES:GetSize(S) == 0) {
+    throw 'ran out of data: ' + S;
+  }
+  if (flag == 'B') {
+    idx = 0;
+  } else {
+    idx = ES:GetSize(S) - 1;
+  }
+  return idx;
+}
+
 function M:Initialize() {
   MY:Reload();
   ES:GPut('M:CashPosition',     100000.0);
@@ -64,49 +76,28 @@ function M:Initialize() {
   ES:GPut('M:EquityPosition',   0.0);
 }
 
-function M:GetDateBegin(date, period) {
+function M:GetDate(date, period, flag) {
   s = ES:Chop(DTB3, date, date + period);
-  if (ES:GetSize(s) == 0) {
-    throw 'ran out of data: ' + date;
-  }
-  d = ES:GetDate(s, 0);
-  ES:Log(DEBUG, 'date (B)=' + d);
-  return ES:GetDate(s, 0);
+  idx = M:GetIndex(s, flag);
+  d = ES:GetDate(s, idx);
+  ES:Log(DEBUG, ES:ToString(d));
+  return d;
 }
 
-function M:GetDateEnd(date, period) {
+function M:GetCashYield(date, period, flag) {
   s = ES:Chop(DTB3, date, date + period);
-  d = ES:GetDate(s, ES:GetSize(s) - 1);
-  ES:Log(DEBUG, 'date (E)=' + d);
-  return ES:GetDate(s, ES:GetSize(s) - 1);
+  idx = M:GetIndex(s, flag);
+  d = ES:GetDate(s, idx);
+  ES:Log(DEBUG, ES:ToString(d) + ': cash yield=' + ES:Get(s, idx));
+  return ES:Get(s, idx);
 }
 
-function M:GetCashYieldBegin(date, period) {
-  s = ES:Chop(DTB3, date, date + period);
-  d = ES:GetDate(s, 0);
-  ES:Log(DEBUG, ES:ToString(d) + ': annual cash yield (B)=' + ES:Get(s, 0));
-  return ES:Get(s, 0);
-}
-
-function M:GetCashYieldEnd(date, period) {
-  s = ES:Chop(DTB3, date, date + period);
-  d = ES:GetDate(s, ES:GetSize(s) - 1);
-  ES:Log(DEBUG, ES:ToString(d) + ': annual cash yield (E)=' + ES:Get(s, ES:GetSize(s) - 1));
-  return ES:Get(s, ES:GetSize(s) - 1);
-}
-
-function M:GetDurationYieldBegin(date, period) {
+function M:GetDurationYield(date, period, flag) {
   s = ES:Chop(DGS10, date, date + period);
-  d = ES:GetDate(s, 0);
-  ES:Log(DEBUG, ES:ToString(d) + ': annual duration yield (B)=' + ES:Get(s, 0));
-  return ES:Get(s, 0);
-}
-
-function M:GetDurationYieldEnd(date, period) {
-  s = ES:Chop(DGS10, date, date + period);
-  d = ES:GetDate(s, ES:GetSize(s) - 1);
-  ES:Log(DEBUG, ES:ToString(d) + ': annual duration yield (E)=' + ES:Get(s, ES:GetSize(s) - 1));
-  return ES:Get(s, ES:GetSize(s) - 1);
+  idx = M:GetIndex(s, flag);
+  d = ES:GetDate(s, idx);
+  ES:Log(DEBUG, ES:ToString(d) + ': duration yield=' + ES:Get(s, idx));
+  return ES:Get(s, idx);
 }
 
 function M:GetDurationGain(date, period) {
@@ -129,8 +120,11 @@ function M:GetEquityGain(date, period) {
   return change * 100 / ES:Get(s, 0);
 }
 
-function M:Rebalance(date, period) {
+function M:Rebalance(date, period, flag) {
   netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition;
+  if (flag == 'E') {
+    date = date + period;
+  }
   ES:Log(DEBUG, ES:ToString(date) + ': net position=' + netPosition);
   ES:Log(DEBUG, ES:ToString(date) + ': duration position=' + 0.3 * netPosition);
   ES:Log(DEBUG, ES:ToString(date) + ': equity position=' + 0.6 * netPosition);

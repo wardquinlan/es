@@ -30,7 +30,7 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
 
   if (true == initialRebalance) {
     # very first rebalance at the start of the first period
-    M:Rebalance(:Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), period);
+    M:Rebalance(:Date(ES:ToString(yearStart) + '-' + monthStart + '-01'), period, 'B');
   }
   if (resultsBase != null) {
     function fn(obj) {
@@ -108,12 +108,12 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
   date = :Date(ES:ToString(year) + '-' + month + '-01');
 
   # get the yields/gains for the current period
-  dateBegin          = M:GetDateBegin(date, period);
-  cashYieldBegin     = M:GetCashYieldBegin(date, period);
-  durationYieldBegin = M:GetDurationYieldBegin(date, period);
-  dateEnd            = M:GetDateEnd(date, period);
-  cashYieldEnd       = M:GetCashYieldEnd(date, period);
-  durationYieldEnd   = M:GetDurationYieldEnd(date, period);
+  dateBegin          = M:GetDate(date, period, 'B');
+  cashYieldBegin     = M:GetCashYield(date, period, 'B');
+  durationYieldBegin = M:GetDurationYield(date, period, 'B');
+  dateEnd            = M:GetDate(date, period, 'E');
+  cashYieldEnd       = M:GetCashYield(date, period, 'E');
+  durationYieldEnd   = M:GetDurationYield(date, period, 'E');
   durationGain       = M:GetDurationGain(date, period);
   equityGain         = M:GetEquityGain(date, period);
   
@@ -172,7 +172,7 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
   ES:GPut('M:EquityPosition', equityPosition);
 
   # rebalance for the current period
-  M:Rebalance(date, period);
+  M:Rebalance(date, period, 'E');
 
   # calculate the positions after rebalancing
   cashPosition        = M:CashPosition;

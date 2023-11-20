@@ -32,8 +32,8 @@ function rebal() {
   cash = c * (net - eq);
   duration = d * (net - eq);
 
-  ES:Print(date + ' cash allocation=' + cash + ' (' + (cash * 100 / net) + '%)');
-  ES:Print(date + ' duration allocation=' + duration + ' (' + (duration * 100 / net) + '%)');
-  ES:Print(date + ' net allocation=' + (eq + cash + duration));
+  ES:Print(date + ' cash position=' + cash + ' (' + (cash * 100 / net) + '%)');
+  ES:Print(date + ' duration position=' + duration + ' (' + (duration * 100 / net) + '%)');
+  ES:Print(date + ' net position=' + (eq + cash + duration));
 }
 
