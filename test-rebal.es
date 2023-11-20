@@ -12,8 +12,8 @@ function rebal() {
   reload();
 
   SP500GDP = ES:Chop(SP500GDP, start, start + period);
-  idx = getIndex(SP500GDP, flag);
-  eq = ES:Transform(ES:Get(SP500GDP, idx), 60, 180, 75, 0);
+  idxe = getIndex(SP500GDP, flag);
+  eq = ES:Transform(ES:Get(SP500GDP, idxe), 60, 180, 75, 0);
   eq = net * eq / 100;
   ES:Print(date + ' equity position=' + eq + '(' + (eq *100 / net) + '%)'); 
 
@@ -21,10 +21,10 @@ function rebal() {
   DGS10 = ES:Chop(DGS10, start, start + period);
 
   idxc = getIndex(DTB3, flag);
-  c = ES:Get(DTB3, idx);
+  c = ES:Get(DTB3, idxc);
 
   idxd = getIndex(DGS10, flag);
-  d = ES:Get(DGS10, idx);
+  d = ES:Get(DGS10, idxd);
 
   total = c + d;
   c = c / total;
