@@ -1,5 +1,14 @@
 include 'model.es';
 
+# Optimal to date:
+#****************************
+#** Tue Nov 21 13:36:16 EST 2023
+#** RUN=899
+#** PARAMS=100, 200, 90, 0
+#** NET POSITION=1069.587
+#** MAX=1186.1405
+#** MAXIDX=834
+#****************************
 function model3() {
   MY:Reload();
   cnt = 0;
