@@ -13,7 +13,8 @@ function rebal() {
 
   SP500GDP = ES:Chop(SP500GDP, start, start + period);
   idxe = getIndex(SP500GDP, flag);
-  eq = ES:Transform(ES:Get(SP500GDP, idxe), 60, 180, 75, 0);
+  #eq = ES:Transform(ES:Get(SP500GDP, idxe), 60, 180, 75, 0);
+  eq = ES:Transform(ES:Get(SP500GDP, idxe), 70, 200, 90, -30);
   eq = net * eq / 100;
 
   DTB3 = ES:Chop(DTB3, start, start + period);
