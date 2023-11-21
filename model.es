@@ -165,20 +165,21 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
 #     throw 'invalid type: ' + type;
 #   }
     date = ES:Date(ES:ToString(year) + '-' + month + '-01');
+
     r = ES:GGet(resultsBase + ':CASH');
-    ES:Insert(r, date, cashYieldBegin);
+    ES:Insert(r, date, cashPosition / 1000);
     ES:GPut(resultsBase + ':CASH', r);
+
     r = ES:GGet(resultsBase + ':DURATION');
-    ES:Insert(r, date, durationYieldBegin + durationGain);
+    ES:Insert(r, date, durationPosition / 1000);
     ES:GPut(resultsBase + ':DURATION', r);
+
     r = ES:GGet(resultsBase + ':EQUITY');
-    ES:Insert(r, date, equityGain);
+    ES:Insert(r, date, equityPosition / 1000);
     ES:GPut(resultsBase + ':EQUITY', r);
 
-    netPositionOrig = ES:GGet('M:CashPosition') + ES:GGet('M:DurationPosition') + ES:GGet('M:EquityPosition');
-    netPositionPct = 100 * (netPosition - netPositionOrig) / netPositionOrig;
     r = ES:GGet(resultsBase + ':NET');
-    ES:Insert(r, date, netPositionPct);
+    ES:Insert(r, date, netPosition / 1000);
     ES:GPut(resultsBase + ':NET', r);
   }
 
