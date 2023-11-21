@@ -8,7 +8,8 @@ function M:Rebalance(date, period, flag) {
   d = ES:GetDate(s, idx);
   s = ES:Get(s, idx);
   ES:Log(DEBUG, ES:ToString(d) + ': SP500GDP=' + s);
-  equityPct = ES:Transform(s, 60, 180, 75, 0) / 100;
+  #equityPct = ES:Transform(s, 60, 180, 75, 0) / 100;
+  equityPct = ES:Transform(s, 70, 200, 90, -30) / 100;
   ES:Log(DEBUG, 'computed equity pct=' + equityPct);
   ES:Log(DEBUG, 'computed equity position=' + equityPct * netPosition);
   ES:GPut('M:EquityPosition', equityPct * netPosition);
