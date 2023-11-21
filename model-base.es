@@ -1,59 +1,80 @@
 # approximate duration (in years) of duration assets
 DURATION_YEARS = 8;
 
-function model() {
-  startYear = ES:DlgInput('Enter the model start year:');
+function model(startYear, startMonth, type, periods, name, resultsBase, rebalance) {
   if (startYear == null) {
-    throw 'model aborted by user';
+    startYear = ES:DlgInput('Enter the model start year:');
+    if (startYear == null) {
+      throw 'model aborted by user';
+    }
+    startYear = ES:ParseInt(startYear);
+    if (startYear == null) {
+      throw 'invalid year: ' + startYear;
+    }
   }
-  startYear = ES:ParseInt(startYear);
-  if (startYear == null) {
-    throw 'invalid year: ' + startYear;
-  }
-  startMonth = ES:DlgInput('Enter the model start month:');
+
   if (startMonth == null) {
-    throw 'model aborted by user';
+    startMonth = ES:DlgInput('Enter the model start month:');
+    if (startMonth == null) {
+      throw 'model aborted by user';
+    }
+    startMonth = ES:ParseInt(startMonth);
+    if (startMonth == null or startMonth < 1 or startMonth > 12) {
+      throw 'invalid month: ' + startMonth;
+    }
   }
-  startMonth = ES:ParseInt(startMonth);
-  if (startMonth == null or startMonth < 1 or startMonth > 12) {
-    throw 'invalid month: ' + startMonth;
-  }
-  type = ES:DlgInput('Enter the model type (Y / Q / M):');
+
   if (type == null) {
-    throw 'model aborted by user';
+    type = ES:DlgInput('Enter the model type (Y / Q / M):');
+    if (type == null) {
+      throw 'model aborted by user';
+    }
+    if (type == 'y') {
+      type = 'Y';
+    }
+    if (type == 'q') {
+      type = 'Q';
+    }
+    if (type == 'm') {
+      type = 'M';
+    }
+    if (type != 'Y' and type != 'Q' and type != 'M') {
+      throw 'invalid type: ' + type;
+    }
   }
-  if (type == 'y') {
-    type = 'Y';
-  }
-  if (type == 'q') {
-    type = 'Q';
-  }
-  if (type == 'm') {
-    type = 'M';
-  }
-  if (type != 'Y' and type != 'Q' and type != 'M') {
-    throw 'invalid type: ' + type;
-  }
-  periods = ES:DlgInput('Enter the # of periods:');
+
   if (periods == null) {
-    throw 'model aborted by user';
+    periods = ES:DlgInput('Enter the # of periods:');
+    if (periods == null) {
+      throw 'model aborted by user';
+    }
+    periods = ES:ParseInt(periods);
+    if (periods == null) {
+      throw 'invalid # of periods: ' + periods;
+    }
   }
-  periods = ES:ParseInt(periods);
-  if (periods == null) {
-    throw 'invalid # of periods: ' + periods;
-  }
-  name = ES:DlgInput('Enter the model name:');
+
   if (name == null) {
-    throw 'model aborted by user';
+    name = ES:DlgInput('Enter the model name:');
+    if (name == null) {
+      throw 'model aborted by user';
+    }
+    if (name == '') {
+      ES:Log(WARN, 'unspecified model name');
+    }
   }
-  if (name == '') {
-    ES:Log(WARN, 'unspecified model name');
+
+  if (resultsBase == null) {
+    resultsBase = ES:DlgInput('If you wish to save your results, enter a Global Name:');
+    if (resultsBase == '') {
+      resultsBase = null;
+    }
   }
-  resultsBase = ES:DlgInput('If you wish to save your results, enter a Global Name:');
-  if (resultsBase == '') {
-    resultsBase = null;
+
+  if (rebalance == null) {
+    rebalance = ES:DlgConfirm('Do you want to rebalance before the first period run?');
   }
-  rebalance = ES:DlgConfirm('Do you want to rebalance before the first period run?');
+
   M:Run(name, resultsBase, type, startYear, startMonth, periods, rebalance);
 }
 
