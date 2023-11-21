@@ -2,19 +2,23 @@ include 'model.es';
 
 # Optimal to date:
 #****************************
-#** Tue Nov 21 13:36:16 EST 2023
-#** RUN=899
-#** PARAMS=100, 200, 90, 0
-#** NET POSITION=1069.587
-#** MAX=1186.1405
-#** MAXIDX=834
+#** Tue Nov 21 15:19:07 EST 2023
+#** RUN=384
+#** PARAMS=130, 150, 90, -50
+#** NET POSITION=1259.6383
+#** NEWMAX **
+#** MAX=1259.6383
+#** MAXIDX=384
 #****************************
+#
+# Previous result:
+# 100, 180, 90, -50, NET POS = 1186
 function model3() {
   MY:Reload();
   cnt = 0;
   max = 0;
   maxIdx = null;
-  for (s1 = 60; s1 <= 100; s1 = s1 + 10) {
+  for (s1 = 110; s1 <= 130; s1 = s1 + 10) {
     for (s2 = 150; s2 <= 200; s2 = s2 + 10) {
       for (y1 = 50; y1 <= 90; y1 = y1 + 10) {
         for (y2 = -50; y2 <= 0; y2 = y2 + 10) {
