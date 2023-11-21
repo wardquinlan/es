@@ -11,14 +11,16 @@ include 'model.es';
 #** MAXIDX=384
 #****************************
 #
-# Previous result:
-# 100, 180, 90, -50, NET POS = 1186
+# Previous results:
+# 100, 180, 90, -50 => 1186
+# 140, 150, 90, -50 => 1251
+
 function model3() {
   MY:Reload();
   cnt = 0;
   max = 0;
   maxIdx = null;
-  for (s1 = 110; s1 <= 130; s1 = s1 + 10) {
+  for (s1 = 135; s1 <= 135; s1 = s1 + 10) {
     for (s2 = 150; s2 <= 200; s2 = s2 + 10) {
       for (y1 = 50; y1 <= 90; y1 = y1 + 10) {
         for (y2 = -50; y2 <= 0; y2 = y2 + 10) {
