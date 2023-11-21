@@ -67,10 +67,6 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
     }
     cnt++;
   }
-
-  if (resultsBase != null) {
-    MY:Plot(ES:GGet(resultsBase + ':CASH'), ES:GGet(resultsBase + ':DURATION'), ES:GGet(resultsBase + ':EQUITY'), ES:GGet(resultsBase + ':NET'));
-  }
 }
 
 function M:RunPeriod(type, year, month, period, resultsBase) {
