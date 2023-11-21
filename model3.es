@@ -13,6 +13,7 @@ function model3() {
           N = 128;
           model(1992, 1, 'Q', N, 'M3', 'M3', true);
           ES:Print('****************************');
+          ES:Print('** ' + ES:Timestamp());
           ES:Print('** RUN=' + cnt);
           ES:Print('** PARAMS=' + s1 + ', ' + s2 + ', ' + y1 + ', ' + y2);
           ES:Print('** NET POSITION=' + ES:Get(M3:NET, N - 1));
