@@ -9,9 +9,6 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
     throw 'invalid type: ' + type;
   }
 
-  # initialize with balances
-  M:Initialize();
-
   ES:Printf('Model Name         : %s\n', name);
   ES:Printf('Model Results Base : %s\n', resultsBase);
   ES:Printf('Model Type         : %s\n', type);
