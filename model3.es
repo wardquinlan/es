@@ -2,8 +2,33 @@ include 'model.es';
 
 function model3() {
   MY:Reload();
-  M:Initialize(70, 200, 90, -30);
-  model(1995, 1, 'Q', 1, 'M1995', 'M1995', true);
+  cnt = 0;
+  max = 0;
+  maxIdx = null;
+  for (s1 = 60; s1 <= 100; s1 = s1 + 10) {
+    for (s2 = 150; s2 <= 200; s2 = s2 + 10) {
+      for (y1 = 50; y1 <= 90; y1 = y1 + 10) {
+        for (y2 = -50; y2 <= 0; y2 = y2 + 10) {
+          M:Initialize(s1, s2, y1, y2);
+          N = 128;
+          model(1992, 1, 'Q', N, 'M3', 'M3', true);
+          ES:Print('****************************');
+          ES:Print('** RUN=' + cnt);
+          ES:Print('** PARAMS=' + s1 + ', ' + s2 + ', ' + y1 + ', ' + y2);
+          ES:Print('** NET POSITION=' + ES:Get(M3:NET, N - 1));
+          if (ES:Get(M3:NET, N - 1) > max) {
+            ES:Print('** NEWMAX **');
+            max = ES:Get(M3:NET, N - 1);
+            maxIdx = cnt;
+          }
+          ES:Print('** MAX=' + max);
+          ES:Print('** MAXIDX=' + maxIdx);
+          ES:Print('****************************');
+          cnt++;
+        }
+      }
+    }
+  }
 }
 
 function M:Initialize(s1, s2, y1, y2) {
