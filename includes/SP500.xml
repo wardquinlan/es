@@ -29,6 +29,7 @@
 
     <chart label="Market Cap to GDP"
            span="20"
+           gridlines="135,150"
            ngridlines="8">
 
 <!--
