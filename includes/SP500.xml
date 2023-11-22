@@ -41,6 +41,7 @@
       <series ref="SHORT_EQUITIES" color="Pink"/>
       <series ref="MKCAPGDP2" color="Green"/>
       <series ref="SP500GDP" color="Blue"/>
+      <series ref="SP500GDP_AVG" color="Red"/>
     </chart>
   </panel>
 </context>
