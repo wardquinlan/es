@@ -371,6 +371,8 @@ function MY:CreateSP500(r) {
     'K=' + K;
   :SetNotes(SP500GDP, DESC);
 
+  :GPut('LONG_EQUITIES', SP500GDP <= 135);
+  :GPut('SHORT_EQUITIES', SP500GDP >= 150);
   :GPut(:GetName(SP500_PE), SP500_PE);
   :GPut(:GetName(SP500_PS), SP500_PS);
   :GPut(:GetName(SP500_EY), SP500_EY);

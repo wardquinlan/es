@@ -11,6 +11,8 @@
 
       <series ref="SP500"/>
       <series ref="RC" color="LightCyan"/>
+      <series ref="LONG_EQUITIES" color="LightGreen"/>
+      <series ref="SHORT_EQUITIES" color="Pink"/>
     </chart>
 
     <chart label="P/E"
@@ -35,6 +37,8 @@
 <!--
       <series ref="MKCAPGDP" color="Red"/>
 -->
+      <series ref="LONG_EQUITIES" color="LightGreen"/>
+      <series ref="SHORT_EQUITIES" color="Pink"/>
       <series ref="MKCAPGDP2" color="Green"/>
       <series ref="SP500GDP" color="Blue"/>
     </chart>
