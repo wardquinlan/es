@@ -371,7 +371,7 @@ function MY:CreateSP500(r) {
     'K=' + K;
   :SetNotes(SP500GDP, DESC);
 
-  N = 800;
+  N = 500;
   SP500GDP_AVG = ES:Average(SP500GDP, N);
   ES:SetName(SP500GDP_AVG, 'SP500GDP_AVG');
   SP500GDP_STDEV = ES:Stdev(SP500GDP, N);
