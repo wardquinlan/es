@@ -10,7 +10,7 @@
            scale="log">
 
       <series ref="SP500"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
     </chart>
 
     <chart label="Gross Domestic Product, YoY Percentage Change"
@@ -18,7 +18,7 @@
            span="25">
 
       <series ref="GDP.pc1"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
     </chart>
 
     <chart label="Moody's Seasoned Baa Corporate Bond Yield Relative to Yield on 10-Year Treasury Constant Maturity"
@@ -26,7 +26,7 @@
            ngridlines="6">
 
       <series ref="BAA10Y" color="Red"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
     </chart>
   </panel>
 </context>

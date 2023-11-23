@@ -10,7 +10,7 @@
            scale="log">
 
       <series ref="SP500"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
       <series ref="T10Y3M.inv" color="Yellow"/>
     </chart>
 
@@ -19,7 +19,7 @@
            span="25">
 
       <series ref="GDP.pc1"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
       <series ref="T10Y3M.inv" color="Yellow"/>
     </chart>
 
@@ -29,7 +29,7 @@
 
       <series ref="T10Y3M" color="Red"/>
       <series ref="T10Y2Y" color="Blue"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
       <series ref="T10Y3M.inv" color="Yellow"/>
       <series ref="T10Y2Y.inv" color="Orange"/>
     </chart>

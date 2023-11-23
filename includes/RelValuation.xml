@@ -10,7 +10,7 @@
            scale="log">
 
       <series ref="SP500"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
     </chart>
 
     <chart label="Relative Valuation"

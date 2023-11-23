@@ -3,4 +3,5 @@
 . 'aliases.es';
 defaults.chart.linecolor = DarkGray;
 defaults.chart.rectcolor = DarkGray;
+defaults.chart.backgroundcolor = LightCyan;
 

@@ -10,7 +10,7 @@
            scale="log">
 
       <series ref="SP500"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
     </chart>
 
     <chart label="Gross Domestic Product, YoY Percentage Change"
@@ -18,7 +18,7 @@
            span="25">
 
       <series ref="GDP.pc1"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
     </chart>
 
     <chart label="University of Michigan Consumer Sentiment"
@@ -26,7 +26,7 @@
            ngridlines="10">
 
       <series ref="UMCSENT" color="Red"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
     </chart>
   </panel>
 </context>

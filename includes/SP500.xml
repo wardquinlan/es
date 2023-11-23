@@ -10,7 +10,7 @@
            scale="log">
 
       <series ref="SP500"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
       <series ref="LONG_EQUITIES" color="LightGreen"/>
       <series ref="SHORT_EQUITIES" color="Pink"/>
     </chart>

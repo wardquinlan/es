@@ -10,7 +10,7 @@
            scale="log">
 
       <series ref="SP500"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
     </chart>
 
     <chart label="Overnight Reverse Repurchase Agreements Award Rate"
@@ -19,7 +19,7 @@
 
       <series ref="RRPONTSYAWARD" color="Red"/>
       <series ref="DTB3" color="Blue"/>
-      <series ref="RC" color="LightCyan"/>
+      <series ref="RC" color="Orange"/>
     </chart>
   </panel>
 </context>
