@@ -36,12 +36,12 @@
 
 <!--
       <series ref="MKCAPGDP" color="Red"/>
--->
       <series ref="MKCAPGDP2" color="Green"/>
-      <series ref="SP500GDP" color="Blue"/>
       <series ref="SP500GDP_AVG" color="Black"/>
-      <series ref="SP500GDP_L" color="Black"/>
-      <series ref="SP500GDP_U" color="Black"/>
+-->
+      <series ref="SP500GDP" color="Blue"/>
+      <series ref="SP500GDP_L" color="Red"/>
+      <series ref="SP500GDP_U" color="Red"/>
     </chart>
   </panel>
 </context>
