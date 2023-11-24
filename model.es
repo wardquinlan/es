@@ -22,7 +22,8 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
   ES:Printf('Cash Position      : %10.2f\n', M:CashPosition);
   ES:Printf('Duration Position  : %10.2f\n', M:DurationPosition);
   ES:Printf('Equity Position    : %10.2f\n', M:EquityPosition);
-  ES:Printf('Net Position       : %10.2f\n', M:CashPosition + M:DurationPosition + M:EquityPosition);
+  ES:Printf('Hedge Position     : %10.2f\n', M:HedgePosition);
+  ES:Printf('Net Position       : %10.2f\n', M:CashPosition + M:DurationPosition + M:EquityPosition + M:HedgePosition);
   ES:Print();
 
   if (true == initialRebalance) {
@@ -38,8 +39,8 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
     ES:Iterate(fn, 'CASH', 'DURATION', 'EQUITY', 'NET');
   }
 
-  ES:Printf('%30s %8s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Period-Start', 'Cash-Yld', 'Drtn-Yld', 'Drtn-Gn', 'Eqty-Gn', 'Hdg-Gn',
-          'Cash-Pos', '', 'Drtn-Pos', '', 'Eqty-Pos', '', 'Net-Pos');
+  ES:Printf('%30s %8s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s %5s %10s\n', 'Period-Start', 'Cash-Yld', 'Drtn-Yld', 'Drtn-Gn', 'Eqty-Gn', 'Hdge-Gn',
+          'Cash-Pos', '', 'Drtn-Pos', '', 'Eqty-Pos', '', 'Hdge-Pos', '', 'Net-Pos');
   ES:Print();
     
   year = yearStart;
@@ -75,7 +76,7 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
       date = dateBegin;
       cashYield = cashYieldBegin;
       durationYield = durationYieldBegin;
-      format = '%30s %8.2f %8.2f %8s %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
+      format = '%30s %8.2f %8.2f %8s %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
       durationGain = '';
       equityGain = '';
       hedgeGain = '';
@@ -83,7 +84,7 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
       date = dateEnd;
       cashYield = '';
       durationYield = durationYieldEnd;
-      format = '%30s %8s %8.2f %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
+      format = '%30s %8s %8.2f %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
     } else {
       date = dateEnd;
       cashYield = '';
@@ -91,7 +92,7 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
       durationGain = '';
       equityGain = '';
       hedgeGain = '';
-      format = '%30s %8s %8s %8s %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
+      format = '%30s %8s %8s %8s %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
     }
     ES:Printf(format,
       ES:ToString(date) + ' ' + ind,
@@ -106,6 +107,8 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
       durationPositionPct,
       equityPosition,
       equityPositionPct,
+      hedgePosition,
+      hedgePositionPct,
       netPosition);
   }
 
@@ -187,6 +190,7 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
   ES:GPut('M:CashPosition', cashPosition);
   ES:GPut('M:DurationPosition', durationPosition);
   ES:GPut('M:EquityPosition', equityPosition);
+  ES:GPut('M:HedgePosition', hedgePosition);
 
   # rebalance for the current period
   M:Rebalance(date, period, 'E');
@@ -195,15 +199,18 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
   cashPosition        = M:CashPosition;
   durationPosition    = M:DurationPosition;
   equityPosition      = M:EquityPosition;
-  netPosition         = cashPosition + durationPosition + equityPosition;
+  hedgePosition       = M:HedgePosition;
+  netPosition         = cashPosition + durationPosition + equityPosition + hedgePosition;
   cashPositionPct     = cashPosition / netPosition * 100;
   durationPositionPct = durationPosition / netPosition * 100;
   equityPositionPct   = equityPosition / netPosition * 100;
+  hedgePositionPct    = hedgePosition / netPosition * 1000;
   printLine('R');
 
   ES:GPut('M:CashPosition', cashPosition);
   ES:GPut('M:DurationPosition', durationPosition);
   ES:GPut('M:EquityPosition', equityPosition);
+  ES:GPut('M:HedgePosition', hedgePosition);
 
   ES:Print();
 }
