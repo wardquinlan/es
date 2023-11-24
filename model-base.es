@@ -95,6 +95,9 @@ function M:Initialize() {
   ES:GPut('M:CashPosition',     100000.0);
   ES:GPut('M:DurationPosition', 0.0);
   ES:GPut('M:EquityPosition',   0.0);
+  ES:GPut('M:HedgePosition',    0.0);
+  ES:GPut('M:EquityScale',      1.0);
+  ES:GPut('M:HedgeScale',       1.0);
 }
 
 function M:GetDate(date, period, flag) {
@@ -136,13 +139,27 @@ function M:GetEquityGain(date, period) {
   ES:Log(DEBUG, ES:ToString(ES:GetDate(s, 0)) + ': equity value (B)=' + ES:Get(s, 0));
   ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': equity value (E)=' + ES:Get(s, ES:GetSize(s) - 1));
   change = ES:Get(s, ES:GetSize(s) - 1) - ES:Get(s, 0);
-  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, 0)) + ': change in equity value=' + change);
-  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': equity gain=' + change * 100 / ES:Get(s, 0));
-  return change * 100 / ES:Get(s, 0);
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': change in equity value=' + change);
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': equity scale=' + ES:GGet('M:EquityScale'));
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': equity gain=' + ES:GGet('M:EquityScale') * change * 100 
+    / ES:Get(s, 0));
+  return ES:GGet('M:EquityScale') * change * 100 / ES:Get(s, 0);
+}
+
+function M:GetHedgeGain(date, period) {
+  s = ES:Chop(SP500, date, date + period);
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, 0)) + ': hedge value (B)=' + ES:Get(s, 0));
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': hedge value (E)=' + ES:Get(s, ES:GetSize(s) - 1));
+  change = ES:Get(s, 0) - ES:Get(s, ES:GetSize(s) - 1);
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': change in hedge value=' + change);
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': hedge scale=' + ES:GGet('M:HedgeScale'));
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': hedge gain=' + ES:GGet('M:HedgeScale') * change * 100 
+    / ES:Get(s, ES:GetSize(s) - 1));
+  return ES:GGet('M:HedgeScale') * change * 100 / ES:Get(s, ES:GetSize(s) - 1);
 }
 
 function M:Rebalance(date, period, flag) {
-  netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition;
+  netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition + M:HedgePosition;
   if (flag == 'E') {
     date = date + period;
   }
@@ -150,8 +167,10 @@ function M:Rebalance(date, period, flag) {
   ES:Log(DEBUG, ES:ToString(date) + ': duration position=' + 0.3 * netPosition);
   ES:Log(DEBUG, ES:ToString(date) + ': equity position=' + 0.6 * netPosition);
   ES:Log(DEBUG, ES:ToString(date) + ': cash position=' + 0.1 * netPosition);
+  ES:Log(DEBUG, ES:ToString(date) + ': hedge position=' + 0.0 * netPosition);
   ES:GPut('M:DurationPosition', 0.3 * netPosition);
   ES:GPut('M:EquityPosition', 0.6 * netPosition);
   ES:GPut('M:CashPosition', 0.1 * netPosition);
+  ES:GPut('M:HedgePosition', 0.0 * netPosition);
 }
 

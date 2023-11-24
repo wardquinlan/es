@@ -116,15 +116,18 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
   durationYieldEnd   = M:GetDurationYield(date, period, 'E');
   durationGain       = M:GetDurationGain(date, period);
   equityGain         = M:GetEquityGain(date, period);
+  hedgeGain          = M:GetHedgeGain(date, period);
   
   # calculate the positions at the beginning of the period
   cashPosition        = M:CashPosition;
   durationPosition    = M:DurationPosition;
   equityPosition      = M:EquityPosition;
-  netPosition         = cashPosition + durationPosition + equityPosition;
+  hedgePosition       = M:HedgePosition;
+  netPosition         = cashPosition + durationPosition + equityPosition + hedgePosition;
   cashPositionPct     = cashPosition / netPosition * 100;
   durationPositionPct = durationPosition / netPosition * 100;
   equityPositionPct   = equityPosition / netPosition * 100;
+  hedgePositionPct    = hedgePosition / netPosition * 100;
   printLine('B');
 
   # calculate the positions at the end of the period
@@ -132,10 +135,12 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
   durationPosition    = M:DurationPosition * (100 + ES:PeriodYield(durationYieldBegin, period) +
                         durationGain) / 100;
   equityPosition      = M:EquityPosition * (100 + equityGain) / 100;
-  netPosition         = cashPosition + durationPosition + equityPosition;
+  hedgePosition       = M:HedgePosition * (100 + hedgeGain) / 100;
+  netPosition         = cashPosition + durationPosition + equityPosition + hedgePosition;
   cashPositionPct     = cashPosition / netPosition * 100;
   durationPositionPct = durationPosition / netPosition * 100;
   equityPositionPct   = equityPosition / netPosition * 100;
+  hedgePositionPct    = hedgePosition / netPosition * 100;
   printLine('E');
 
   if (resultsBase != null) {
