@@ -23,10 +23,10 @@ function model4() {
   maxIdx = null;
   # original loop:
   # 60..140, 150..200, 50..90, -50..0
-  for (s1 = 10; s1 <= 40; s1 = s1 + 10) {
-    for (s2 = 10; s2 <= 40; s2 = s2 + 10) {
-      for (y1 = 90; y1 <= 90; y1 = y1 + 10) {
-        for (y2 = -50; y2 <= -50; y2 = y2 + 10) {
+  for (s1 = 135; s1 <= 135; s1 = s1 + 5) {
+    for (s2 = 150; s2 <= 150; s2 = s2 + 5) {
+      for (y1 = 90; y1 <= 90; y1 = y1 + 5) {
+        for (y2 = -90; y2 <= -90; y2 = y2 + 5) {
           for (k = 3.5; k <= 3.5; k = k + 0.25) {
             M:Initialize(s1, s2, y1, y2, k);
             N = 128;
@@ -53,10 +53,13 @@ function model4() {
 }
 
 function M:Initialize(s1, s2, y1, y2, k) {
-  ES:Log(DEBUG, 'initializing model3 with ' + s1 + ', ' + s2 + ', ' + y1 + ', ' + y2);
+  ES:Log(DEBUG, 'initializing model4 with ' + s1 + ', ' + s2 + ', ' + y1 + ', ' + y2);
   ES:GPut('M:CashPosition',     100000.0);
   ES:GPut('M:DurationPosition', 0.0);
   ES:GPut('M:EquityPosition',   0.0);
+  ES:GPut('M:HedgePosition',    0.0);
+  ES:GPut('M:EquityScale',      1.0);
+  ES:GPut('M:HedgeScale',       1.0);
 
   ES:GPut('M:S1', s1);
   ES:GPut('M:S2', s2);
@@ -74,23 +77,9 @@ function M:Rebalance(date, period, flag) {
   d = ES:GetDate(s, idx);
   s = ES:Get(s, idx);
   ES:Log(DEBUG, ES:ToString(d) + ': SP500GDP=' + s);
-
-  avg = ES:Chop(SP500GDP_AVG, date, date + period);
-  idx = M:GetIndex(avg, flag);
-  d = ES:GetDate(avg, idx);
-  avg = ES:Get(avg, idx);
-  ES:Log(DEBUG, ES:ToString(d) + ': SP500GDP_AVG=' + avg);
-
-  stdev = ES:Chop(SP500GDP_STDEV, date, date + period);
-  idx = M:GetIndex(stdev, flag);
-  d = ES:GetDate(stdev, idx);
-  stdev = ES:Get(stdev, idx);
-  ES:Log(DEBUG, ES:ToString(d) + ': SP500GDP_STDEV=' + stdev);
-
   #equityPct = ES:Transform(s, 60, 180, 75, 0) / 100;
   #equityPct = ES:Transform(s, 70, 200, 90, -30) / 100;
-  
-  equityPct = ES:Transform(s, avg - ES:GGet('M:S1'), avg + ES:GGet('M:S2'), ES:GGet('M:Y1'), ES:GGet('M:Y2')) / 100;
+  equityPct = ES:Transform(s, ES:GGet('M:S1'), ES:GGet('M:S2'), ES:GGet('M:Y1'), ES:GGet('M:Y2')) / 100;
   ES:Log(DEBUG, 'computed equity pct=' + equityPct);
   ES:Log(DEBUG, 'computed equity position=' + equityPct * netPosition);
   ES:GPut('M:EquityPosition', equityPct * netPosition);
