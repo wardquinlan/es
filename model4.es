@@ -1,21 +1,5 @@
 include 'model.es';
 
-# Optimal to date:
-#****************************
-#** Tue Nov 21 15:19:07 EST 2023
-#** RUN=384
-#** PARAMS=130, 150, 90, -50
-#** NET POSITION=1259.6383
-#** NEWMAX **
-#** MAX=1259.6383
-#** MAXIDX=384
-#****************************
-#
-# Previous results:
-# 100, 180, 90, -50 => 1186
-# 140, 150, 90, -50 => 1251
-# K = 3.5
-
 function model4() {
   MY:Reload();
   cnt = 0;
@@ -30,15 +14,15 @@ function model4() {
           for (k = 3.5; k <= 3.5; k = k + 0.25) {
             M:Initialize(s1, s2, y1, y2, k);
             N = 128;
-            model(1992, 1, 'Q', N, 'M3', 'M3', true);
+            model(1992, 1, 'Q', N, 'M4', 'M4', true);
             ES:Print('****************************');
             ES:Print('** ' + ES:Timestamp());
             ES:Print('** RUN=' + cnt);
             ES:Print('** PARAMS=' + s1 + ', ' + s2 + ', ' + y1 + ', ' + y2 + ', ' + k);
-            ES:Print('** NET POSITION=' + ES:Get(M3:NET, N - 1));
-            if (ES:Get(M3:NET, N - 1) > max) {
+            ES:Print('** NET POSITION=' + ES:Get(M4:NET, N - 1));
+            if (ES:Get(M4:NET, N - 1) > max) {
               ES:Print('** NEWMAX **');
-              max = ES:Get(M3:NET, N - 1);
+              max = ES:Get(M4:NET, N - 1);
               maxIdx = cnt;
             }
             ES:Print('** MAX=' + max);
@@ -70,24 +54,30 @@ function M:Initialize(s1, s2, y1, y2, k) {
 
 function M:Rebalance(date, period, flag) {
   ES:Log(DEBUG, 'rebalance: M:CashPosition=' + ES:GGet('M:CashPosition'));
-  netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition;
+  netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition + M:HedgePosition;
   ES:Log(DEBUG, 'net position=' + netPosition);
   s = ES:Chop(SP500GDP, date, date + period);
   idx = M:GetIndex(s, flag);
   d = ES:GetDate(s, idx);
   s = ES:Get(s, idx);
   ES:Log(DEBUG, ES:ToString(d) + ': SP500GDP=' + s);
-  #equityPct = ES:Transform(s, 60, 180, 75, 0) / 100;
-  #equityPct = ES:Transform(s, 70, 200, 90, -30) / 100;
   equityPct = ES:Transform(s, ES:GGet('M:S1'), ES:GGet('M:S2'), ES:GGet('M:Y1'), ES:GGet('M:Y2')) / 100;
   ES:Log(DEBUG, 'computed equity pct=' + equityPct);
   ES:Log(DEBUG, 'computed equity position=' + equityPct * netPosition);
-  ES:GPut('M:EquityPosition', equityPct * netPosition);
+
+  if (equityPct > 0) {
+    ES:GPut('M:EquityPosition', equityPct * netPosition);
+    ES:GPut('M:HedgePosition', 0.0);
+    netPosition = netPosition - equityPct * netPosition;
+  } else {
+    ES:GPut('M:HedgePosition', -equityPct * netPosition);
+    ES:GPut('M:EquityPosition', 0.0);
+    netPosition = netPosition + equityPct * netPosition;
+  }
 
   c = M:GetCashYield(date, period, flag);
   d = M:GetDurationYield(date, period, flag);
 
-  netPosition = netPosition - equityPct * netPosition;
   ES:Log(DEBUG, 'revised net position=' + netPosition);
   cashPct = (c + ES:GGet('M:K'))/ (d + c + ES:GGet('M:K'));
   ES:Log(DEBUG, 'computed duration pct=' + (1 - cashPct));

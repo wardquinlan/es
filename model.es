@@ -204,7 +204,7 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
   cashPositionPct     = cashPosition / netPosition * 100;
   durationPositionPct = durationPosition / netPosition * 100;
   equityPositionPct   = equityPosition / netPosition * 100;
-  hedgePositionPct    = hedgePosition / netPosition * 1000;
+  hedgePositionPct    = hedgePosition / netPosition * 100;
   printLine('R');
 
   ES:GPut('M:CashPosition', cashPosition);
