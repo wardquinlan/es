@@ -38,7 +38,7 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
     ES:Iterate(fn, 'CASH', 'DURATION', 'EQUITY', 'NET');
   }
 
-  ES:Printf('%30s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Period-Start', 'Cash-Yld', 'Drtn-Yld', 'Drtn-Gn', 'Eqty-Gn', 
+  ES:Printf('%30s %8s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s\n', 'Period-Start', 'Cash-Yld', 'Drtn-Yld', 'Drtn-Gn', 'Eqty-Gn', 'Hdg-Gn',
           'Cash-Pos', '', 'Drtn-Pos', '', 'Eqty-Pos', '', 'Net-Pos');
   ES:Print();
     
@@ -75,21 +75,23 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
       date = dateBegin;
       cashYield = cashYieldBegin;
       durationYield = durationYieldBegin;
-      format = '%30s %8.2f %8.2f %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
+      format = '%30s %8.2f %8.2f %8s %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
       durationGain = '';
       equityGain = '';
+      hedgeGain = '';
     } else if (ind == 'E') {
       date = dateEnd;
       cashYield = '';
       durationYield = durationYieldEnd;
-      format = '%30s %8s %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
+      format = '%30s %8s %8.2f %8.2f %8.2f %8.2f %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
     } else {
       date = dateEnd;
       cashYield = '';
       durationYield = '';
       durationGain = '';
       equityGain = '';
-      format = '%30s %8s %8s %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
+      hedgeGain = '';
+      format = '%30s %8s %8s %8s %8s %8s %10.2f %5.1f %10.2f %5.1f %10.2f %5.1f %10.2f\n';
     }
     ES:Printf(format,
       ES:ToString(date) + ' ' + ind,
@@ -97,6 +99,7 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
       durationYield,
       durationGain,
       equityGain,
+      hedgeGain,
       cashPosition,
       cashPositionPct,
       durationPosition,
