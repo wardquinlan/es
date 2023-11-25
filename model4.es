@@ -13,10 +13,8 @@ function model4() {
         for (y2 = -70; y2 <= -70; y2 = y2 + 5) {
           for (k = 3.5; k <= 3.5; k = k + 0.25) {
             M:Initialize(s1, s2, y1, y2, k);
-            #N = 128;
-            #model(1992, 1, 'Q', N, 'M4', 'M4', true);
-            N = 1;
-            model(2022, 1, 'Q', N, 'M4', 'M4', true);
+            N = 128;
+            model(1992, 1, 'Q', N, 'M4', 'M4', true);
             ES:Print('****************************');
             ES:Print('** ' + ES:Timestamp());
             ES:Print('** RUN=' + cnt);
@@ -83,6 +81,7 @@ function M:Rebalance(date, period, flag) {
   d = M:GetDurationYield(date, period, flag);
 
   ES:Log(DEBUG, 'revised net position=' + netPosition);
+  ES:Log(DEBUG, 'M:K=' + M:K);
   cashPct = (c + M:K) / (d + c + M:K);
   ES:Log(DEBUG, 'computed duration pct=' + (1 - cashPct));
   ES:Log(DEBUG, 'computed duration position=' + (1 - cashPct) * netPosition);
