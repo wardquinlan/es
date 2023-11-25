@@ -7,10 +7,10 @@ function model4() {
   maxIdx = null;
   # original loop:
   # 60..140, 150..200, 50..90, -50..0
-  for (s1 = 135; s1 <= 135; s1 = s1 + 5) {
-    for (s2 = 150; s2 <= 150; s2 = s2 + 5) {
-      for (y1 = 90; y1 <= 90; y1 = y1 + 5) {
-        for (y2 = -70; y2 <= -70; y2 = y2 + 5) {
+  for (s1 = 135; s1 <= 135; s1 = s1 + 10) {
+    for (s2 = 150; s2 <= 150; s2 = s2 + 10) {
+      for (y1 = 90; y1 <= 90; y1 = y1 + 10) {
+        for (y2 = -30; y2 <= -30; y2 = y2 + 5) {
           for (k = 3.5; k <= 3.5; k = k + 0.25) {
             M:Initialize(s1, s2, y1, y2, k);
             N = 128;
