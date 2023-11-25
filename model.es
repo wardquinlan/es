@@ -36,7 +36,7 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
       ES:SetTitle(r, name + ':' + obj);
       ES:GPut(resultsBase + ':' + obj, r);
     }
-    ES:Iterate(fn, 'CASH', 'DURATION', 'EQUITY', 'NET');
+    ES:Iterate(fn, 'NET');
   }
 
   ES:Printf('%30s %8s %8s %8s %8s %8s %10s %5s %10s %5s %10s %5s %10s %5s %10s\n', 'Period-Start', 'Cash-Yld', 'Drtn-Yld', 'Drtn-Gn', 'Eqty-Gn', 'Hdge-Gn',
@@ -55,7 +55,7 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
       month = month + 3;
       if (month > 12) {
         year++;
-        month = 1;
+        month = month - 12;
       }
     } else if (type == 'M') {
       month++;
@@ -150,38 +150,7 @@ function M:RunPeriod(type, year, month, period, resultsBase) {
   printLine('E');
 
   if (resultsBase != null) {
-# uncomment this if you want to report results against the beginning of the next period:
-#   if (type == 'Y') {
-#     year++;
-#   } else if (type == 'Q') {
-#     month = month + 3;
-#     if (month > 12) {
-#       year++;
-#       month = 1;
-#     }
-#   } else if (type == 'M') {
-#     month++;
-#     if (month > 12) {
-#       year++;
-#       month = 1;
-#     }
-#   } else {
-#     throw 'invalid type: ' + type;
-#   }
     date = ES:Date(ES:ToString(year) + '-' + month + '-01');
-
-    r = ES:GGet(resultsBase + ':CASH');
-    ES:Insert(r, date, cashPosition / 1000);
-    ES:GPut(resultsBase + ':CASH', r);
-
-    r = ES:GGet(resultsBase + ':DURATION');
-    ES:Insert(r, date, durationPosition / 1000);
-    ES:GPut(resultsBase + ':DURATION', r);
-
-    r = ES:GGet(resultsBase + ':EQUITY');
-    ES:Insert(r, date, equityPosition / 1000);
-    ES:GPut(resultsBase + ':EQUITY', r);
-
     r = ES:GGet(resultsBase + ':NET');
     ES:Insert(r, date, netPosition / 1000);
     ES:GPut(resultsBase + ':NET', r);

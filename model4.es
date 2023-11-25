@@ -10,11 +10,13 @@ function model4() {
   for (s1 = 135; s1 <= 135; s1 = s1 + 5) {
     for (s2 = 150; s2 <= 150; s2 = s2 + 5) {
       for (y1 = 90; y1 <= 90; y1 = y1 + 5) {
-        for (y2 = -90; y2 <= -90; y2 = y2 + 5) {
+        for (y2 = -70; y2 <= -70; y2 = y2 + 5) {
           for (k = 3.5; k <= 3.5; k = k + 0.25) {
             M:Initialize(s1, s2, y1, y2, k);
-            N = 128;
-            model(1992, 1, 'Q', N, 'M4', 'M4', true);
+            #N = 128;
+            #model(1992, 1, 'Q', N, 'M4', 'M4', true);
+            N = 1;
+            model(2022, 1, 'Q', N, 'M4', 'M4', true);
             ES:Print('****************************');
             ES:Print('** ' + ES:Timestamp());
             ES:Print('** RUN=' + cnt);
@@ -42,8 +44,6 @@ function M:Initialize(s1, s2, y1, y2, k) {
   ES:GPut('M:DurationPosition', 0.0);
   ES:GPut('M:EquityPosition',   0.0);
   ES:GPut('M:HedgePosition',    0.0);
-  ES:GPut('M:EquityScale',      1.0);
-  ES:GPut('M:HedgeScale',       1.0);
 
   ES:GPut('M:S1', s1);
   ES:GPut('M:S2', s2);

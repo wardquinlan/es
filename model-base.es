@@ -96,8 +96,6 @@ function M:Initialize() {
   ES:GPut('M:DurationPosition', 0.0);
   ES:GPut('M:EquityPosition',   0.0);
   ES:GPut('M:HedgePosition',    0.0);
-  ES:GPut('M:EquityScale',      1.0);
-  ES:GPut('M:HedgeScale',       1.0);
 }
 
 function M:GetDate(date, period, flag) {
@@ -140,10 +138,9 @@ function M:GetEquityGain(date, period) {
   ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': equity value (E)=' + ES:Get(s, ES:GetSize(s) - 1));
   change = ES:Get(s, ES:GetSize(s) - 1) - ES:Get(s, 0);
   ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': change in equity value=' + change);
-  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': equity scale=' + ES:GGet('M:EquityScale'));
-  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': equity gain=' + ES:GGet('M:EquityScale') * change * 100 
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': equity gain=' + change * 100 
     / ES:Get(s, 0));
-  return ES:GGet('M:EquityScale') * change * 100 / ES:Get(s, 0);
+  return change * 100 / ES:Get(s, 0);
 }
 
 function M:GetHedgeGain(date, period) {
@@ -152,10 +149,9 @@ function M:GetHedgeGain(date, period) {
   ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': hedge value (E)=' + ES:Get(s, ES:GetSize(s) - 1));
   change = ES:Get(s, 0) - ES:Get(s, ES:GetSize(s) - 1);
   ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': change in hedge value=' + change);
-  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': hedge scale=' + ES:GGet('M:HedgeScale'));
-  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': hedge gain=' + ES:GGet('M:HedgeScale') * change * 100 
+  ES:Log(DEBUG, ES:ToString(ES:GetDate(s, ES:GetSize(s) - 1)) + ': hedge gain=' + change * 100 
     / ES:Get(s, ES:GetSize(s) - 1));
-  return ES:GGet('M:HedgeScale') * change * 100 / ES:Get(s, ES:GetSize(s) - 1);
+  return change * 100 / ES:Get(s, ES:GetSize(s) - 1);
 }
 
 function M:Rebalance(date, period, flag) {
