@@ -42,6 +42,8 @@ function M:Initialize(s1, s2, y1, y2, k) {
   ES:GPut('M:DurationPosition', 0.0);
   ES:GPut('M:EquityPosition',   0.0);
   ES:GPut('M:HedgePosition',    0.0);
+  ES:GPut('M:EquityScale',      1.0);
+  ES:GPut('M:HedgeScale',       1.0);
 
   ES:GPut('M:S1', s1);
   ES:GPut('M:S2', s2);
@@ -64,17 +66,18 @@ function M:Rebalance(date, period, flag) {
   ES:Log(DEBUG, ES:ToString(d) + ': M:Y1=' + M:Y1);
   ES:Log(DEBUG, ES:ToString(d) + ': M:Y2=' + M:Y2);
   equityPct = ES:Transform(s, M:S1, M:S2, M:Y1, M:Y2) / 100;
-  ES:Log(DEBUG, 'computed equity pct=' + equityPct);
-  ES:Log(DEBUG, 'computed equity position=' + equityPct * netPosition);
+  ES:Log(DEBUG, 'computed base equity pct=' + equityPct);
 
   if (equityPct > 0) {
-    ES:GPut('M:EquityPosition', equityPct * netPosition);
+    ES:GPut('M:EquityPosition', equityPct * netPosition / M:EquityScale);
+    ES:Log(DEBUG, 'scaled equity position=' + M:EquityPosition);
     ES:GPut('M:HedgePosition', 0.0);
-    netPosition = netPosition - equityPct * netPosition;
+    netPosition = netPosition - M:EquityPosition;
   } else {
-    ES:GPut('M:HedgePosition', -equityPct * netPosition);
+    ES:GPut('M:HedgePosition', -equityPct * netPosition / M:HedgeScale);
+    ES:Log(DEBUG, 'scaled hedge position=' + M:HedgePosition);
     ES:GPut('M:EquityPosition', 0.0);
-    netPosition = netPosition + equityPct * netPosition;
+    netPosition = netPosition - M:HedgePosition;
   }
 
   c = M:GetCashYield(date, period, flag);

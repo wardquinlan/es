@@ -22,7 +22,9 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
   ES:Printf('Cash Position      : %10.2f\n', M:CashPosition);
   ES:Printf('Duration Position  : %10.2f\n', M:DurationPosition);
   ES:Printf('Equity Position    : %10.2f\n', M:EquityPosition);
+  ES:Printf('Equity Scale       : %10.2f\n', M:EquityScale);
   ES:Printf('Hedge Position     : %10.2f\n', M:HedgePosition);
+  ES:Printf('Hedge Scale        : %10.2f\n', M:HedgeScale);
   ES:Printf('Net Position       : %10.2f\n', M:CashPosition + M:DurationPosition + M:EquityPosition + M:HedgePosition);
   ES:Print();
 
