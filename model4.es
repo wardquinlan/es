@@ -42,8 +42,8 @@ function M:Initialize(s1, s2, y1, y2, k) {
   ES:GPut('M:DurationPosition', 0.0);
   ES:GPut('M:EquityPosition',   0.0);
   ES:GPut('M:HedgePosition',    0.0);
-  ES:GPut('M:EquityScale',      2.0);
-  ES:GPut('M:HedgeScale',       2.0);
+  ES:GPut('M:EquityScale',      1.5);
+  ES:GPut('M:HedgeScale',       1.5);
 
   ES:GPut('M:S1', s1);
   ES:GPut('M:S2', s2);
