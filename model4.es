@@ -61,7 +61,11 @@ function M:Rebalance(date, period, flag) {
   d = ES:GetDate(s, idx);
   s = ES:Get(s, idx);
   ES:Log(DEBUG, ES:ToString(d) + ': SP500GDP=' + s);
-  equityPct = ES:Transform(s, ES:GGet('M:S1'), ES:GGet('M:S2'), ES:GGet('M:Y1'), ES:GGet('M:Y2')) / 100;
+  ES:Log(DEBUG, ES:ToString(d) + ': M:S1=' + M:S1);
+  ES:Log(DEBUG, ES:ToString(d) + ': M:S2=' + M:S2);
+  ES:Log(DEBUG, ES:ToString(d) + ': M:Y1=' + M:Y1);
+  ES:Log(DEBUG, ES:ToString(d) + ': M:Y2=' + M:Y2);
+  equityPct = ES:Transform(s, M:S1, M:S2, M:Y1, M:Y2) / 100;
   ES:Log(DEBUG, 'computed equity pct=' + equityPct);
   ES:Log(DEBUG, 'computed equity position=' + equityPct * netPosition);
 
@@ -79,7 +83,7 @@ function M:Rebalance(date, period, flag) {
   d = M:GetDurationYield(date, period, flag);
 
   ES:Log(DEBUG, 'revised net position=' + netPosition);
-  cashPct = (c + ES:GGet('M:K'))/ (d + c + ES:GGet('M:K'));
+  cashPct = (c + M:K) / (d + c + M:K);
   ES:Log(DEBUG, 'computed duration pct=' + (1 - cashPct));
   ES:Log(DEBUG, 'computed duration position=' + (1 - cashPct) * netPosition);
   ES:Log(DEBUG, 'computed cash pct=' + cashPct);
