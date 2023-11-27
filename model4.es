@@ -19,6 +19,8 @@ function model4() {
             ES:Print('** ' + ES:Timestamp());
             ES:Print('** RUN=' + cnt);
             ES:Print('** PARAMS=' + s1 + ', ' + s2 + ', ' + y1 + ', ' + y2 + ', ' + k);
+            ES:Print('** Equity Scale=' + M:EquityScale);
+            ES:Print('** Hedge Scale=' + M:HedgeScale);
             ES:Print('** NET POSITION=' + ES:Get(M4:NET, N - 1));
             if (ES:Get(M4:NET, N - 1) > max) {
               ES:Print('** NEWMAX **');
