@@ -1,6 +1,8 @@
 function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialRebalance) {
   if (type == 'Y') {
     period = 365;
+  } else if (type == 'S') {
+    period = 180;
   } else if (type == 'Q') {
     period = 90;
   } else if (type == 'M') {
@@ -53,6 +55,12 @@ function M:Run(name, resultsBase, type, yearStart, monthStart, count, initialReb
     M:RunPeriod(type, year, month, period, resultsBase);
     if (type == 'Y') {
       year++;
+    } else if (type == 'S') {
+      month = month + 6;
+      if (month > 12) {
+        year++;
+        month = month - 12;
+      }
     } else if (type == 'Q') {
       month = month + 3;
       if (month > 12) {
