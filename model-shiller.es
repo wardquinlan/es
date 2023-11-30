@@ -43,6 +43,7 @@ function M:Initialize(equityPremium, durationPremium) {
 }   
 
 function M:Rebalance(date, period, flag) {
+  ES:Log(DEBUG, 'period=' + flag);
   netPosition = M:CashPosition + M:DurationPosition + M:EquityPosition + M:HedgePosition;
   ES:Log(DEBUG, 'net position=' + netPosition);
 
