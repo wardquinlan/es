@@ -5,11 +5,11 @@ function modelConst() {
   cnt = 0;
   max = 0;
   maxIdx = null;
-  for (eq = 0.4; eq <= 0.91; eq = eq + 0.1) {
+  for (eq = 0.6; eq <= 0.6; eq = eq + 0.1) {
     d = 0.9 - eq;
     M:Initialize(eq, d);
     N = 128;
-    model(1992, 1, 'Q', N, 'MC', 'MC', true);
+    model(1992, 2, 'Q', N, 'MC', 'MC', true);
     ES:Print('****************************');
     ES:Print('** ' + ES:Timestamp());
     ES:Print('** RUN=' + cnt);
@@ -34,7 +34,7 @@ function M:Initialize(eq, d) {
   ES:GPut('M:DurationPosition', 0.0);
   ES:GPut('M:EquityPosition',   0.0);
   ES:GPut('M:HedgePosition',    0.0);
-  ES:GPut('M:EquityScale',      1.0); # some indications it might be closer to 1.75
+  ES:GPut('M:EquityScale',      1.5); # some indications it might be closer to 1.75
   ES:GPut('M:HedgeScale',       1.0);
 
   ES:GPut('M:EQ', eq);
