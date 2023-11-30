@@ -60,12 +60,29 @@ function M:Rebalance(date, period, flag) {
   ES:Log(DEBUG, 'equity yield=' + S);
 
   total = ES:Max(C, 0) + ES:Max(D - M:DURATIONPREMIUM, 0) + (S - M:EQUITYPREMIUM);
-  ES:Log(DEBUG, 'total=' + total);
+  ES:Log(DEBUG, 'total1=' + total);
+
+  equityPct = (S - M:EQUITYPREMIUM) / total;
+  ES:Log(DEBUG, 'equity pct=' + equityPct);
+  if (equityPct > 0) {
+    ES:GPut('M:EquityPosition', equityPct * netPosition / M:EquityScale);
+    ES:GPut('M:HedgePosition', 0.0);
+    netPosition = netPosition - M:EquityPosition;
+  } else {
+    ES:GPut('M:HedgePosition', -equityPct * netPosition / M:HedgeScale);
+    ES:GPut('M:EquityPosition', 0.0);
+    netPosition = netPosition  - M:HedgePosition;
+  }
+
+  total = ES:Max(C, 0) + ES:Max(D - M:DURATIONPREMIUM, 0);
+  ES:Log(DEBUG, 'total2=' + total);
+
   cashPct = ES:Max(C, 0) / total;
   ES:Log(DEBUG, 'cash pct=' + cashPct);
+  ES:GPut('M:CashPosition', cashPct * netPosition);
+
   durationPct = ES:Max(D - M:DURATIONPREMIUM, 0) / total;
   ES:Log(DEBUG, 'duration pct=' + durationPct);
-  equityPct = 1 - cashPct - durationPct;
-  ES:Log(DEBUG, 'equity pct=' + equityPct);
+  ES:GPut('M:DurationPosition', durationPct * netPosition);
 }
 
