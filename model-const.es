@@ -5,31 +5,31 @@ function modelConst() {
   cnt = 0;
   max = 0;
   maxIdx = null;
-  eq = 0.6;
-  d = 0.3;
-  c = 0.1;
-  M:Initialize(eq, d, c);
-  N = 128;
-  model(1992, 2, 'Q', N, 'MC', 'MC', true);
-  ES:Print('****************************');
-  ES:Print('** ' + ES:Timestamp());
-  ES:Print('** RUN=' + cnt);
-  ES:Print('** PARAMS=' + eq + ', ' + d + ', ' + c);
-  ES:Print('** Equity Scale=' + M:EquityScale);
-  ES:Print('** Hedge Scale=' + M:HedgeScale);
-  ES:Print('** NET POSITION=' + ES:Get(MC:NET, N - 1));
-  if (ES:Get(MC:NET, N - 1) > max) {
-    ES:Print('** NEWMAX **');
-    max = ES:Get(MC:NET, N - 1);
-    maxIdx = cnt;
+  for (eq = 0.4; eq <= 0.91; eq = eq + 0.1) {
+    d = 0.9 - eq;
+    M:Initialize(eq, d);
+    N = 128;
+    model(1992, 1, 'Q', N, 'MC', 'MC', true);
+    ES:Print('****************************');
+    ES:Print('** ' + ES:Timestamp());
+    ES:Print('** RUN=' + cnt);
+    ES:Print('** PARAMS=' + eq + ', ' + d);
+    ES:Print('** Equity Scale=' + M:EquityScale);
+    ES:Print('** Hedge Scale=' + M:HedgeScale);
+    ES:Print('** NET POSITION=' + ES:Get(MC:NET, N - 1));
+    if (ES:Get(MC:NET, N - 1) > max) {
+      ES:Print('** NEWMAX **');
+      max = ES:Get(MC:NET, N - 1);
+      maxIdx = cnt;
+    }
+    ES:Print('** MAX=' + max);
+    ES:Print('** MAXIDX=' + maxIdx);
+    ES:Print('****************************');
+    cnt++;
   }
-  ES:Print('** MAX=' + max);
-  ES:Print('** MAXIDX=' + maxIdx);
-  ES:Print('****************************');
-  cnt++;
 }
 
-function M:Initialize(eq, d, c) {
+function M:Initialize(eq, d) {
   ES:GPut('M:CashPosition',     100000.0);
   ES:GPut('M:DurationPosition', 0.0);
   ES:GPut('M:EquityPosition',   0.0);
@@ -39,7 +39,7 @@ function M:Initialize(eq, d, c) {
 
   ES:GPut('M:EQ', eq);
   ES:GPut('M:D', d);
-  ES:GPut('M:C', c);
+  ES:GPut('M:C', 1.0 - eq - d);
 }   
 
 function M:Rebalance(date, period, flag) {
