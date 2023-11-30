@@ -7,14 +7,14 @@ function model4() {
   maxIdx = null;
   # original loop:
   # 60..140, 150..200, 50..90, -50..0
-  for (s1 = 135; s1 <= 135; s1 = s1 + 10) {
-    for (s2 = 150; s2 <= 150; s2 = s2 + 10) {
-      for (y1 = 90; y1 <= 90; y1 = y1 + 10) {
-        for (y2 = -30; y2 <= -30; y2 = y2 + 5) {
+  for (s1 = 60; s1 <= 120; s1 = s1 + 10) {
+    for (s2 = 130; s2 <= 180; s2 = s2 + 10) {
+      for (y1 = 60; y1 <= 90; y1 = y1 + 10) {
+        for (y2 = -60; y2 <= 0; y2 = y2 + 10) {
           for (k = 3.5; k <= 3.5; k = k + 0.25) {
             M:Initialize(s1, s2, y1, y2, k);
-            N = 128;
-            model(1992, 1, 'Q', N, 'M4', 'M4', true);
+            N = 383;
+            model(1992, 1, 'M', N, 'M4', 'M4', true);
             ES:Print('****************************');
             ES:Print('** ' + ES:Timestamp());
             ES:Print('** RUN=' + cnt);
@@ -44,7 +44,7 @@ function M:Initialize(s1, s2, y1, y2, k) {
   ES:GPut('M:DurationPosition', 0.0);
   ES:GPut('M:EquityPosition',   0.0);
   ES:GPut('M:HedgePosition',    0.0);
-  ES:GPut('M:EquityScale',      1.5); # some indications it might be closer to 1.75
+  ES:GPut('M:EquityScale',      1.0); # some indications it might be closer to 1.75
   ES:GPut('M:HedgeScale',       1.0);
 
   ES:GPut('M:S1', s1);
