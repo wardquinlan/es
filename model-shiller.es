@@ -5,8 +5,8 @@ function modelShiller() {
   cnt = 0;
   max = 0;
   maxIdx = null;
-  for (e = 4; e <= 4; e++) {
-    for (d = 2; d <= 2; d++) {
+  for (e = 1; e <= 3.0; e = e + 0.2) {
+    for (d = 1; d <= 2.0; d = d + 0.2) {
       M:Initialize(e, d);
       N = 128;
       model(1992, 1, 'Q', N, 'MS', 'MS', true);
