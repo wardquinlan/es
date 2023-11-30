@@ -5,8 +5,8 @@ function modelShiller() {
   cnt = 0;
   max = 0;
   maxIdx = null;
-  for (e = 0; e <= 0; e++) {
-    for (d = 0; d <= 0; d++) {
+  for (e = 4; e <= 4; e++) {
+    for (d = 2; d <= 2; d++) {
       M:Initialize(e, d);
       N = 128;
       model(1992, 1, 'Q', N, 'MS', 'MS', true);
@@ -58,5 +58,14 @@ function M:Rebalance(date, period, flag) {
   ES:Log(DEBUG, 'cash yield=' + C);
   ES:Log(DEBUG, 'duration yield=' + D);
   ES:Log(DEBUG, 'equity yield=' + S);
+
+  total = ES:Max(C, 0) + ES:Max(D - M:DURATIONPREMIUM, 0) + (S - M:EQUITYPREMIUM);
+  ES:Log(DEBUG, 'total=' + total);
+  cashPct = ES:Max(C, 0) / total;
+  ES:Log(DEBUG, 'cash pct=' + cashPct);
+  durationPct = ES:Max(D - M:DURATIONPREMIUM, 0) / total;
+  ES:Log(DEBUG, 'duration pct=' + durationPct);
+  equityPct = 1 - cashPct - durationPct;
+  ES:Log(DEBUG, 'equity pct=' + equityPct);
 }
 
