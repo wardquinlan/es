@@ -1,0 +1,25 @@
+<context>
+  <panel label="Shiller PE"
+         dxincr="1"
+         backgroundcolor="White"
+         frequency="months">
+
+    <chart label="S&amp;P 500"
+           ngridlines="16"
+           span="70"
+           scale="log">
+
+      <series ref="SP500"/>
+      <series ref="RC" color="Cornsilk"/>
+    </chart>
+
+    <chart label="Shiller PE"
+           span="30"
+           ngridlines="10">
+
+      <series ref="SHILLERPE" color="Red"/>
+      <series ref="RC" color="Cornsilk"/>
+    </chart>
+  </panel>
+</context>
+
