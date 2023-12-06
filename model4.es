@@ -11,7 +11,7 @@ function model4() {
   for (s1 = 120; s1 <= 120; s1 = s1 + 10) {
     for (s2 = 150; s2 <= 150; s2 = s2 + 10) {
       for (y1 = 90; y1 <= 90; y1 = y1 + 10) {
-        for (y2 = -60; y2 <= -30; y2 = y2 + 10) {
+        for (y2 = -30; y2 <= -30; y2 = y2 + 10) {
           for (k = 3.5; k <= 3.5; k = k + 0.25) {
             M:Initialize(s1, s2, y1, y2, k);
             N = 383;
@@ -46,7 +46,7 @@ function M:Initialize(s1, s2, y1, y2, k) {
   ES:GPut('M:EquityPosition',   0.0);
   ES:GPut('M:HedgePosition',    0.0);
   ES:GPut('M:EquityScale',      1.5); # some indications it might be closer to 1.75
-  ES:GPut('M:HedgeScale',       1.5);
+  ES:GPut('M:HedgeScale',       1.0);
 
   ES:GPut('M:S1', s1);
   ES:GPut('M:S2', s2);
