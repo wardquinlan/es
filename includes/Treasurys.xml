@@ -9,7 +9,7 @@
            ngridlines="8">
 
       <series ref="DGS10" color="Red"/>
-      <series ref="RC" color="Orange"/>
+      <series ref="RC" color="Cornsilk"/>
     </chart>
 
     <chart label="Market Yield on U.S. Treasury Securities at 2-Year Constant Maturity, Quoted on an Investment Basis"
@@ -17,7 +17,7 @@
            ngridlines="8">
 
       <series ref="DGS2" color="Red"/>
-      <series ref="RC" color="Orange"/>
+      <series ref="RC" color="Cornsilk"/>
     </chart>
 
     <chart label="Market Yield on U.S. Treasury Securities at 1-Year Constant Maturity, Quoted on an Investment Basis"
@@ -26,7 +26,7 @@
 
       <series ref="DGS1" color="Red"/>
       <series ref="DGS1.fc" color="Blue"/>
-      <series ref="RC" color="Orange"/>
+      <series ref="RC" color="Cornsilk"/>
     </chart>
 
     <chart label="3-Month Treasury Bill Secondary Market Rate, Discount Basis"
@@ -34,7 +34,7 @@
            ngridlines="8">
 
       <series ref="DTB3" color="Red"/>
-      <series ref="RC" color="Orange"/>
+      <series ref="RC" color="Cornsilk"/>
     </chart>
   </panel>
 </context>

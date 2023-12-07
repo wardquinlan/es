@@ -10,7 +10,7 @@
            scale="log">
 
       <series ref="SP500"/>
-      <series ref="RC" color="Orange"/>
+      <series ref="RC" color="Cornsilk"/>
       <series ref="VIXCLS.H" color="Yellow"/>
     </chart>
 
@@ -19,7 +19,7 @@
            span="25">
 
       <series ref="GDP.pc1"/>
-      <series ref="RC" color="Orange"/>
+      <series ref="RC" color="Cornsilk"/>
       <series ref="VIXCLS.H" color="Yellow"/>
     </chart>
 
@@ -28,7 +28,7 @@
            ngridlines="6">
 
       <series ref="VIXCLS" color="Red"/>
-      <series ref="RC" color="Orange"/>
+      <series ref="RC" color="Cornsilk"/>
       <series ref="VIXCLS.H" color="Yellow"/>
     </chart>
   </panel>
