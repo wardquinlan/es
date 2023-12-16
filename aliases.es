@@ -46,7 +46,6 @@ const checkMetaData = ES:CheckMetaData;
 const lastUpdated   = ES:LastUpdated;
 
 const reload     = MY:Reload;
-const plot       = MY:Plot;
 const input      = MY:Input;
 const sp500      = MY:SP500;
 const view       = MY:View;
