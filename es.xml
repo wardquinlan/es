@@ -22,8 +22,9 @@
   <include name="includes/BAMLC0A0CM.xml"/>
   <include name="includes/SOFRDGS2.xml"/>
   <include name="includes/RRPONTSYD.xml"/>
-  <include name="includes/RRPONTSYAWARD.xml"/>
   <include name="includes/WALCL.xml"/>
+  <include name="includes/Reserves.xml"/>
+  <include name="includes/RRPONTSYAWARD.xml"/>
   <include name="includes/ICSA.xml"/>
   <include name="includes/M2REAL.xml"/>
   <include name="includes/DTWEXBGS.xml"/>

@@ -1,0 +1,25 @@
+<context>
+  <panel label="Reserves"
+         dxincr="1"
+         backgroundcolor="White"
+         frequency="months">
+
+    <chart label="S&amp;P 500"
+           ngridlines="16"
+           span="70"
+           scale="log">
+
+      <series ref="SP500"/>
+      <series ref="RC" color="Cornsilk"/>
+    </chart>
+
+    <chart label="Reserves of Depository Institutions: Total"
+           span="30"
+           ngridlines="10">
+
+      <series ref="TOTRESNS" color="Red"/>
+      <series ref="RC" color="Cornsilk"/>
+    </chart>
+  </panel>
+</context>
+
