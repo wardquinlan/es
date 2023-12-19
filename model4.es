@@ -14,7 +14,7 @@ function model4() {
         for (y2 = -30; y2 <= -30; y2 = y2 + 10) {
           for (k = 3.5; k <= 3.5; k = k + 0.25) {
             M:Initialize(s1, s2, y1, y2, k);
-            N = 383;
+            N = 384;
             model(1992, 1, 'M', N, 'M4', 'M4', true);
             ES:Print('****************************');
             ES:Print('** ' + ES:Timestamp());
