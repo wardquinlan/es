@@ -28,11 +28,20 @@ ES:Print('-----------------------------------------');
 printStats();
 
 CASH = CASH0 * 1.05;
+FI = FI0 * 1.03;
+HIU = HIU0 + HIU0 * ES:PercentInverse(50) / 100;
+HSD = HSD0 + HSD0 * ES:PercentInverse(50 * 2) / 100;
+TOTAL = CASH + FI + HIU + HSD;
+ES:Print('Scenario #2: increase of 50% over 1 year');
+ES:Print('-----------------------------------------');
+printStats();
+
+CASH = CASH0 * 1.05;
 FI = FI0 * 1.06;
 HIU = HIU0 + HIU0 * ES:PercentInverse(ES:PercentInverse(100)) / 100;
 HSD = HSD0 + HSD0 * ES:PercentInverse(ES:PercentInverse(100 * 2)) / 100;
 TOTAL = CASH + FI + HIU + HSD;
-ES:Print('Scenario #2: decrease of 50% over 1 year');
+ES:Print('Scenario #3: decrease of 50% over 1 year');
 ES:Print('----------------------------------------');
 printStats();
 
@@ -41,7 +50,7 @@ FI = FI0 * 1.06;
 HIU = HIU0 + HIU0 * ES:PercentInverse(ES:PercentInverse(50)) / 100;
 HSD = HSD0 + HSD0 * ES:PercentInverse(ES:PercentInverse(50 * 2)) / 100;
 TOTAL = CASH + FI + HIU + HSD;
-ES:Print('Scenario #3: decrease of 33% over 1 year');
+ES:Print('Scenario #4: decrease of 33% over 1 year');
 ES:Print('----------------------------------------');
 printStats();
 
