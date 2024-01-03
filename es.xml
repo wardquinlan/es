@@ -29,5 +29,6 @@
   <include name="includes/M2REAL.xml"/>
   <include name="includes/DTWEXBGS.xml"/>
   <include name="includes/SHILLER.xml"/>
+  <include name="includes/GDI.xml"/>
 </context>
 

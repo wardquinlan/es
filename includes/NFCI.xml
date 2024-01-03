@@ -18,6 +18,7 @@
            span="25">
 
       <series ref="GDP.pc1"/>
+      <series ref="GDI.pc1" color="Red"/>
       <series ref="RC" color="Cornsilk"/>
     </chart>
 

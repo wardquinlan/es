@@ -45,6 +45,7 @@ function MY:Reload() {
   :Ds(ES:AutoLoad);
   MY:CreateRC();
   MY:CreatePC1(GDP, 4);
+  MY:CreatePC1(GDI, 4);
   MY:CreateInv(T10Y3M);
   MY:CreateInv(T10Y2Y);
   MY:CreateSP500(DGS10);

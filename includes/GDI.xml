@@ -1,0 +1,26 @@
+<context>
+  <panel label="GDI / GDP"
+         dxincr="1"
+         backgroundcolor="White"
+         frequency="months">
+
+    <chart label="S&amp;P 500"
+           span="60"
+           ngridlines="16"
+           scale="log">
+
+      <series ref="SP500"/>
+      <series ref="RC" color="Cornsilk"/>
+    </chart>
+
+    <chart label="GDI / GDP"
+           span="40"
+           ngridlines="8">
+
+      <series ref="GDI.pc1" color="Red"/>
+      <series ref="GDP.pc1" color="Blue"/>
+      <series ref="RC" color="Cornsilk"/>
+    </chart>
+  </panel>
+</context>
+
