@@ -30,5 +30,6 @@
   <include name="includes/DTWEXBGS.xml"/>
   <include name="includes/SHILLER.xml"/>
   <include name="includes/GDI.xml"/>
+  <include name="includes/SAHM.xml"/>
 </context>
 
