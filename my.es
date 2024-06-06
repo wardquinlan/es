@@ -255,7 +255,16 @@ function MY:CreateSP500(r) {
   #  'NR=' + LOGF.NR;
   #:SetNotes(MKCAPGDP, DESC);
 
-  MKCAPGDP2 = 100 * MY:Logf(WILL5000PR / GDP, r);
+  #MKCAPGDP2 = 100 * MY:Logf(WILL5000PR / GDP, r);
+  #:SetName(MKCAPGDP2, 'MKCAPGDP2');
+  #:SetTitle(MKCAPGDP2, 'Market Cap to GDP');
+  #:SetSource(MKCAPGDP2, '[DERIVED]');
+  #DESC = 'Adjusted Market Cap to GDP with:\n\n' +
+  # 'K=' + LOGF.K + '\n' +
+  # 'NR=' + LOGF.NR;
+  #:SetNotes(MKCAPGDP2, DESC);
+
+  MKCAPGDP2 = 100 * MY:Logf(SP500 * 10 / GDP, r);
   :SetName(MKCAPGDP2, 'MKCAPGDP2');
   :SetTitle(MKCAPGDP2, 'Market Cap to GDP');
   :SetSource(MKCAPGDP2, '[DERIVED]');
